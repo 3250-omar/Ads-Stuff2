@@ -1,0 +1,40 @@
+{
+  "Language": {
+    "label": "Language",
+    "english": "English",
+    "arabic": "Arabic"
+  },
+  "Navigation": {
+    "home": "Home",
+    "projects": "Projects",
+    "skills": "Skills",
+    "contacts": "Contacts",
+    "about": "About"
+  },
+  "Home": {
+    "title": "Welcome to My Portfolio",
+    "description": "Explore my work and get in touch"
+  },
+  "Projects": {
+    "title": "My Projects",
+    "description": "Check out my latest work",
+    "comingSoon": "Coming soon..."
+  },
+  "Skills": {
+    "title": "My Skills",
+    "description": "Technologies and tools I work with",
+    "comingSoon": "Coming soon..."
+  },
+  "Contacts": {
+    "title": "Get In Touch",
+    "description": "Let's work together on your next project"
+  },
+  "About": {
+    "title": "About Me",
+    "description": "Learn more about my journey"
+  },
+  "Footer": {
+    "copyright": "All rights reserved",
+    "madeWith": "Made with ❤️"
+  }
+}

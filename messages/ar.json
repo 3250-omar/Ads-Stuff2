@@ -1,0 +1,40 @@
+{
+  "Language": {
+    "label": "اللغة",
+    "english": "الإنجليزية",
+    "arabic": "العربية"
+  },
+  "Navigation": {
+    "home": "الرئيسية",
+    "projects": "المشاريع",
+    "skills": "المهارات",
+    "contacts": "اتصل بنا",
+    "about": "عنّي"
+  },
+  "Home": {
+    "title": "مرحبًا بك في معرض أعمالي",
+    "description": "استكشف أعمالي وتواصل معي"
+  },
+  "Projects": {
+    "title": "مشاريعي",
+    "description": "اطلع على أحدث أعمالي",
+    "comingSoon": "قريباً..."
+  },
+  "Skills": {
+    "title": "مهاراتي",
+    "description": "التقنيات والأدوات التي أعمل بها",
+    "comingSoon": "قريباً..."
+  },
+  "Contacts": {
+    "title": "تواصل معي",
+    "description": "لنعمل معاً على مشروعك القادم"
+  },
+  "About": {
+    "title": "عنّي",
+    "description": "تعرّف على رحلتي المهنية"
+  },
+  "Footer": {
+    "copyright": "جميع الحقوق محفوظة",
+    "madeWith": "صُنع بـ ❤️"
+  }
+}
