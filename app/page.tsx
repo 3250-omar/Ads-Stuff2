@@ -31,7 +31,7 @@ export default function Home() {
   return (
     <div className="flex flex-col items-center  min-h-screen text-center gap-10">
       {/* sloganArea */}
-      <section className="w-full grid grid-cols-2 gap-4 max-md:grid-cols-1 justify-center items-center relative min-h-[85vh]">
+      <section className="w-full grid grid-cols-2 gap-4 max-md:grid-cols-1 justify-center items-center relative min-h-[75vh]">
         <div className="flex flex-col gap-5">
           <h1 className="font-bold text-6xl text-primary max-sm:text-3xl max-md:text-4xl">
             We Create Stories That Matter{" "}
