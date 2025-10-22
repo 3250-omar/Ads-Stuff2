@@ -13,11 +13,14 @@ import { cn } from "@/lib/utils";
 interface CarouselProps {
   hasArrows?: boolean;
   autoPlay?: boolean;
-  items?: string[];
+  items?: string[] | { src: string; alt: string }[];
   cardClassName?: string;
+  contentClassName?: string;
+  delay?: number;
 }
 export default function CarouselComp(props: CarouselProps) {
-  const { items, hasArrows, autoPlay, cardClassName } = props;
+  const { items, hasArrows, autoPlay, cardClassName, contentClassName, delay } =
+    props;
   return (
     <Carousel
       opts={{ loop: true }}
@@ -25,20 +28,20 @@ export default function CarouselComp(props: CarouselProps) {
         autoPlay
           ? [
               Autoplay({
-                delay: 2000,
+                delay: delay || 2000,
               }),
             ]
           : []
       }
     >
-      <CarouselContent className="w-full max-w-full ">
+      <CarouselContent className={cn("w-full max-w-full ", contentClassName)}>
         {items?.map((item, index) => (
           <CarouselItem className={"-ml-1"} key={index}>
             <div>
               <Card className="border-none">
                 <CardContent className="relative flex aspect-square items-center justify-center !p-0 ">
                   <Image
-                    src={item}
+                    src={typeof item === "string" ? item : item?.src}
                     alt={`Image ${index + 1}`}
                     width={400} // Set your desired width
                     height={400} // Set your desired height

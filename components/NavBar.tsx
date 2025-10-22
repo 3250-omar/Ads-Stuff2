@@ -13,7 +13,7 @@ const NavBar = () => {
   return (
     <nav className="navbar">
       <Link href={"/"} className="w-[150px] h-[100px] relative">
-        <Image src="/Logo 3 G.png" alt="Logo" fill className="object-contain" />
+        <Image src="/Logo3G.png" alt="Logo" fill className="object-contain" />
       </Link>
       <div className="flex items-center gap-5 max-sm:hidden">
         <div className="flex items-center gap-3">

@@ -5,6 +5,9 @@ import CarouselComp from "@/components/ui/carouselComponet";
 import StatictsSection from "@/components/StatictsSection";
 import { Timeline } from "@/components/TimeLine";
 import Link from "next/link";
+import OurCustomers from "@/components/OurCustomers";
+import FeedBacks from "@/components/FeedBacks";
+import OurMisssion from "@/components/OurMisssion";
 // import { WhyDiffSection } from "@/components/WhyDiffSection";
 const timelineItems = [
   {
@@ -30,7 +33,7 @@ export default function Home() {
       {/* sloganArea */}
       <section className="w-full grid grid-cols-2 gap-4 max-md:grid-cols-1 justify-center items-center relative min-h-[85vh]">
         <div className="flex flex-col gap-5">
-          <h1 className="font-bold text-6xl text-primary ">
+          <h1 className="font-bold text-6xl text-primary max-sm:text-3xl max-md:text-4xl">
             We Create Stories That Matter{" "}
             <Typewriter
               words={["Ads", "Branding", "Social Media", "Content Marketing"]}
@@ -74,6 +77,9 @@ export default function Home() {
         <StatictsSection />
         {/* <WhyDiffSection /> */}
         <Timeline items={timelineItems} />
+        <OurCustomers />
+        <FeedBacks />
+        {/* <OurMisssion /> */}
       </div>
     </div>
   );
