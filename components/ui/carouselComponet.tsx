@@ -57,10 +57,10 @@ export default function CarouselComp(props: CarouselProps) {
         ))}
       </CarouselContent>
       {hasArrows && (
-        <>
+        <div className="max-sm:hidden">
           <CarouselPrevious />
           <CarouselNext />
-        </>
+        </div>  
       )}
     </Carousel>
   );

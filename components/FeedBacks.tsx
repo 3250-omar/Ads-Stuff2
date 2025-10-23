@@ -45,11 +45,11 @@ const FeedBacks = () => {
     },
   ];
   return (
-    <section className="w-full grid grid-cols-4 gap-4 max-md:grid-cols-3 max-sm:grid-cols-2">
+    <section className="w-full grid grid-cols-4 gap-4 max-md:grid-cols-3 max-sm:grid-cols-1">
       {test.map((testimonial, index) => (
         <div
           key={index}
-          className="bg-white p-6 rounded-lg shadow-md shadow-secondary border-none hover:transform-[scale(1.02)] transition-all cursor-pointer duration-200 flex flex-col  items-center  justify-center gap-4 "
+          className="bg-white p-4 rounded-lg shadow-md shadow-secondary border-none hover:transform-[scale(1.02)] transition-all cursor-pointer duration-200 flex flex-col  items-center  justify-center gap-4 "
         >
           <div className="flex items-center flex-col gap-1 ">
             <Image
