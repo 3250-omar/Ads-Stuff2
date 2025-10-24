@@ -105,7 +105,7 @@ const Footer = () => {
                   }}
                   className="border-2 rounded-2xl border-primary p-2 hover:bg-schemaWhite hover:text-primary  hover:scale-110 transition-all flex items-center gap-2 group text-white"
                 >
-                  <p>Whatsapp</p>
+                  <p>Whatsapp </p>
                 </Button>
               </div>
             </div>

@@ -51,10 +51,12 @@ const skills = [
 ];
 export default function SkillsSection() {
   return (
-    <section className="w-full py-24 flex justify-center items-center bg-gradient-to-b from-white to-gray-50  relative overflow-hidden">
+    <section className="w-full py-24 flex justify-center items-center  relative overflow-hidden">
       <div className="relative w-[300px] h-[300px] flex justify-center items-center">
         {/* Center text */}
-        <h2 className="text-4xl font-bold text-primary">Skills</h2>
+        <h2 className="text-4xl font-bold text-primary max-sm:text-3xl">
+          Skills
+        </h2>
 
         {/* Rotating circle container */}
         <div className="absolute w-full h-full animate-spin-slow ">
@@ -68,7 +70,7 @@ export default function SkillsSection() {
                   transform: `rotate(${angle}deg) translate(130px) rotate(-${angle}deg)`,
                 }}
               >
-                <div className="flex items-center justify-center w-16 h-16 rounded-full bg-white  shadow-lg shadow-primary/50 hover:scale-110 transition-all duration-300 hover:bg-schemaWhite">
+                <div className="flex items-center justify-center w-16 h-16 max-sm:w-12 max-sm:h-12 rounded-full bg-white  shadow-lg shadow-primary/50 hover:scale-110 transition-all duration-300 hover:bg-schemaWhite">
                   <ToolTipComp trigger={skill.icon} title={skill.name} />
                 </div>
               </div>

@@ -7,6 +7,7 @@ import { Timeline } from "@/components/TimeLine";
 import Link from "next/link";
 import OurCustomers from "@/components/OurCustomers";
 import FeedBacks from "@/components/FeedBacks";
+import SkillsSection from "@/components/SkillsSection";
 const timelineItems = [
   {
     title: "Project Started",
@@ -29,7 +30,7 @@ export default function Home() {
   return (
     <div className="flex flex-col items-center  min-h-screen text-center gap-10">
       {/* sloganArea */}
-      <section className="w-full grid grid-cols-2 gap-4 max-md:grid-cols-1 justify-center items-center relative min-h-[75vh]">
+      <section className="w-full grid grid-cols-2 gap-4 max-md:grid-cols-1 justify-center items-center relative min-h-[85vh]">
         <div className="flex flex-col gap-5">
           <h1 className="font-bold text-6xl text-primary max-sm:text-3xl max-md:text-4xl">
             We Create Stories That Matter{" "}
@@ -72,6 +73,7 @@ export default function Home() {
       </section>
       {/* statictsArea */}
       <div id="get-started" className="w-full space-y-10">
+        <SkillsSection/>
         <StatictsSection />
         {/* <WhyDiffSection /> */}
         <Timeline items={timelineItems} />
