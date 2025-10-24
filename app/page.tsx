@@ -7,8 +7,6 @@ import { Timeline } from "@/components/TimeLine";
 import Link from "next/link";
 import OurCustomers from "@/components/OurCustomers";
 import FeedBacks from "@/components/FeedBacks";
-import OurMisssion from "@/components/OurMisssion";
-// import { WhyDiffSection } from "@/components/WhyDiffSection";
 const timelineItems = [
   {
     title: "Project Started",

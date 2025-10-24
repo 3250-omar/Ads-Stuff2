@@ -23,7 +23,11 @@ const NavBar = () => {
     };
   }, []);
   return (
-    <nav className="navbar">
+    <nav
+      className={`navbar ${
+        windowHeight >= 80 ? "bg-white transition-all" : ""
+      }`}
+    >
       <Link href={"/"} className="w-[150px] h-[75px] relative">
         <Image src="/Logo3G.png" alt="Logo" fill className="object-contain" />
       </Link>
@@ -67,8 +71,8 @@ const NavBar = () => {
       </div>
       {windowHeight >= 100 && (
         <ArrowUpToLineIcon
-          className="fixed right-10 bottom-10 z-50 cursor-pointer hover:text-primary hover:bg-white border-2 rounded-full p-2 transition-all bg-primary text-white"
-          size={35}
+          className="fixed right-10 bottom-10 z-50 cursor-pointer size-10 hover:text-primary hover:bg-white border-2 rounded-full p-2 transition-all bg-primary text-white"
+          
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         />
       )}
