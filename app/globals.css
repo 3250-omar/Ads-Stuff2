@@ -15,7 +15,7 @@
         @apply mx-auto max-w-7xl  min-h-screen max-md:px-8 max-sm:px-8;
     }
     .navbar {
-        @apply  px-5 flex justify-between items-center sticky top-0 z-50;
+        @apply  px-5 flex justify-between items-center sticky top-0 z-50  ;
     } 
 
 }

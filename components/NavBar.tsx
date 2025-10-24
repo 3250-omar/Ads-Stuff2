@@ -1,15 +1,30 @@
 "use client";
 import { navItems } from "@/constants/routes";
 import { cn } from "@/lib/utils";
+import { ArrowUpToLineIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const NavBar = () => {
   const pathName = usePathname();
+  const [windowHeight, setWindowHeight] = useState<number>(0);
+  console.log("hhhhh", windowHeight);
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowHeight(window.pageYOffset);
+    };
+
+    window.addEventListener("scroll", handleResize);
+
+    return () => {
+      window.removeEventListener("scroll", handleResize);
+    };
+  }, []);
   return (
     <nav className="navbar">
-      <Link href={"/"} className="w-[150px] h-[100px] relative">
+      <Link href={"/"} className="w-[150px] h-[75px] relative">
         <Image src="/Logo3G.png" alt="Logo" fill className="object-contain" />
       </Link>
       <div className="flex items-center gap-5 max-sm:hidden">
@@ -50,6 +65,13 @@ const NavBar = () => {
           ))}
         </div>
       </div>
+      {windowHeight >= 100 && (
+        <ArrowUpToLineIcon
+          className="fixed right-10 bottom-10 z-50 cursor-pointer hover:text-primary hover:bg-white border-2 rounded-full p-2 transition-all bg-primary text-white"
+          size={35}
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        />
+      )}
       {/* <DrawerComp open={openSideBar} setOpen={setOpenSideBar} title="Menu" /> */}
     </nav>
   );
