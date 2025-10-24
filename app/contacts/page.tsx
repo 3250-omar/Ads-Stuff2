@@ -31,7 +31,7 @@ export default function Contacts() {
   return (
     <div className="flex items-start gap-4 justify-between max-sm:flex-col ">
       <div className="flex items-center gap-2">
-        <p className="text-4xl font-bold text-primary max-sm:text-center">
+        <p className="text-4xl font-bold text-primary max-sm:text-center max-sm:text-3xl">
           Keep in touch With us
         </p>
         <HeartIcon
@@ -42,7 +42,7 @@ export default function Contacts() {
       </div>
       <TabsComp
         tabs={TabsItems}
-        className="w-1/2"
+        className="w-1/2 max-sm:w-full"
         triggerStyle="data-[state=active]:!bg-primary data-[state=active]:!text-white"
       />
     </div>
