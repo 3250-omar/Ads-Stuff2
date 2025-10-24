@@ -72,7 +72,6 @@ const NavBar = () => {
       {windowHeight >= 100 && (
         <ArrowUpToLineIcon
           className="fixed right-10 bottom-10 z-50 cursor-pointer size-10 hover:text-primary hover:bg-white border-2 rounded-full p-2 transition-all bg-primary text-white"
-          
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         />
       )}
