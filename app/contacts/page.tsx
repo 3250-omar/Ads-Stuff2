@@ -1,11 +1,50 @@
+"use client";
 
-export default async function Contacts() {
-  // const t = await getTranslations("Contacts");
-  
+import TabsComp from "@/components/TabsComp";
+import { HeartIcon } from "lucide-react";
+import { SiGmail } from "react-icons/si";
+import { SiWhatsapp } from "react-icons/si";
+import { SiTelegram } from "react-icons/si";
+import GmailForm from "./_comp/GmailContact";
+
+export default function Contacts() {
+  const TabsItems = [
+    {
+      title: "Gmail",
+      icon: SiGmail,
+      value: "gmail",
+      content: <GmailForm />,
+    },
+    {
+      title: "Whatsapp",
+      icon: SiWhatsapp,
+      value: "whatsapp",
+      content: <p>Whatsapp</p>,
+    },
+    {
+      title: "Telegram",
+      icon: SiTelegram,
+      value: "telegram",
+      content: <p>Telegram</p>,
+    },
+  ];
   return (
-    <div className="flex flex-col items-center justify-center min-h-[60vh] text-center">
-      <h1 className="text-4xl font-bold mb-4">Contacts</h1>
-      <p className="text-lg text-muted-foreground">description</p>
+    <div className="flex items-start gap-4 justify-between max-sm:flex-col ">
+      <div className="flex items-center gap-2">
+        <p className="text-4xl font-bold text-primary max-sm:text-center">
+          Keep in touch With us
+        </p>
+        <HeartIcon
+          fill="#6B9071"
+          stroke={undefined}
+          className="animate-pulse size-12"
+        />
+      </div>
+      <TabsComp
+        tabs={TabsItems}
+        className="w-1/2"
+        triggerStyle="data-[state=active]:!bg-primary data-[state=active]:!text-white"
+      />
     </div>
   );
 }

@@ -52,7 +52,7 @@ export default function Projects() {
   return (
     <div className="flex flex-col gap-4 ">
       <Tabs defaultValue="all" className="w-full">
-        <TabsList>
+        <TabsList className="sticky top-[50px] z-50">
           <TabsTrigger
             value="all"
             className=" data-[state=active]:!bg-primary data-[state=active]:!text-white"
@@ -84,9 +84,12 @@ export default function Projects() {
           />
         </TabsContent>
         <TabsContent value="inProgress">
-          {/* <PasswordForm /> */} <InProgressProjects inProgress={projects.filter(
+          {/* <PasswordForm /> */}{" "}
+          <InProgressProjects
+            inProgress={projects.filter(
               (project) => project.status === "inprogress"
-            )}/>
+            )}
+          />
         </TabsContent>
       </Tabs>
       <div></div>
