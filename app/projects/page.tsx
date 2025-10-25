@@ -3,6 +3,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import FinishedProjects from "./_comp/FinishedProjects";
 import InProgressProjects from "./_comp/InProgressProjects";
 import AllProjects from "./_comp/AllProjects";
+import TabsComp from "@/components/TabsComp";
 export default function Projects() {
   // const t = await getTranslations("Projects");
   const projects = [
@@ -49,50 +50,36 @@ export default function Projects() {
       status: "finished",
     },
   ];
+  const tabsItems = [
+    {
+      title: "All Projects",
+      value: "all",
+      content: <AllProjects projects={projects} />,
+    },
+    {
+      title: "Finished",
+      value: "finished",
+      content: (
+        <FinishedProjects
+          finished={projects.filter((project) => project.status === "finished")}
+        />
+      ),
+    },
+    {
+      title: "In Progress",
+      value: "inProgress",
+      content: (
+        <InProgressProjects
+          inProgress={projects.filter(
+            (project) => project.status === "inprogress"
+          )}
+        />
+      ),
+    },
+  ];
   return (
     <div className="flex flex-col gap-4 ">
-      <Tabs defaultValue="all" className="w-full">
-        <TabsList className="sticky top-[50px] z-50">
-          <TabsTrigger
-            value="all"
-            className=" data-[state=active]:!bg-primary data-[state=active]:!text-white"
-          >
-            All Projects
-          </TabsTrigger>
-          <TabsTrigger
-            value="finished"
-            className=" data-[state=active]:!bg-primary data-[state=active]:!text-white"
-          >
-            Finished
-          </TabsTrigger>
-          <TabsTrigger
-            value="inProgress"
-            className=" data-[state=active]:!bg-primary/50 data-[state=active]:!text-white "
-          >
-            In Progress
-          </TabsTrigger>
-        </TabsList>
-        <TabsContent value="all">
-          {/* <AccountForm /> */} <AllProjects projects={projects} />
-        </TabsContent>
-        <TabsContent value="finished">
-          {/* <AccountForm /> */}{" "}
-          <FinishedProjects
-            finished={projects.filter(
-              (project) => project.status === "finished"
-            )}
-          />
-        </TabsContent>
-        <TabsContent value="inProgress">
-          {/* <PasswordForm /> */}{" "}
-          <InProgressProjects
-            inProgress={projects.filter(
-              (project) => project.status === "inprogress"
-            )}
-          />
-        </TabsContent>
-      </Tabs>
-      <div></div>
+      <TabsComp tabs={tabsItems} />
     </div>
   );
 }

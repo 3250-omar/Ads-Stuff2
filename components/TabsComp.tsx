@@ -22,7 +22,10 @@ const TabsComp = ({
           <TabsTrigger
             value={tab.value}
             key={index}
-            className={triggerStyle + " flex items-center gap-2"}
+            className={
+              triggerStyle +
+              " flex items-center gap-2  data-[state=active]:!bg-primary data-[state=active]:!text-white"
+            }
           >
             {tab.title}
             {tab.icon && <tab.icon />}

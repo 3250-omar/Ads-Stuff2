@@ -40,11 +40,7 @@ export default function Contacts() {
           className="animate-pulse size-12"
         />
       </div>
-      <TabsComp
-        tabs={TabsItems}
-        className="w-1/2 max-sm:w-full"
-        triggerStyle="data-[state=active]:!bg-primary data-[state=active]:!text-white"
-      />
+      <TabsComp tabs={TabsItems} className="w-1/2 max-sm:w-full" />
     </div>
   );
 }
