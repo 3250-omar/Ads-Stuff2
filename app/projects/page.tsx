@@ -76,11 +76,11 @@ export default async function Projects() {
       ),
     },
   ];
-  const projectsMany = await getProjects();
-  console.log(
-    "projectsMany",
-    projectsMany.map((project) => project.title)
-  );
+  // const projectsMany = await getProjects();
+  // console.log(
+  //   "projectsMany",
+  //   projectsMany.map((project) => project.title)
+  // );
   return (
     <div className="flex flex-col gap-4 ">
       <TabsComp tabs={tabsItems} />
