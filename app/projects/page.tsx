@@ -1,10 +1,9 @@
-"use client";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import FinishedProjects from "./_comp/FinishedProjects";
 import InProgressProjects from "./_comp/InProgressProjects";
 import AllProjects from "./_comp/AllProjects";
 import TabsComp from "@/components/TabsComp";
-export default function Projects() {
+import { getProjects } from "@/actions/projectActions";
+export default async function Projects() {
   // const t = await getTranslations("Projects");
   const projects = [
     {
@@ -77,6 +76,11 @@ export default function Projects() {
       ),
     },
   ];
+  const projectsMany = await getProjects();
+  console.log(
+    "projectsMany",
+    projectsMany.map((project) => project.title)
+  );
   return (
     <div className="flex flex-col gap-4 ">
       <TabsComp tabs={tabsItems} />

@@ -6,6 +6,8 @@ import { SiGmail } from "react-icons/si";
 import { SiWhatsapp } from "react-icons/si";
 import { SiTelegram } from "react-icons/si";
 import GmailForm from "./_comp/GmailContact";
+import WhatsAppContact from "./_comp/WhatsAppContact";
+import TelegramContact from "./_comp/TelegramContact";
 
 export default function Contacts() {
   const TabsItems = [
@@ -16,16 +18,16 @@ export default function Contacts() {
       content: <GmailForm />,
     },
     {
-      title: "Whatsapp",
+      title: "WhatsApp",
       icon: SiWhatsapp,
       value: "whatsapp",
-      content: <p>Whatsapp</p>,
+      content: <WhatsAppContact />,
     },
     {
       title: "Telegram",
       icon: SiTelegram,
       value: "telegram",
-      content: <p>Telegram</p>,
+      content: <TelegramContact />,
     },
   ];
   return (
