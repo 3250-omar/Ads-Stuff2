@@ -12,7 +12,9 @@ import {
   SiAdobepremierepro,
 } from "react-icons/si";
 import { FaPalette, FaFont, FaBrain } from "react-icons/fa";
-import ToolTipComp from "@/components/ui/ToolTipComp";
+import { Tooltip, Typography } from "antd";
+
+const { Title } = Typography;
 
 const skills = [
   {
@@ -51,13 +53,18 @@ const skills = [
 ];
 export default function SkillsSection() {
   return (
-    <section className="w-full py-24 flex justify-center items-center bg-gradient-to-b from-white to-gray-50  relative overflow-hidden">
-      <div className="relative w-[300px] h-[300px] flex justify-center items-center">
+    <section className="w-full py-32 flex justify-center items-center relative overflow-hidden">
+      <div className="relative w-[350px] h-[350px] flex justify-center items-center">
         {/* Center text */}
-        <h2 className="text-4xl font-bold text-primary">Skills</h2>
+        <Title
+          level={2}
+          className="!m-0 !text-primary !font-black !text-5xl max-sm:!text-4xl"
+        >
+          Skills
+        </Title>
 
         {/* Rotating circle container */}
-        <div className="absolute w-full h-full animate-spin-slow ">
+        <div className="absolute w-full h-full animate-spin-slow">
           {skills.map((skill, i) => {
             const angle = (i / skills.length) * 360;
             return (
@@ -65,12 +72,14 @@ export default function SkillsSection() {
                 key={skill.name}
                 className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"
                 style={{
-                  transform: `rotate(${angle}deg) translate(130px) rotate(-${angle}deg)`,
+                  transform: `rotate(${angle}deg) translate(150px) rotate(-${angle}deg)`,
                 }}
               >
-                <div className="flex items-center justify-center w-16 h-16 rounded-full bg-white  shadow-lg shadow-primary/50 hover:scale-110 transition-all duration-300 hover:bg-schemaWhite">
-                  <ToolTipComp trigger={skill.icon} title={skill.name} />
-                </div>
+                <Tooltip title={skill.name} color="#6B9071" placement="top">
+                  <div className="flex items-center justify-center w-16 h-16 max-sm:w-14 max-sm:h-14 rounded-full bg-white shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-gray-50 hover:scale-125 hover:border-primary transition-all duration-500 cursor-pointer">
+                    {skill.icon}
+                  </div>
+                </Tooltip>
               </div>
             );
           })}

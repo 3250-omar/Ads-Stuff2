@@ -3,7 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
-import { TooltipProvider } from "@/components/ui/tooltip";
+import AntdRegistry from "@/lib/AntdRegistry";
+import { ConfigProvider } from "antd";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,11 +32,19 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased space-y-8`}
       >
-        <TooltipProvider delayDuration={200} skipDelayDuration={100}>
-          <NavBar />
-          <div className="head-section">{children}</div>
-          <Footer />
-        </TooltipProvider>
+        <AntdRegistry>
+          <ConfigProvider
+            theme={{
+              token: {
+                colorPrimary: "#6B9071",
+              },
+            }}
+          >
+            <NavBar />
+            <div className="head-section">{children}</div>
+            <Footer />
+          </ConfigProvider>
+        </AntdRegistry>
       </body>
     </html>
   );

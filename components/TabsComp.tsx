@@ -1,43 +1,43 @@
-import { IconType } from "react-icons/lib";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
+"use client";
 
-const TabsComp = ({
-  tabs,
-  className,
-  triggerStyle,
-}: {
-  tabs: {
-    title: string;
-    icon?: IconType;
-    value: string;
-    content: React.ReactNode;
-  }[];
+import { Tabs } from "antd";
+import { IconType } from "react-icons/lib";
+
+interface TabItem {
+  title: string;
+  icon?: IconType;
+  value: string;
+  content: React.ReactNode;
+}
+
+interface TabsCompProps {
+  tabs: TabItem[];
   className?: string;
   triggerStyle?: string;
-}) => {
+}
+
+const TabsComp = ({ tabs, className }: TabsCompProps) => {
+  const items = tabs.map((tab) => ({
+    key: tab.value,
+    label: (
+      <span className="flex items-center gap-2">
+        {tab.icon && <tab.icon className="text-lg" />}
+        {tab.title}
+      </span>
+    ),
+    children: tab.content,
+  }));
+
   return (
-    <Tabs defaultValue={tabs[0].value} className={className}>
-      <TabsList>
-        {tabs.map((tab, index) => (
-          <TabsTrigger
-            value={tab.value}
-            key={index}
-            className={
-              triggerStyle +
-              " flex items-center gap-2  data-[state=active]:!bg-primary data-[state=active]:!text-white"
-            }
-          >
-            {tab.title}
-            {tab.icon && <tab.icon />}
-          </TabsTrigger>
-        ))}
-      </TabsList>
-      {tabs.map((tab, index) => (
-        <TabsContent value={tab.value} key={index}>
-          {tab.content}
-        </TabsContent>
-      ))}
-    </Tabs>
+    <div className={className}>
+      <Tabs
+        defaultActiveKey={tabs[0].value}
+        items={items}
+        animated={{ inkBar: true, tabPane: true }}
+        size="large"
+        className="custom-tabs"
+      />
+    </div>
   );
 };
 

@@ -1,13 +1,17 @@
-import { Quote, StarIcon } from "lucide-react";
-import Image from "next/image";
+"use client";
+
+import { Card, Rate, Avatar, Typography, Space } from "antd";
+import { MessageFilled } from "@ant-design/icons";
+
+const { Text, Title } = Typography;
 
 const FeedBacks = () => {
-  const test = [
+  const testimonials = [
     {
       name: "John Doe",
       job: "Software Engineer",
       feedback:
-        "&ldquo;Outstanding service and support! Highly recommend for any project needs.&rdquo;",
+        "Outstanding service and support! Highly recommend for any project needs.",
       logo: "/imgs/1.jpeg",
       rating: 5,
     },
@@ -15,7 +19,7 @@ const FeedBacks = () => {
       name: "Jane Smith",
       job: "Project Manager",
       feedback:
-        "&ldquo;Professional team with quick turnaround times. Exceeded our expectations.&rdquo;",
+        "Professional team with quick turnaround times. Exceeded our expectations.",
       logo: "/imgs/2.jpeg",
       rating: 5,
     },
@@ -23,7 +27,7 @@ const FeedBacks = () => {
       name: "Michael Johnson",
       job: "Designer",
       feedback:
-        "&ldquo;Creative solutions and attention to detail made all the difference.&rdquo;",
+        "Creative solutions and attention to detail made all the difference.",
       logo: "/imgs/3.jpeg",
       rating: 4,
     },
@@ -31,7 +35,7 @@ const FeedBacks = () => {
       name: "Emily Davis",
       job: "Marketing Specialist",
       feedback:
-        "&ldquo;Reliable and innovative. Our campaigns have never been better.&rdquo;",
+        "Reliable and innovative. Our campaigns have never been better.",
       logo: "/imgs/4.jpeg",
       rating: 5,
     },
@@ -39,49 +43,61 @@ const FeedBacks = () => {
       name: "David Wilson",
       job: "Entrepreneur",
       feedback:
-        "&ldquo;From concept to execution, they delivered perfectly on time and budget.&rdquo;",
+        "From concept to execution, they delivered perfectly on time and budget.",
       logo: "/imgs/5.jpeg",
       rating: 5,
     },
   ];
+
   return (
-    <section className="w-full grid grid-cols-4 gap-4 max-md:grid-cols-3 max-sm:grid-cols-1">
-      {test.map((testimonial, index) => (
-        <div
+    <section className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 py-10">
+      {testimonials.map((testimonial, index) => (
+        <Card
           key={index}
-          className="bg-white p-4 rounded-lg shadow-md shadow-secondary border-none hover:transform-[scale(1.02)] transition-all cursor-pointer duration-200 flex flex-col  items-center  justify-center gap-4 "
+          hoverable
+          className="rounded-3xl border-none shadow-md hover:shadow-xl transition-all duration-300 flex flex-col items-center text-center group"
+          styles={{
+            body: {
+              padding: "24px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: "16px",
+            },
+          }}
         >
-          <div className="flex items-center flex-col gap-1 ">
-            <Image
+          <div className="flex flex-col items-center gap-2">
+            <Avatar
               src={testimonial.logo}
-              alt={`${testimonial.name} logo`}
-              width={52}
-              height={52}
-              className="rounded-full object-cover"
+              size={64}
+              className="border-4 border-white shadow-lg group-hover:scale-110 transition-transform"
             />
-            <div>
-              <h3 className="font-semibold text-[16px]">{testimonial.name}</h3>
-              <p className="text-gray-600 text-[14px]">{testimonial.job}</p>
+            <div className="flex flex-col">
+              <Text strong className="text-base m-0">
+                {testimonial.name}
+              </Text>
+              <Text
+                type="secondary"
+                className="text-xs uppercase tracking-widest"
+              >
+                {testimonial.job}
+              </Text>
             </div>
           </div>
-          <div className="flex flex-col items-center justify-center gap-2 ">
-            <Quote size={25} />
-            <p className="text-gray-800 text-center text-[14px]">
-              {testimonial.feedback}
-            </p>
+
+          <div className="flex flex-col items-center gap-3">
+            <MessageFilled className="text-primary/20 text-2xl" />
+            <Text className="text-gray-600 italic leading-relaxed text-sm">
+              &ldquo;{testimonial.feedback}&rdquo;
+            </Text>
           </div>
-          <div className="flex ">
-            {Array.from({ length: testimonial.rating }, (_, i) => (
-              <StarIcon
-                key={i}
-                size={20}
-                fill={"#6B9071"}
-                className="border-none outline-none "
-                stroke={undefined}
-              />
-            ))}
-          </div>
-        </div>
+
+          <Rate
+            disabled
+            defaultValue={testimonial.rating}
+            className="text-primary text-sm"
+          />
+        </Card>
       ))}
     </section>
   );

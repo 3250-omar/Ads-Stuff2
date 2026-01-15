@@ -1,9 +1,8 @@
 "use client";
 
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
-import clsx from "clsx";
+import { Card, Badge, Typography, Space, Divider } from "antd";
+
+const { Title, Text, Paragraph } = Typography;
 
 type TimelineItem = {
   title: string;
@@ -19,93 +18,92 @@ interface TimelineProps {
 
 export function Timeline({ items }: TimelineProps) {
   return (
-    <div className="relative   py-10">
-      {/* continuous center line */}
-      <Separator
-        orientation="vertical"
-        className="absolute left-1/2 top-0 bottom-0 -translate-x-1/2 w-[2px] bg-primary max-sm:hidden"
-      />
+    <div className="relative py-20 px-4">
+      {/* center line */}
+      <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-primary/20 -translate-x-1/2 hidden md:block" />
 
-      <div className="relative z-10 space-y-10 ">
+      <div className="relative z-10 space-y-16">
         {items.map((item, i) => {
           const isLeft = i % 2 === 0;
           return (
             <div
               key={i}
-              className={clsx(
-                "relative flex items-start",
-                isLeft ? "justify-start" : "justify-end",
-                "max-md:justify-center"
-              )}
+              className={`flex flex-col md:flex-row items-center justify-between w-full ${
+                isLeft ? "md:flex-row" : "md:flex-row-reverse"
+              }`}
             >
-              {/* timeline dot */}
-              <span className="absolute left-1/2 z-20 flex h-5 w-5 -translate-x-1/2 items-center justify-center rounded-full bg-background max-sm:hidden">
-                <span className="block h-3 w-3 rounded-full bg-secondary" />
-              </span>
-
               {/* timeline card */}
-              <div
-                className={clsx(
-                  "w-[calc(50%-1rem)] max-md:w-[calc(100%-2.5rem)] max-sm:w-[calc(100%-1.5rem)]",
-                  isLeft
-                    ? "text-right pr-4 max-md:pr-0"
-                    : "text-left pl-4 max-md:pl-0"
-                )}
-              >
-                <Card className="shadow-lg hover:shadow-xl transition-all border-border group ">
-                  <CardContent className="px-6 py-6">
-                    <div
-                      className={clsx(
-                        "flex items-center justify-between mb-3 gap-2",
-                        isLeft && "flex-row-reverse"
-                      )}
+              <div className="w-full md:w-[45%]">
+                <Card
+                  variant="outlined"
+                  className="shadow-md hover:shadow-2xl transition-all duration-500 rounded-3xl border border-gray-100 group"
+                  style={{ textAlign: isLeft ? "right" : "left" }}
+                >
+                  <div
+                    className={`flex flex-col gap-3 ${
+                      isLeft ? "items-end" : "items-start"
+                    }`}
+                  >
+                    <Space
+                      size="middle"
+                      className={isLeft ? "flex-row-reverse" : "flex-row"}
                     >
-                      <h3 className="font-semibold text-xl group-hover:text-primary transition-colors">
+                      <Title
+                        level={4}
+                        className="!m-0 group-hover:text-primary transition-colors"
+                      >
                         {item.title}
-                      </h3>
-                      <Badge variant="secondary">{item.date}</Badge>
-                    </div>
+                      </Title>
+                      <Badge
+                        count={item.date}
+                        className="site-badge-count-109"
+                        style={{
+                          backgroundColor: "#AEC3B0",
+                          color: "#6B9071",
+                          fontWeight: "bold",
+                        }}
+                      />
+                    </Space>
 
                     {item.subtitle && (
-                      <p
-                        className={clsx(
-                          "text-sm text-muted-foreground mb-2",
-                          isLeft && "text-right"
-                        )}
-                      >
+                      <Text type="secondary" className="text-sm">
                         {item.subtitle}
-                      </p>
+                      </Text>
                     )}
 
                     {item.description && (
-                      <p
-                        className={clsx(
-                          "text-base leading-relaxed text-muted-foreground",
-                          isLeft && "text-right"
-                        )}
-                      >
+                      <Paragraph className="text-gray-600 leading-relaxed m-0 mt-2">
                         {item.description}
-                      </p>
+                      </Paragraph>
                     )}
 
                     {item.status && (
-                      <div
-                        className={clsx(
-                          "mt-4 border-t  pt-3",
-                          isLeft && "flex justify-end"
-                        )}
-                      >
+                      <>
+                        <Divider className="my-3" />
                         <Badge
-                          variant="outline"
-                          className="group-hover:bg-primary group-hover:text-white transition-colors"
-                        >
-                          {item.status}
-                        </Badge>
-                      </div>
+                          status="processing"
+                          text={
+                            <Text
+                              strong
+                              className="text-primary uppercase tracking-wider text-xs"
+                            >
+                              {item.status}
+                            </Text>
+                          }
+                        />
+                      </>
                     )}
-                  </CardContent>
+                  </div>
                 </Card>
               </div>
+
+              {/* timeline dot */}
+              <div className="relative flex items-center justify-center w-12 h-12 my-4 md:my-0 z-20">
+                <div className="w-6 h-6 rounded-full bg-white border-4 border-primary shadow-lg" />
+              </div>
+
+              {/* empty space for the other side on desktop */}
+              <div className="hidden md:block w-[45%]" />
             </div>
           );
         })}

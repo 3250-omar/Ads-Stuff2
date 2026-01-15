@@ -1,4 +1,5 @@
-import { Spinner } from "@/components/ui/spinner";
+// import { Spinner } from "@/components/ui/spinner";
+import { Spin } from "antd";
 import Image from "next/image";
 
 const Loading = () => {
@@ -12,7 +13,7 @@ const Loading = () => {
         className="object-contain"
         priority
       />
-      <Spinner className="size-8 text-primary" />
+      <Spin className="size-8 text-primary" />
     </div>
   );
 };

@@ -1,114 +1,121 @@
 "use client";
 
 import {
-  Facebook,
-  InstagramIcon,
-  LinkedinIcon,
-  LucideIcon,
-  Send,
-  TwitterIcon,
-} from "lucide-react";
+  FacebookFilled,
+  InstagramOutlined,
+  LinkedinFilled,
+  TwitterOutlined,
+  SendOutlined,
+  MailOutlined,
+  WhatsAppOutlined,
+} from "@ant-design/icons";
+import { Button, Space, Typography } from "antd";
 import Link from "next/link";
 import { useState } from "react";
-import { Button } from "./ui/button";
+
+const { Title, Text } = Typography;
 
 const Footer = () => {
   const [showMessage, setShowMessage] = useState<boolean>(false);
   const currentYear = new Date().getFullYear();
-  const socialMedia: {
-    id: number;
-    name: string;
-    icon: LucideIcon;
-    iconColor: string;
-    link: string;
-  }[] = [
+
+  const socialMedia = [
     {
       id: 1,
       name: "Facebook",
-      icon: Facebook,
-      iconColor: "text-blue-500",
+      icon: <FacebookFilled />,
+      color: "#1877F2",
       link: "https://www.facebook.com/",
     },
     {
       id: 2,
       name: "Instagram",
-      icon: InstagramIcon,
-      iconColor: "text-pink-500",
+      icon: <InstagramOutlined />,
+      color: "#E4405F",
       link: "https://www.instagram.com/",
     },
     {
       id: 3,
       name: "Twitter",
-      icon: TwitterIcon,
-      iconColor: "text-blue-500",
+      icon: <TwitterOutlined />,
+      color: "#1DA1F2",
       link: "https://www.twitter.com/",
     },
     {
       id: 4,
       name: "LinkedIn",
-      icon: LinkedinIcon,
-      iconColor: "text-blue-500",
+      icon: <LinkedinFilled />,
+      color: "#0A66C2",
       link: "https://www.linkedin.com/",
     },
   ];
+
   return (
-    <footer className="w-full bg-secondary !mb-0 !p-4">
-      <div className="mx-auto max-w-7xl flex items-center  justify-between max-sm:flex-col-reverse max-sm:gap-4">
-        <div className="flex items-center justify-center flex-col gap-4 text-white max-sm:text-center">
-          <h2 className="text-2xl font-bold text-primary">
+    <footer className="w-full bg-[#AEC3B0] !mb-0 p-8">
+      <div className="mx-auto max-w-7xl flex items-center justify-between max-sm:flex-col-reverse max-sm:gap-8">
+        <div className="flex flex-col gap-6 max-sm:text-center items-center sm:items-start">
+          <Title level={3} style={{ color: "#6B9071", margin: 0 }}>
             With Ads&Staff You will never be on the shelf
-          </h2>
-          <div className="text-center space-y-3">
-            <p className="text-xl font-bold ">Follow us on</p>
-            <div className="flex items-center gap-2">
+          </Title>
+
+          <div className="space-y-4">
+            <Text strong style={{ fontSize: "1.1rem" }}>
+              Follow us on
+            </Text>
+            <div className="flex items-center gap-4 justify-center sm:justify-start">
               {socialMedia.map((item) => (
                 <Link
                   key={item.id}
                   href={item.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="border-2 rounded-2xl border-primary p-2 hover:bg-schemaWhite  hover:scale-110 transition-all"
+                  className="flex items-center justify-center border-2 rounded-xl border-[#6B9071] p-2 hover:bg-[#E3EED4] hover:scale-110 transition-all text-xl"
+                  style={{ color: item.color }}
                 >
-                  <item.icon className={item.iconColor} />
+                  {item.icon}
                 </Link>
               ))}
             </div>
           </div>
-          <div className="text-sm">
-            &copy; {currentYear} Ads&Staff | All rights reserved
-          </div>
+
+          <Text>&copy; {currentYear} Ads&Staff | All rights reserved</Text>
         </div>
-        <div className="flex items-center justify-center flex-col gap-4">
+
+        <div className="flex flex-col gap-4 items-center">
           <Button
+            type="primary"
+            size="large"
+            icon={<SendOutlined />}
             onClick={() => setShowMessage(!showMessage)}
-            className="border-2 rounded-2xl border-primary p-2 hover:bg-schemaWhite hover:text-primary  hover:scale-110 transition-all flex items-center gap-2 group text-white"
+            className="flex items-center h-auto py-3 px-6 rounded-xl hover:scale-105 transition-transform"
+            style={{ backgroundColor: "#6B9071" }}
           >
-            <p>{showMessage ? "Close Quick Message " : "Quick Message"}</p>
-            <Send className="  group-hover:size-10  transition-all" />
+            {showMessage ? "Close Quick Message" : "Quick Message"}
           </Button>
+
           {showMessage && (
-            <div className="flex items-center justify-center flex-col gap-2 ">
-              <div className="flex items-center gap-2">
-                <Button
-                  onClick={() => {
-                    window.open(
-                      "https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=ziad@adsstaff.com"
-                    );
-                  }}
-                  className="border-2 rounded-2xl border-primary p-2 hover:bg-schemaWhite hover:text-primary  hover:scale-110 transition-all flex items-center gap-2 group text-white"
-                >
-                  <p>Email</p>
-                </Button>
-                <Button
-                  onClick={() => {
-                    window.open("https://wa.me/201111111111");
-                  }}
-                  className="border-2 rounded-2xl border-primary p-2 hover:bg-schemaWhite hover:text-primary  hover:scale-110 transition-all flex items-center gap-2 group text-white"
-                >
-                  <p>Whatsapp </p>
-                </Button>
-              </div>
-            </div>
+            <Space orientation="horizontal" size="middle">
+              <Button
+                icon={<MailOutlined />}
+                onClick={() => {
+                  window.open(
+                    "https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=ziad@adsstaff.com"
+                  );
+                }}
+                className="rounded-xl border-primary text-primary hover:bg-schemaWhite"
+              >
+                Email
+              </Button>
+              <Button
+                icon={<WhatsAppOutlined />}
+                onClick={() => {
+                  window.open("https://wa.me/201111111111");
+                }}
+                className="rounded-xl border-primary text-primary hover:bg-schemaWhite"
+              >
+                Whatsapp
+              </Button>
+            </Space>
           )}
         </div>
       </div>
