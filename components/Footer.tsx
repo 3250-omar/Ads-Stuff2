@@ -133,7 +133,7 @@ const Footer = () => {
                     href={item.social_media_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`flex items-center justify-center w-12 h-12 rounded-full border-2 border-gray-100 text-black! text-xl hover:border-transparent hover:text-white! hover:scale-110 hover:shadow-lg transition-all ${bgHover}!`}
+                    className={`flex items-center justify-center w-12 h-12 rounded-full border-2 text-black! border-gray-100 text-xl hover:border-transparent hover:text-white! hover:scale-110 hover:shadow-lg transition-all ${bgHover}`}
                   >
                     <SocialIcon />
                   </Link>

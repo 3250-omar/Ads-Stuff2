@@ -1,5 +1,6 @@
 import Icon, {
   FacebookFilled,
+  FullscreenOutlined,
   InstagramFilled,
   LinkedinFilled,
   TikTokFilled,
@@ -17,13 +18,13 @@ const getSocialMedia = ({
       return {
         icon: FacebookFilled,
         name: "Facebook",
-        bgHover: "hover:bg-[#1877F2]",
+        bgHover: "hover:!bg-[#1877F2]",
       };
     case "twitter":
       return {
         icon: BsTwitter,
         name: "Twitter",
-        bgHover: "hover:bg-[#1DA1F2]",
+        bgHover: "hover:!bg-[#1DA1F2]",
       };
     case "instagram":
       return {
@@ -36,22 +37,26 @@ const getSocialMedia = ({
       return {
         icon: TikTokFilled,
         name: "TikTok",
-        bgHover: "hover:bg-[#FF0080]",
+        bgHover: "hover:!bg-[#FF0080]",
       };
     case "linkedin":
       return {
         icon: LinkedinFilled,
         name: "LinkedIn",
-        bgHover: "hover:bg-[#0A66C2]",
+        bgHover: "hover:!bg-[#0A66C2]",
       };
     case "snapchat":
       return {
         icon: BsSnapchat,
         name: "Snapchat",
-        bgHover: "hover:bg-[#FF0080]",
+        bgHover: "hover:!bg-gray-400",
       };
     default:
-      return { icon: Icon, name: "icon", bgHover: "hover:bg-white" };
+      return {
+        icon: FullscreenOutlined,
+        name: "icon",
+        bgHover: "hover:!bg-white",
+      };
   }
 };
 

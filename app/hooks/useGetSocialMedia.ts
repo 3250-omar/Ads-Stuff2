@@ -10,16 +10,22 @@ export default function useGetSocialMedia() {
 
   useEffect(() => {
     const fetchSocialMedia = async () => {
-      const supabase = createClient();
-      const { data, error } = await supabase.from("socialmedia").select();
+      try {
+        const supabase = createClient();
+        const { data, error } = await supabase.from("socialmedia").select();
 
-      if (error) {
-        console.error("Error fetching social media data:", error);
-        setError(error);
-      } else {
-        setSocialmedia(data);
+        if (error) {
+          console.error("Supabase error fetching social media:", error);
+          setError(error);
+        } else {
+          setSocialmedia(data);
+        }
+      } catch (err) {
+        console.error("Unknown error in useGetSocialMedia:", err);
+        setError(err);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
 
     fetchSocialMedia();
