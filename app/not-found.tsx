@@ -1,7 +1,7 @@
-import React from "react";
+import { notFound } from "next/navigation";
 
 const NotFound = () => {
-  return <div>404 Not Found</div>;
+  return <div>Not Found 404</div>;
 };
 
 export default NotFound;

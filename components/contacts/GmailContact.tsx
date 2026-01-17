@@ -98,7 +98,7 @@ export default function GmailForm() {
             />
           </Form.Item>
 
-          <Space className="w-full mt-4" direction="vertical" size="middle">
+          <Space className="w-full mt-4" orientation="vertical" size="middle">
             <Button
               type="primary"
               htmlType="submit"

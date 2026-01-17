@@ -1,6 +1,11 @@
 "use client";
 
 import { Card, Badge, Typography, Space, Divider } from "antd";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const { Title, Text, Paragraph } = Typography;
 
@@ -17,10 +22,34 @@ interface TimelineProps {
 }
 
 export function Timeline({ items }: TimelineProps) {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const cardsRef = useRef<HTMLDivElement[]>([]);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      cardsRef.current.forEach((card, index) => {
+        const isLeft = index % 2 === 0;
+        gsap.from(card, {
+          x: isLeft ? -80 : 80,
+          opacity: 0,
+          duration: 0.9,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: card,
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+        });
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, [items]);
+
   return (
-    <div className="relative py-20 px-4">
-      {/* center line */}
-      <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-primary/20 -translate-x-1/2 hidden md:block" />
+    <div ref={sectionRef} className="relative py-20 px-4">
+      {/* Center line */}
+      <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-primary/10 via-primary to-primary/10 -translate-x-1/2 hidden md:block rounded-full" />
 
       <div className="relative z-10 space-y-16">
         {items.map((item, i) => {
@@ -28,15 +57,18 @@ export function Timeline({ items }: TimelineProps) {
           return (
             <div
               key={i}
+              ref={(el) => {
+                if (el) cardsRef.current[i] = el;
+              }}
               className={`flex flex-col md:flex-row items-center justify-between w-full ${
                 isLeft ? "md:flex-row" : "md:flex-row-reverse"
               }`}
             >
-              {/* timeline card */}
+              {/* Timeline card */}
               <div className="w-full md:w-[45%]">
                 <Card
                   variant="outlined"
-                  className="shadow-md hover:shadow-2xl transition-all duration-500 rounded-3xl border border-gray-100 group"
+                  className="shadow-lg hover:shadow-2xl transition-all duration-500 rounded-3xl border border-gray-100 group hover:-translate-y-1 glass-card"
                   style={{ textAlign: isLeft ? "right" : "left" }}
                 >
                   <div
@@ -50,17 +82,18 @@ export function Timeline({ items }: TimelineProps) {
                     >
                       <Title
                         level={4}
-                        className="!m-0 group-hover:text-primary transition-colors"
+                        className="m-0! group-hover:text-primary transition-colors"
                       >
                         {item.title}
                       </Title>
                       <Badge
                         count={item.date}
-                        className="site-badge-count-109"
                         style={{
                           backgroundColor: "#AEC3B0",
-                          color: "#6B9071",
+                          color: "#0f2a1d",
                           fontWeight: "bold",
+                          borderRadius: "1rem",
+                          padding: "0 12px",
                         }}
                       />
                     </Space>
@@ -79,7 +112,7 @@ export function Timeline({ items }: TimelineProps) {
 
                     {item.status && (
                       <>
-                        <Divider className="my-3" />
+                        <Divider className="my-3 border-primary/20" />
                         <Badge
                           status="processing"
                           text={
@@ -97,12 +130,12 @@ export function Timeline({ items }: TimelineProps) {
                 </Card>
               </div>
 
-              {/* timeline dot */}
+              {/* Timeline dot */}
               <div className="relative flex items-center justify-center w-12 h-12 my-4 md:my-0 z-20">
-                <div className="w-6 h-6 rounded-full bg-white border-4 border-primary shadow-lg" />
+                <div className="w-6 h-6 rounded-full bg-white border-4 border-primary shadow-lg animate-pulse-glow" />
               </div>
 
-              {/* empty space for the other side on desktop */}
+              {/* Empty space for the other side on desktop */}
               <div className="hidden md:block w-[45%]" />
             </div>
           );

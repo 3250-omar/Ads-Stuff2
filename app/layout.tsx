@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
+import ScrollToTop from "@/components/ScrollToTop";
 import AntdRegistry from "@/lib/AntdRegistry";
 import { ConfigProvider } from "antd";
 
@@ -30,7 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en" dir="ltr" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased space-y-8`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-linear-to-br from-schemaWhite/50 via-white to-secondary/20 min-h-screen`}
       >
         <AntdRegistry>
           <ConfigProvider
@@ -43,6 +44,7 @@ export default function RootLayout({
             <NavBar />
             <div className="head-section">{children}</div>
             <Footer />
+            <ScrollToTop />
           </ConfigProvider>
         </AntdRegistry>
       </body>

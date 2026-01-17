@@ -1,6 +1,5 @@
 "use client";
 import { navItems } from "@/constants/routes";
-import { VerticalAlignTopOutlined } from "@ant-design/icons";
 import { Button } from "antd";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -53,26 +52,28 @@ const NavBar = () => {
         windowHeight >= 80 ? "bg-white shadow-md" : "bg-transparent"
       }`}
     >
-      <button
+      <Button
         onClick={() => scrollToSection("#home")}
-        className="w-[150px] h-[75px] relative"
+        className="w-[150px]! h-[100px]! relative "
+        type="link"
       >
         <Image src="/Logo3G.png" alt="Logo" fill className="object-contain" />
-      </button>
+      </Button>
       <div className="flex items-center gap-5 max-sm:hidden">
         <div className="flex items-center gap-6">
           {navItems.map((item: { key: string; href: string }) => (
-            <button
+            <Button
               onClick={() => scrollToSection(item.href)}
               key={item.key}
-              className={`text-base transition-colors hover:text-primary capitalize ${
+              className={`text-base transition-colors hover:text-primary! capitalize! ${
                 activeSection === item.key
-                  ? "text-primary font-bold border-b-2 border-primary"
+                  ? "text-primary! font-bold! border-primary!"
                   : "text-gray-600"
               }`}
+              type="dashed"
             >
               {item.key}
-            </button>
+            </Button>
           ))}
         </div>
       </div>
@@ -81,31 +82,21 @@ const NavBar = () => {
       <div className="fixed bottom-5 left-1/2 -translate-x-1/2 w-[280px] rounded-full bg-primary/80 backdrop-blur-md text-white z-50 mx-auto p-3 hidden max-sm:block shadow-lg">
         <div className="flex items-center gap-2 justify-around">
           {navItems.map((item: { key: string; href: string }) => (
-            <button
+            <Button
               onClick={() => scrollToSection(item.href)}
               key={item.key}
-              className={`transition-colors text-sm hover:text-black capitalize ${
+              className={`transition-colors! text-sm! hover:text-black! capitalize! ${
                 activeSection === item.key
-                  ? "text-black font-bold bg-white/20 px-2 py-1 rounded-md"
-                  : "text-white"
+                  ? "text-black! font-bold! bg-white/20! px-2! py-1! rounded-md!"
+                  : "text-white!"
               }`}
+              type="text"
             >
               {item.key}
-            </button>
+            </Button>
           ))}
         </div>
       </div>
-
-      {windowHeight >= 100 && (
-        <Button
-          type="primary"
-          shape="circle"
-          icon={<VerticalAlignTopOutlined />}
-          size="large"
-          className="fixed right-10 bottom-10 z-50 shadow-lg"
-          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        />
-      )}
     </nav>
   );
 };

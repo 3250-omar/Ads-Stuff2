@@ -1,30 +1,63 @@
 "use client";
 import CountUp from "react-countup";
 import { Typography } from "antd";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const { Title, Text } = Typography;
 
 const StatictsSection = () => {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const cardsRef = useRef<HTMLDivElement[]>([]);
+
   const statistics = [
-    { title: "Customers", count: 1000 },
-    { title: "Projects", count: 500 },
-    { title: "Awards", count: 250 },
+    { title: "Happy Customers", count: 1000, suffix: "+" },
+    { title: "Projects Completed", count: 500, suffix: "+" },
+    { title: "Awards Won", count: 50, suffix: "" },
   ];
 
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      cardsRef.current.forEach((card, index) => {
+        gsap.from(card, {
+          y: 60,
+          opacity: 0,
+          duration: 0.8,
+          delay: index * 0.15,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: card,
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+        });
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="bg-[#E3EED4]/30 rounded-[3rem] border-2 border-[#E3EED4] grid grid-cols-3 gap-6 w-full max-sm:grid-cols-1 max-md:grid-cols-2 p-8">
+    <section
+      ref={sectionRef}
+      className="gradient-section rounded-[3rem] border border-secondary/30 grid grid-cols-3 gap-8 w-full max-sm:grid-cols-1 max-md:grid-cols-2 p-10"
+    >
       {statistics.map((statistic, index) => (
         <div
           key={index}
-          className="flex flex-col items-center justify-center gap-2 group hover:bg-primary hover:-translate-y-2 hover:cursor-pointer transition-all duration-500 p-10 rounded-[2.5rem] bg-white shadow-sm hover:shadow-xl"
+          ref={(el) => {
+            if (el) cardsRef.current[index] = el;
+          }}
+          className="flex flex-col items-center justify-center gap-3 group hover:bg-primary hover:-translate-y-3 hover:cursor-pointer transition-all duration-500 p-12 rounded-[2rem] bg-white shadow-lg hover:shadow-2xl hover:glow-primary"
         >
-          <div className="text-5xl font-black text-primary group-hover:text-white transition-colors duration-300">
-            <Space size={0}>
-              <span>+</span>
-              <CountUp end={statistic.count} duration={4} delay={0.5} />
-            </Space>
+          <div className="text-6xl font-black text-primary group-hover:text-white transition-colors duration-300">
+            <CountUp end={statistic.count} duration={3} delay={0.5} />
+            <span>{statistic.suffix}</span>
           </div>
-          <Text className="text-xl font-medium text-gray-600 group-hover:text-white transition-colors duration-300">
+          <Text className="text-xl font-semibold text-gray-600 group-hover:text-white/90 transition-colors duration-300 tracking-wide">
             {statistic.title}
           </Text>
         </div>
@@ -32,14 +65,5 @@ const StatictsSection = () => {
     </section>
   );
 };
-
-// Internal Space component mock if not using antd Space, but I'll use simple span
-const Space = ({
-  children,
-  size,
-}: {
-  children: React.ReactNode;
-  size?: number;
-}) => <div className="flex items-center gap-0">{children}</div>;
 
 export default StatictsSection;

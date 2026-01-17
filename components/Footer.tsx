@@ -9,7 +9,7 @@ import {
   MailOutlined,
   WhatsAppOutlined,
 } from "@ant-design/icons";
-import { Button, Space, Typography } from "antd";
+import { Button, Space, Typography, Divider } from "antd";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -24,99 +24,150 @@ const Footer = () => {
       id: 1,
       name: "Facebook",
       icon: <FacebookFilled />,
-      color: "#1877F2",
+      hoverBg: "hover:bg-[#1877F2]",
       link: "https://www.facebook.com/",
     },
     {
       id: 2,
       name: "Instagram",
       icon: <InstagramOutlined />,
-      color: "#E4405F",
+      hoverBg:
+        "hover:bg-gradient-to-tr hover:from-[#F58529] hover:via-[#DD2A7B] hover:to-[#8134AF]",
       link: "https://www.instagram.com/",
     },
     {
       id: 3,
       name: "Twitter",
       icon: <TwitterOutlined />,
-      color: "#1DA1F2",
+      hoverBg: "hover:bg-[#1DA1F2]",
       link: "https://www.twitter.com/",
     },
     {
       id: 4,
       name: "LinkedIn",
       icon: <LinkedinFilled />,
-      color: "#0A66C2",
+      hoverBg: "hover:bg-[#0A66C2]",
       link: "https://www.linkedin.com/",
     },
   ];
 
-  return (
-    <footer className="w-full bg-[#AEC3B0] !mb-0 p-8">
-      <div className="mx-auto max-w-7xl flex items-center justify-between max-sm:flex-col-reverse max-sm:gap-8">
-        <div className="flex flex-col gap-6 max-sm:text-center items-center sm:items-start">
-          <Title level={3} style={{ color: "#6B9071", margin: 0 }}>
-            With Ads&Staff You will never be on the shelf
-          </Title>
+  const quickLinks = [
+    { name: "Home", href: "#home" },
+    { name: "Projects", href: "#projects" },
+    { name: "Contact", href: "#contacts" },
+  ];
 
-          <div className="space-y-4">
-            <Text strong style={{ fontSize: "1.1rem" }}>
-              Follow us on
+  return (
+    <footer className="w-full bg-linear-to-br from-schemaWhite/20 via-white to-secondary/10 mb-0! py-16 px-8 relative overflow-hidden border-t border-gray-100">
+      {/* Decorative Glowing Orbs */}
+      <div className="absolute top-0 left-1/4 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-secondary/5 rounded-full blur-3xl" />
+
+      <div className="mx-auto max-w-7xl relative z-10">
+        {/* Main Footer Content */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
+          {/* Brand Section */}
+          <div className="flex flex-col gap-6 items-center md:items-start text-center md:text-left">
+            <div className="space-y-2">
+              <Title level={2} className="text-primary! m-0! font-black!">
+                Ads & Stuff
+              </Title>
+              <Text className="text-gray-500 text-lg">
+                It's Not Just Ads — It's The Whole Stuff
+              </Text>
+            </div>
+            <Text className="text-gray-400 max-w-xs">
+              We craft compelling brand stories, stunning visuals, and
+              result-driven advertising campaigns.
             </Text>
-            <div className="flex items-center gap-4 justify-center sm:justify-start">
-              {socialMedia.map((item) => (
+          </div>
+
+          {/* Quick Links */}
+          <div className="flex flex-col gap-4 items-center">
+            <Text
+              strong
+              className="text-primary! text-lg! uppercase tracking-widest"
+            >
+              Quick Links
+            </Text>
+            <div className="flex flex-col gap-2 items-center">
+              {quickLinks.map((link) => (
                 <Link
-                  key={item.id}
-                  href={item.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center border-2 rounded-xl border-[#6B9071] p-2 hover:bg-[#E3EED4] hover:scale-110 transition-all text-xl"
-                  style={{ color: item.color }}
+                  key={link.name}
+                  href={link.href}
+                  className="text-gray-500 hover:text-primary transition-colors text-base"
                 >
-                  {item.icon}
+                  {link.name}
                 </Link>
               ))}
             </div>
           </div>
 
-          <Text>&copy; {currentYear} Ads&Staff | All rights reserved</Text>
+          {/* Contact Section */}
+          <div className="flex flex-col gap-6 items-center md:items-end">
+            <Button
+              type="primary"
+              size="large"
+              icon={<SendOutlined />}
+              onClick={() => setShowMessage(!showMessage)}
+              className="flex items-center h-auto py-4 px-10 rounded-2xl hover:scale-105 transition-all shadow-xl shadow-primary/20 text-lg font-semibold"
+              style={{ backgroundColor: "#6B9071" }}
+            >
+              {showMessage ? "Close" : "Get In Touch"}
+            </Button>
+
+            {showMessage && (
+              <Space orientation="horizontal" size="middle">
+                <Button
+                  icon={<MailOutlined />}
+                  size="large"
+                  onClick={() => {
+                    window.open(
+                      "https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=ziad@adsstaff.com"
+                    );
+                  }}
+                  className="rounded-xl border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all font-medium"
+                >
+                  Email
+                </Button>
+                <Button
+                  icon={<WhatsAppOutlined />}
+                  size="large"
+                  onClick={() => {
+                    window.open("https://wa.me/201111111111");
+                  }}
+                  className="rounded-xl border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all font-medium"
+                >
+                  WhatsApp
+                </Button>
+              </Space>
+            )}
+          </div>
         </div>
 
-        <div className="flex flex-col gap-4 items-center">
-          <Button
-            type="primary"
-            size="large"
-            icon={<SendOutlined />}
-            onClick={() => setShowMessage(!showMessage)}
-            className="flex items-center h-auto py-3 px-6 rounded-xl hover:scale-105 transition-transform"
-            style={{ backgroundColor: "#6B9071" }}
-          >
-            {showMessage ? "Close Quick Message" : "Quick Message"}
-          </Button>
+        <Divider className="border-gray-200 my-10!" />
 
-          {showMessage && (
-            <Space orientation="horizontal" size="middle">
-              <Button
-                icon={<MailOutlined />}
-                onClick={() => {
-                  window.open(
-                    "https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=ziad@adsstaff.com"
-                  );
-                }}
-                className="rounded-xl border-primary text-primary hover:bg-schemaWhite"
+        {/* Bottom Footer */}
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+          {/* Social Icons */}
+          <div className="flex items-center gap-4">
+            {socialMedia.map((item) => (
+              <Link
+                key={item.id}
+                href={item.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`flex items-center justify-center w-12 h-12 rounded-full border-2 border-gray-100 text-gray-400 text-xl hover:border-transparent hover:text-white hover:scale-110 hover:shadow-lg transition-all ${item.hoverBg}`}
               >
-                Email
-              </Button>
-              <Button
-                icon={<WhatsAppOutlined />}
-                onClick={() => {
-                  window.open("https://wa.me/201111111111");
-                }}
-                className="rounded-xl border-primary text-primary hover:bg-schemaWhite"
-              >
-                Whatsapp
-              </Button>
-            </Space>
-          )}
+                {item.icon}
+              </Link>
+            ))}
+          </div>
+
+          {/* Copyright */}
+          <Text className="text-gray-400 text-sm">
+            &copy; {currentYear} Ads & Stuff. All rights reserved.
+          </Text>
         </div>
       </div>
     </footer>
