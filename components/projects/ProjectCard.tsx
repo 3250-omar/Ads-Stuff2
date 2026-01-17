@@ -58,7 +58,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
 
         <div className="flex justify-between items-center mt-2 group-hover:translate-x-1 transition-transform">
           <Link
-            href={project.link}
+            href={`/projects/${project.id}`}
             className="flex items-center gap-1 font-bold text-primary hover:text-primary/80"
           >
             <span>View Case Study</span>

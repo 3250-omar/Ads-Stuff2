@@ -1,56 +1,11 @@
-"use client";
 import { Typography, Divider } from "antd";
 import TabsComp from "@/components/TabsComp";
 import FinishedProjects from "@/components/projects/FinishedProjects";
 import InProgressProjects from "@/components/projects/InProgressProjects";
 import AllProjects from "@/components/projects/AllProjects";
+import { projectsData } from "@/constants/projects";
 
-const { Title } = Typography;
-
-const projectsData = [
-  {
-    title: "Project 1",
-    description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-    image: "/imgs/1.jpeg",
-    link: "#",
-    status: "finished",
-  },
-  {
-    title: "Project 2",
-    description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-    image: "/imgs/2.jpeg",
-    link: "#",
-    status: "inprogress",
-  },
-  {
-    title: "Project 3",
-    description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-    image: "/imgs/3.jpeg",
-    link: "#",
-    status: "finished",
-  },
-  {
-    title: "Project 4",
-    description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-    image: "/imgs/1.jpeg",
-    link: "#",
-    status: "inprogress",
-  },
-  {
-    title: "Project 5",
-    description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-    image: "/imgs/2.jpeg",
-    link: "#",
-    status: "inprogress",
-  },
-  {
-    title: "Project 6",
-    description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-    image: "/imgs/3.jpeg",
-    link: "#",
-    status: "finished",
-  },
-];
+const { Title, Paragraph } = Typography;
 
 export default function ProjectsSection() {
   const projectTabsItems = [
@@ -84,15 +39,19 @@ export default function ProjectsSection() {
   ];
 
   return (
-    <section id="projects" className="w-full px-4 py-16">
-      <div className="text-center mb-12">
-        <Title
-          level={2}
-          className="!text-primary !font-black !text-5xl !m-0 mb-4"
-        >
-          Our Projects
+    <section
+      id="projects"
+      className="w-full px-4 py-20 gradient-section rounded-[3rem]"
+    >
+      <div className="text-center mb-16 flex flex-col items-center">
+        <Title level={2} className="section-title mb-4">
+          Our Creative Impact
         </Title>
-        <Divider className="border-primary/30 w-1/4 min-w-[100px] mx-auto" />
+        <Divider className="border-primary/30 w-1/4 min-w-[100px] my-6" />
+        <Paragraph className="text-xl text-gray-500 max-w-2xl text-center">
+          Explore our portfolio of successful collaborations and innovative
+          solutions that drive growth.
+        </Paragraph>
       </div>
       <TabsComp tabs={projectTabsItems} />
     </section>
