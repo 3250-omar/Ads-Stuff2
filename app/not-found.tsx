@@ -1,5 +1,3 @@
-import { notFound } from "next/navigation";
-
 const NotFound = () => {
   return <div>Not Found 404</div>;
 };

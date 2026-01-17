@@ -1,9 +1,10 @@
 "use client";
 
-import { supabase } from "@/utils/supabase/client";
+import { createClient } from "@/utils/supabase/client";
 import { useEffect, useState } from "react";
 
 export default function useGetSocialMedia() {
+  const supabase = createClient();
   const [socialmedia, setSocialmedia] = useState<any[] | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<any>(null);
