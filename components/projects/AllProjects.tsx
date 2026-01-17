@@ -1,13 +1,13 @@
 import { Project } from "@/types";
-import ProjectsSection from "./ProjectsSection";
+import ProjectsGrid from "./ProjectsGrid";
 import ProjectCard from "./ProjectCard";
 const AllProjects = ({ projects }: { projects: Project[] }) => {
   return (
-    <ProjectsSection>
+    <ProjectsGrid>
       {projects?.map((project: Project, index: number) => (
         <ProjectCard project={project} key={index} />
       ))}
-    </ProjectsSection>
+    </ProjectsGrid>
   );
 };
 

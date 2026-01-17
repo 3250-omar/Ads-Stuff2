@@ -1,14 +1,14 @@
 import { Project } from "@/types";
-import ProjectsSection from "./ProjectsSection";
+import ProjectsGrid from "./ProjectsGrid";
 import ProjectCard from "./ProjectCard";
 
 const InProgressProjects = ({ inProgress }: { inProgress: Project[] }) => {
   return (
-    <ProjectsSection>
+    <ProjectsGrid>
       {inProgress.map((item, index) => (
         <ProjectCard project={item} key={index} />
       ))}
-    </ProjectsSection>
+    </ProjectsGrid>
   );
 };
 

@@ -1,5 +1,7 @@
 "use client";
 
+import useGetSocialMedia from "@/app/hooks/useGetSocialMedia";
+import getSocialMedia from "@/constants/getSocialMedia";
 import {
   FacebookFilled,
   InstagramOutlined,
@@ -9,7 +11,7 @@ import {
   MailOutlined,
   WhatsAppOutlined,
 } from "@ant-design/icons";
-import { Button, Space, Typography, Divider } from "antd";
+import { Button, Space, Typography, Divider, Spin } from "antd";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -18,38 +20,7 @@ const { Title, Text } = Typography;
 const Footer = () => {
   const [showMessage, setShowMessage] = useState<boolean>(false);
   const currentYear = new Date().getFullYear();
-
-  const socialMedia = [
-    {
-      id: 1,
-      name: "Facebook",
-      icon: <FacebookFilled />,
-      hoverBg: "hover:bg-[#1877F2]",
-      link: "https://www.facebook.com/",
-    },
-    {
-      id: 2,
-      name: "Instagram",
-      icon: <InstagramOutlined />,
-      hoverBg:
-        "hover:bg-gradient-to-tr hover:from-[#F58529] hover:via-[#DD2A7B] hover:to-[#8134AF]",
-      link: "https://www.instagram.com/",
-    },
-    {
-      id: 3,
-      name: "Twitter",
-      icon: <TwitterOutlined />,
-      hoverBg: "hover:bg-[#1DA1F2]",
-      link: "https://www.twitter.com/",
-    },
-    {
-      id: 4,
-      name: "LinkedIn",
-      icon: <LinkedinFilled />,
-      hoverBg: "hover:bg-[#0A66C2]",
-      link: "https://www.linkedin.com/",
-    },
-  ];
+  const { socialmedia: socialMedia, loading } = useGetSocialMedia();
 
   const quickLinks = [
     { name: "Home", href: "#home" },
@@ -123,7 +94,7 @@ const Footer = () => {
                   size="large"
                   onClick={() => {
                     window.open(
-                      "https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=ziad@adsstaff.com"
+                      "https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=ziad@adsstaff.com",
                     );
                   }}
                   className="rounded-xl border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all font-medium"
@@ -150,19 +121,26 @@ const Footer = () => {
         {/* Bottom Footer */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Social Icons */}
-          <div className="flex items-center gap-4">
-            {socialMedia.map((item) => (
-              <Link
-                key={item.id}
-                href={item.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`flex items-center justify-center w-12 h-12 rounded-full border-2 border-gray-100 text-gray-400 text-xl hover:border-transparent hover:text-white hover:scale-110 hover:shadow-lg transition-all ${item.hoverBg}`}
-              >
-                {item.icon}
-              </Link>
-            ))}
-          </div>
+          <Spin spinning={loading}>
+            <div className="flex items-center gap-4">
+              {socialMedia?.map((item: any) => {
+                const { icon: SocialIcon, bgHover } = getSocialMedia({
+                  name: item.name.toLowerCase(),
+                });
+                return (
+                  <Link
+                    key={item.id}
+                    href={item.social_media_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`flex items-center justify-center w-12 h-12 rounded-full border-2 border-gray-100 text-black! text-xl hover:border-transparent hover:text-white! hover:scale-110 hover:shadow-lg transition-all ${bgHover}!`}
+                  >
+                    <SocialIcon />
+                  </Link>
+                );
+              })}
+            </div>
+          </Spin>
 
           {/* Copyright */}
           <Text className="text-gray-400 text-sm">

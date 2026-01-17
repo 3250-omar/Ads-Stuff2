@@ -1,4 +1,3 @@
-"use client";
 import StatictsSection from "@/components/StatictsSection";
 import { Timeline } from "@/components/TimeLine";
 import OurCustomers from "@/components/OurCustomers";
@@ -7,6 +6,7 @@ import SkillsSection from "@/components/SkillsSection";
 import HeroSection from "./_comp/sections/HeroSection";
 import ProjectsSection from "./_comp/sections/ProjectsSection";
 import ContactsSection from "./_comp/sections/ContactsSection";
+import { createClient } from "@/utils/supabase/server";
 
 const timelineItems = [
   {
@@ -27,7 +27,7 @@ const timelineItems = [
   },
 ];
 
-export default function Home() {
+export default async function Home() {
   return (
     <div className="flex flex-col items-center min-h-screen text-center gap-10">
       <HeroSection />

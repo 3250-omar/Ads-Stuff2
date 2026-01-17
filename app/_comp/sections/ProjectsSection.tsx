@@ -1,3 +1,4 @@
+"use client";
 import { Typography, Divider } from "antd";
 import TabsComp from "@/components/TabsComp";
 import FinishedProjects from "@/components/projects/FinishedProjects";
@@ -7,7 +8,7 @@ import { projectsData } from "@/constants/projects";
 
 const { Title, Paragraph } = Typography;
 
-export default function ProjectsSection() {
+const ProjectsSection = () => {
   const projectTabsItems = [
     {
       title: "All Projects",
@@ -20,7 +21,7 @@ export default function ProjectsSection() {
       content: (
         <FinishedProjects
           finished={projectsData.filter(
-            (project) => project.status === "finished"
+            (project) => project.status === "finished",
           )}
         />
       ),
@@ -31,7 +32,7 @@ export default function ProjectsSection() {
       content: (
         <InProgressProjects
           inProgress={projectsData.filter(
-            (project) => project.status === "inprogress"
+            (project) => project.status === "inprogress",
           )}
         />
       ),
@@ -56,4 +57,5 @@ export default function ProjectsSection() {
       <TabsComp tabs={projectTabsItems} />
     </section>
   );
-}
+};
+export default ProjectsSection;
