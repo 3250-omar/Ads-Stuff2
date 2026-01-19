@@ -27,7 +27,7 @@ const timelineItems = [
   },
 ];
 
-export default async function Home() {
+export default function Home() {
   return (
     <div className="flex flex-col items-center min-h-screen text-center gap-10">
       <HeroSection />

@@ -31,7 +31,7 @@ const StatictsSection = () => {
           scrollTrigger: {
             trigger: card,
             start: "top 85%",
-            toggleActions: "play none none none",
+            toggleActions: "play reverse none none",
           },
         });
       });

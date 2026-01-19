@@ -54,10 +54,17 @@ const NavBar = () => {
     >
       <Button
         onClick={() => scrollToSection("#home")}
-        className="w-[150px]! h-[100px]! relative "
+        className="h-auto! p-0! border-none! shadow-none! hover:bg-transparent! flex items-center"
         type="link"
       >
-        <Image src="/Logo3G.png" alt="Logo" fill className="object-contain" />
+        <Image
+          src="/Logo3G.png"
+          alt="Logo"
+          className="object-contain"
+          width={150}
+          height={70}
+          priority
+        />
       </Button>
       <div className="flex items-center gap-5 max-sm:hidden">
         <div className="flex items-center gap-6">

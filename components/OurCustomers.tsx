@@ -36,7 +36,7 @@ const OurCustomers = () => {
         scrollTrigger: {
           trigger: titleRef.current,
           start: "top 85%",
-          toggleActions: "play none none none",
+          toggleActions: "play reverse play reverse",
         },
       });
 
@@ -84,7 +84,6 @@ const OurCustomers = () => {
             { breakpoint: 768, settings: { slidesToShow: 2 } },
             { breakpoint: 480, settings: { slidesToShow: 1 } },
           ]}
-          
         >
           {customerImages.map((src, index) => (
             <div key={index} className="px-4">

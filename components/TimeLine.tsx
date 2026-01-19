@@ -37,7 +37,7 @@ export function Timeline({ items }: TimelineProps) {
           scrollTrigger: {
             trigger: card,
             start: "top 85%",
-            toggleActions: "play none none none",
+            toggleActions: "play reverse play reverse",
           },
         });
       });
