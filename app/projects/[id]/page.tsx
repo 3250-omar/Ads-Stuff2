@@ -26,7 +26,7 @@ import gsap from "gsap";
 
 const { Title, Paragraph, Text } = Typography;
 
-const ProjectDetailsContent = () => {
+const ProjectDetails = () => {
   const params = useParams();
   const router = useRouter();
   const project = projectsData.find((p) => p.id === params.id);
@@ -289,17 +289,5 @@ const ProjectDetailsContent = () => {
     </div>
   );
 };
-
-const ProjectDetails = () => (
-  <Suspense
-    fallback={
-      <div className="min-h-screen flex items-center justify-center">
-        Loading...
-      </div>
-    }
-  >
-    <ProjectDetailsContent />
-  </Suspense>
-);
 
 export default ProjectDetails;

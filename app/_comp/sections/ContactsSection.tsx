@@ -14,30 +14,29 @@ gsap.registerPlugin(ScrollTrigger);
 
 const { Title } = Typography;
 
+const contactTabsItems = [
+  {
+    title: "Gmail",
+    icon: SiGmail,
+    value: "gmail",
+    content: <GmailForm />,
+  },
+  {
+    title: "WhatsApp",
+    icon: SiWhatsapp,
+    value: "whatsapp",
+    content: <WhatsAppContact />,
+  },
+  {
+    title: "Telegram",
+    icon: SiTelegram,
+    value: "telegram",
+    content: <TelegramContact />,
+  },
+];
 export default function ContactsSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-
-  const contactTabsItems = [
-    {
-      title: "Gmail",
-      icon: SiGmail,
-      value: "gmail",
-      content: <GmailForm />,
-    },
-    {
-      title: "WhatsApp",
-      icon: SiWhatsapp,
-      value: "whatsapp",
-      content: <WhatsAppContact />,
-    },
-    {
-      title: "Telegram",
-      icon: SiTelegram,
-      value: "telegram",
-      content: <TelegramContact />,
-    },
-  ];
 
   useEffect(() => {
     const ctx = gsap.context(() => {

@@ -5,39 +5,43 @@ import FinishedProjects from "@/components/projects/FinishedProjects";
 import InProgressProjects from "@/components/projects/InProgressProjects";
 import AllProjects from "@/components/projects/AllProjects";
 import { projectsData } from "@/constants/projects";
+import { useMemo } from "react";
 
 const { Title, Paragraph } = Typography;
 
 const ProjectsSection = () => {
-  const projectTabsItems = [
-    {
-      title: "All Projects",
-      value: "all",
-      content: <AllProjects projects={projectsData} />,
-    },
-    {
-      title: "Finished",
-      value: "finished",
-      content: (
-        <FinishedProjects
-          finished={projectsData.filter(
-            (project) => project.status === "finished",
-          )}
-        />
-      ),
-    },
-    {
-      title: "In Progress",
-      value: "inProgress",
-      content: (
-        <InProgressProjects
-          inProgress={projectsData.filter(
-            (project) => project.status === "inprogress",
-          )}
-        />
-      ),
-    },
-  ];
+  const projectTabsItems = useMemo(
+    () => [
+      {
+        title: "All Projects",
+        value: "all",
+        content: <AllProjects projects={projectsData} />,
+      },
+      {
+        title: "Finished",
+        value: "finished",
+        content: (
+          <FinishedProjects
+            finished={projectsData.filter(
+              (project) => project.status === "finished",
+            )}
+          />
+        ),
+      },
+      {
+        title: "In Progress",
+        value: "inProgress",
+        content: (
+          <InProgressProjects
+            inProgress={projectsData.filter(
+              (project) => project.status === "inprogress",
+            )}
+          />
+        ),
+      },
+    ],
+    [projectsData],
+  );
 
   return (
     <section

@@ -17,11 +17,25 @@ type TimelineItem = {
   status?: string;
 };
 
-interface TimelineProps {
-  items: TimelineItem[];
-}
-
-export function Timeline({ items }: TimelineProps) {
+const items: TimelineItem[] = [
+  {
+    title: "Project Started",
+    date: "Jan 2025",
+    description: "Initial planning and setup of the repository.",
+  },
+  {
+    title: "Design Phase",
+    date: "Feb 2025",
+    description: "UI/UX design and prototyping using Figma.",
+    status: "In Progress",
+  },
+  {
+    title: "Development",
+    date: "Mar 2025",
+    description: "Started implementing frontend and backend.",
+  },
+];
+export function Timeline() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement[]>([]);
 
@@ -49,7 +63,7 @@ export function Timeline({ items }: TimelineProps) {
   return (
     <div ref={sectionRef} className="relative py-20 px-4">
       {/* Center line */}
-      <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-primary/10 via-primary to-primary/10 -translate-x-1/2 hidden md:block rounded-full" />
+      <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-linear-to-b from-primary/10 via-primary to-primary/10 -translate-x-1/2 hidden md:block rounded-full" />
 
       <div className="relative z-10 space-y-16">
         {items.map((item, i) => {

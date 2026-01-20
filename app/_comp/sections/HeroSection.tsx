@@ -1,8 +1,7 @@
 "use client";
 import { Button, Typography, Space } from "antd";
-import { Typewriter } from "react-simple-typewriter";
 import Image from "next/image";
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useCallback } from "react";
 import gsap from "gsap";
 
 const { Title, Paragraph } = Typography;
@@ -16,37 +15,50 @@ const images = [
   "/imgs/5.jpeg",
 ];
 
+// Position configurations for the three cards
+const positions = {
+  left: { x: -50, y: 30, rotation: -15, zIndex: 1, scale: 0.88 },
+  center: { x: 0, y: 0, rotation: 0, zIndex: 3, scale: 1 },
+  right: { x: 50, y: 30, rotation: 15, zIndex: 2, scale: 0.88 },
+};
+
+// Card positions order: [card0Position, card1Position, card2Position]
+const positionOrders = [
+  ["left", "center", "right"], // Initial: card0=left, card1=center, card2=right
+  ["right", "left", "center"], // After 1st swap: card0=right, card1=left, card2=center
+  ["center", "right", "left"], // After 2nd swap: card0=center, card1=right, card2=left
+];
+
 export default function HeroSection() {
   const textRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const buttonsRef = useRef<HTMLDivElement>(null);
   const imageCardsRef = useRef<HTMLDivElement[]>([]);
+  const sectionRef = useRef<HTMLElement>(null);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const isVisibleRef = useRef(true);
 
   // Track which images are displayed (indices into images array) - use ref to avoid re-renders
   const imageIndicesRef = useRef([0, 1, 2]);
-  const [, forceUpdate] = useState(0); // Only for initial render
   // Track current position configuration for swapping
   const positionIndexRef = useRef(0);
   // Track next image to show
   const nextImageRef = useRef(3);
 
-  // Position configurations for the three cards
-  const positions = {
-    left: { x: -50, y: 30, rotation: -15, zIndex: 1, scale: 0.88 },
-    center: { x: 0, y: 0, rotation: 0, zIndex: 3, scale: 1 },
-    right: { x: 50, y: 30, rotation: 15, zIndex: 2, scale: 0.88 },
-  };
+  // Memoize scroll handlers to prevent recreation
+  const handleGetStartedClick = useCallback(() => {
+    const element = document.getElementById("get-started");
+    element?.scrollIntoView({ behavior: "smooth" });
+  }, []);
 
-  // Card positions order: [card0Position, card1Position, card2Position]
-  const positionOrders = [
-    ["left", "center", "right"], // Initial: card0=left, card1=center, card2=right
-    ["right", "left", "center"], // After 1st swap: card0=right, card1=left, card2=center
-    ["center", "right", "left"], // After 2nd swap: card0=center, card1=right, card2=left
-  ];
+  const handleSeeWorkClick = useCallback(() => {
+    const element = document.getElementById("projects");
+    element?.scrollIntoView({ behavior: "smooth" });
+  }, []);
 
   const animateSwap = useCallback(() => {
     const cards = imageCardsRef.current;
-    if (cards.length < 3) return;
+    if (cards.length < 3 || !isVisibleRef.current) return;
 
     // Move to next position configuration
     positionIndexRef.current = (positionIndexRef.current + 1) % 3;
@@ -72,6 +84,7 @@ export default function HeroSection() {
           opacity: 0.3,
           duration: 0.6,
           ease: "power2.inOut",
+          force3D: true,
           onComplete: () => {
             // Change the image src directly on the DOM element
             const imgElement = card.querySelector("img");
@@ -99,6 +112,7 @@ export default function HeroSection() {
           scale: pos.scale,
           duration: 1.2,
           ease: "elastic.out(1, 0.75)",
+          force3D: true,
         });
       }
     });
@@ -113,6 +127,7 @@ export default function HeroSection() {
         opacity: 0,
         duration: 1,
         ease: "power3.out",
+        force3D: true,
       });
 
       // Animate image from right
@@ -122,6 +137,7 @@ export default function HeroSection() {
         duration: 1,
         delay: 0.3,
         ease: "power3.out",
+        force3D: true,
       });
 
       // Animate buttons from bottom
@@ -131,6 +147,7 @@ export default function HeroSection() {
         duration: 0.8,
         delay: 0.6,
         ease: "power3.out",
+        force3D: true,
       });
 
       // Initial card positions with staggered entrance
@@ -143,6 +160,7 @@ export default function HeroSection() {
           duration: 1,
           delay: 0.5,
           ease: "back.out(1.7)",
+          force3D: true,
         });
         gsap.from(cards[1], {
           y: -200,
@@ -151,6 +169,7 @@ export default function HeroSection() {
           duration: 1,
           delay: 0.7,
           ease: "back.out(1.7)",
+          force3D: true,
         });
         gsap.from(cards[2], {
           x: 200,
@@ -159,6 +178,7 @@ export default function HeroSection() {
           duration: 1,
           delay: 0.9,
           ease: "back.out(1.7)",
+          force3D: true,
         });
       }
     });
@@ -166,17 +186,45 @@ export default function HeroSection() {
     return () => ctx.revert();
   }, []);
 
-  // Swapping animation interval
+  // Intersection Observer to pause animations when off-screen
   useEffect(() => {
-    const interval = setInterval(() => {
-      animateSwap();
-    }, 3000); // Swap every 3 seconds
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          isVisibleRef.current = entry.isIntersecting;
 
-    return () => clearInterval(interval);
+          // Clear existing interval
+          if (intervalRef.current) {
+            clearInterval(intervalRef.current);
+            intervalRef.current = null;
+          }
+
+          // Only start interval if visible
+          if (entry.isIntersecting) {
+            intervalRef.current = setInterval(() => {
+              animateSwap();
+            }, 3000);
+          }
+        });
+      },
+      { threshold: 0.1 },
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
   }, [animateSwap]);
 
   return (
     <section
+      ref={sectionRef}
       id="home"
       className="w-full grid grid-cols-2 gap-12 max-md:grid-cols-1 justify-center items-center relative min-h-[90vh] px-4 py-20"
     >
@@ -210,20 +258,14 @@ export default function HeroSection() {
               type="primary"
               size="large"
               className="px-10 h-14 rounded-2xl text-lg font-semibold shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 hover:scale-105 transition-all duration-300"
-              onClick={() => {
-                const element = document.getElementById("get-started");
-                element?.scrollIntoView({ behavior: "smooth" });
-              }}
+              onClick={handleGetStartedClick}
             >
               Get Started
             </Button>
             <Button
               size="large"
               className="px-10 h-14 rounded-2xl text-lg font-semibold border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300"
-              onClick={() => {
-                const element = document.getElementById("projects");
-                element?.scrollIntoView({ behavior: "smooth" });
-              }}
+              onClick={handleSeeWorkClick}
             >
               See Our Work
             </Button>
@@ -249,6 +291,7 @@ export default function HeroSection() {
                 top: "30px",
                 transform: "rotate(-15deg)",
                 zIndex: 1,
+                willChange: "transform, opacity",
               }}
             >
               <Image
@@ -273,6 +316,7 @@ export default function HeroSection() {
                 top: "0px",
                 transform: "translateX(-50%) rotate(0deg)",
                 zIndex: 3,
+                willChange: "transform, opacity",
               }}
             >
               <Image
@@ -297,10 +341,11 @@ export default function HeroSection() {
                 top: "30px",
                 transform: "rotate(15deg)",
                 zIndex: 2,
+                willChange: "transform, opacity",
               }}
             >
               <Image
-                src={images[imageIndicesRef.current[2]]}
+                src={images[imageIndicesRef.current[2]] || ""}
                 alt="Portfolio Image 3"
                 fill
                 className="object-cover"

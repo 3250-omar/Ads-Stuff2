@@ -58,7 +58,7 @@ export default function SkillsSection() {
         {/* Center text */}
         <Title
           level={2}
-          className="!m-0 !text-primary !font-black !text-5xl max-sm:!text-4xl"
+          className="m-0! text-primary! font-black! text-5xl! max-sm:text-4xl!"
         >
           Skills
         </Title>

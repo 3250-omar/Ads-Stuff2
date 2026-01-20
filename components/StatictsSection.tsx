@@ -7,17 +7,16 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const { Title, Text } = Typography;
+const { Text } = Typography;
+const statistics = [
+  { title: "Happy Customers", count: 1000, suffix: "+" },
+  { title: "Projects Completed", count: 500, suffix: "+" },
+  { title: "Awards Won", count: 50, suffix: "" },
+];
 
 const StatictsSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement[]>([]);
-
-  const statistics = [
-    { title: "Happy Customers", count: 1000, suffix: "+" },
-    { title: "Projects Completed", count: 500, suffix: "+" },
-    { title: "Awards Won", count: 50, suffix: "" },
-  ];
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -51,7 +50,7 @@ const StatictsSection = () => {
           ref={(el) => {
             if (el) cardsRef.current[index] = el;
           }}
-          className="flex flex-col items-center justify-center gap-3 group hover:bg-primary hover:-translate-y-3 hover:cursor-pointer transition-all duration-500 p-12 rounded-[2rem] bg-white shadow-lg hover:shadow-2xl hover:glow-primary"
+          className="flex flex-col items-center justify-center gap-3 group hover:bg-primary hover:-translate-y-3 hover:cursor-pointer transition-all duration-500 p-12 rounded-2rem bg-white shadow-lg hover:shadow-2xl hover:glow-primary"
         >
           <div className="text-6xl font-black text-primary group-hover:text-white transition-colors duration-300">
             <CountUp end={statistic.count} duration={3} delay={0.5} />
