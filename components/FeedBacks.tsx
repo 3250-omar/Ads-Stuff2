@@ -5,7 +5,7 @@ import { MessageFilled } from "@ant-design/icons";
 
 const { Text, Title } = Typography;
 
-const FeedBacks = () => {
+export default function FeedBacks() {
   const testimonials = [
     {
       name: "John Doe",
@@ -137,6 +137,4 @@ const FeedBacks = () => {
       </div>
     </section>
   );
-};
-
-export default FeedBacks;
+}

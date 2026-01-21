@@ -21,7 +21,7 @@ const customerImages = [
   "/imgs/3.jpeg",
 ];
 
-const OurCustomers = () => {
+export default function OurCustomers() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -86,13 +86,14 @@ const OurCustomers = () => {
           ]}
         >
           {customerImages.map((src, index) => (
-            <div key={index} className="px-4">
+            <div key={src} className="px-4">
               <div className="relative h-[280px] w-full rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border-2 border-white group">
                 <Image
                   src={src}
                   alt={`Partner ${index + 1}`}
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-700"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-darkModePrimary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </div>
@@ -102,6 +103,4 @@ const OurCustomers = () => {
       </div>
     </section>
   );
-};
-
-export default OurCustomers;
+}

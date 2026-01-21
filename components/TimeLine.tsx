@@ -35,7 +35,7 @@ const items: TimelineItem[] = [
     description: "Started implementing frontend and backend.",
   },
 ];
-export function Timeline() {
+export default function Timeline() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement[]>([]);
 

@@ -32,6 +32,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
             alt={project.title}
             fill
             className="object-cover rounded-2xl group-hover:scale-110 transition-transform duration-700"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         </div>
       }
@@ -40,7 +41,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
         <div className="flex justify-between items-start gap-2">
           <Title
             level={4}
-            className="!m-0 group-hover:text-primary transition-colors"
+            className="m-0! group-hover:text-primary transition-colors"
           >
             {project.title}
           </Title>
