@@ -105,7 +105,7 @@ const Footer = () => {
                   icon={<WhatsAppOutlined />}
                   size="large"
                   onClick={() => {
-                    window.open("https://wa.me/201111111111");
+                    window.open("https://wa.me/+201025383443");
                   }}
                   className="rounded-xl border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all font-medium"
                 >
