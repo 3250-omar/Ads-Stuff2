@@ -49,7 +49,9 @@ const NavBar = () => {
   return (
     <nav
       className={`flex justify-between items-center px-5 sticky top-0 z-50 h-[80px] transition-all duration-300 ${
-        windowHeight >= 80 ? "bg-white shadow-md" : "bg-transparent"
+        windowHeight >= 80
+          ? "bg-white shadow-md justify-center"
+          : "bg-transparent"
       }`}
     >
       <Button
