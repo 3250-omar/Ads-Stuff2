@@ -10,17 +10,9 @@ export default function useGetSocialMedia() {
 
   useEffect(() => {
     const fetchSocialMedia = async () => {
-      console.log("Checking environment variables...");
-      const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-      const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-      console.log("SUPABASE_URL defined:", !!supabaseUrl);
-      console.log("SUPABASE_ANON_KEY defined:", !!supabaseKey);
-
-      console.log("Starting social media fetch...");
       try {
         const supabase = createClient();
         if (!supabase) {
-          console.error("Supabase client could not be created.");
           setLoading(false);
           return;
         }

@@ -1,6 +1,6 @@
 "use client";
 
-import useGetSocialMedia from "@/app/hooks/useGetSocialMedia";
+import { useGetSocialMedia } from "@/app/api/query";
 import getSocialMedia from "@/constants/getSocialMedia";
 import {
   FacebookFilled,
@@ -20,7 +20,8 @@ const { Title, Text } = Typography;
 const Footer = () => {
   const [showMessage, setShowMessage] = useState<boolean>(false);
   const currentYear = new Date().getFullYear();
-  const { socialmedia: socialMedia, loading } = useGetSocialMedia();
+  // const { socialmedia: socialMedia, loading } = useGetSocialMedia();
+  const { socialMedia, loading } = useGetSocialMedia();
 
   const quickLinks = [
     { name: "Home", href: "#home" },
