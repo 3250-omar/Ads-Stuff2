@@ -50,9 +50,9 @@ const StatictsSection = () => {
           ref={(el) => {
             if (el) cardsRef.current[index] = el;
           }}
-          className="flex flex-col items-center justify-center gap-3 group hover:bg-primary hover:-translate-y-3 hover:cursor-pointer transition-all duration-500 p-12 rounded-2rem bg-white shadow-lg hover:shadow-2xl hover:glow-primary"
+          className="flex flex-col items-center justify-center gap-3 group hover:bg-primary hover:-translate-y-3 hover:cursor-pointer transition-all duration-500 p-12 rounded-4xl bg-white shadow-lg hover:shadow-2xl hover:glow-primary"
         >
-          <div className="text-6xl font-black text-primary group-hover:text-white transition-colors duration-300">
+          <div className="text-6xl font-black text-primary group-hover:text-white transition-colors duration-300 ">
             <CountUp end={statistic.count} duration={3} delay={0.5} />
             <span>{statistic.suffix}</span>
           </div>

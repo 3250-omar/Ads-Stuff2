@@ -53,7 +53,7 @@ export default function GmailForm() {
           <div className="bg-primary/10 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4">
             <MailOutlined className="text-3xl text-primary" />
           </div>
-          <Title level={2} className="!m-0 !font-black !text-primary">
+          <Title level={2} className="m-0! font-black! text-primary!">
             Contact Me
           </Title>
           <Text type="secondary" className="text-sm">

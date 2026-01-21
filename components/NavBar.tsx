@@ -63,9 +63,9 @@ const NavBar = () => {
           src="/Logo3G.png"
           alt="Logo"
           className="object-contain"
-          width={150}
-          height={70}
-          style={{ height: "auto" }}
+          width={110}
+          height={50}
+          style={{ width: "auto", height: "auto" }}
           priority
         />
       </Button>
