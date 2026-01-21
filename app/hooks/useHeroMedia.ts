@@ -18,6 +18,7 @@ async function fetchHeroImages() {
       offset: 0,
       sortBy: { column: "name", order: "asc" },
     });
+  console.log("🚀 ~ fetchHeroImages ~ files:", files);
 
   if (error) throw error;
 
@@ -25,6 +26,7 @@ async function fetchHeroImages() {
 
   const allMedia = files
     .filter((file) => file.name !== ".emptyFolderPlaceholder")
+    .filter((file) => !file.metadata?.mimetype?.startsWith("video"))
     .map((file) => {
       const { data } = supabaseClient.storage
         .from("project-media")
@@ -32,6 +34,7 @@ async function fetchHeroImages() {
       return data.publicUrl;
     })
     .filter((url): url is string => !!url);
+  console.log("🚀 ~ fetchHeroImages ~ allMedia:", allMedia);
 
   return allMedia.length >= 3 ? allMedia : staticImages;
 }
