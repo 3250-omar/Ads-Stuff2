@@ -22,7 +22,7 @@ export default function LazySection({
           observer.disconnect();
         }
       },
-      { rootMargin: "300px" },
+      { rootMargin: "500px" },
     );
 
     if (ref.current) observer.observe(ref.current);
