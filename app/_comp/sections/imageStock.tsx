@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { memo } from "react";
 
 // All available images
 
@@ -73,4 +74,4 @@ export const ImageStack = ({
   );
 };
 
-export default ImageStack;
+export default memo(ImageStack);
