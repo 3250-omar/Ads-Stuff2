@@ -23,6 +23,8 @@ export const metadata: Metadata = {
     "Ads & Stuff is a digital advertising company that specializes in creating targeted and effective online ads for businesses of all sizes. From social media to search engine optimization, we help our clients reach their target audience and drive real results for their business.",
 };
 
+import Providers from "@/components/Providers";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -33,20 +35,22 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-linear-to-br from-schemaWhite/50 via-white to-secondary/20 min-h-screen overflow-x-hidden`}
       >
-        <AntdRegistry>
-          <ConfigProvider
-            theme={{
-              token: {
-                colorPrimary: "#6B9071",
-              },
-            }}
-          >
-            <NavBar />
-            <div className="head-section">{children}</div>
-            <Footer />
-            <ScrollToTop />
-          </ConfigProvider>
-        </AntdRegistry>
+        <Providers>
+          <AntdRegistry>
+            <ConfigProvider
+              theme={{
+                token: {
+                  colorPrimary: "#6B9071",
+                },
+              }}
+            >
+              <NavBar />
+              <div className="head-section">{children}</div>
+              <Footer />
+              <ScrollToTop />
+            </ConfigProvider>
+          </AntdRegistry>
+        </Providers>
       </body>
     </html>
   );

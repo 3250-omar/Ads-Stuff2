@@ -1,14 +1,21 @@
 "use client";
-import { Button, Typography, Space } from "antd";
+import { Button, Typography, Space, Spin } from "antd";
 import { useEffect, useRef, useCallback, useState } from "react";
-import ImageStack, { images, positionOrders } from "./imageStock";
+import ImageStack, { positionOrders } from "./imageStock";
+import { useHeroMedia } from "@/app/hooks/useHeroMedia";
 
 const { Title, Paragraph } = Typography;
 
 export default function HeroSection() {
   const [positionIndex, setPositionIndex] = useState(0);
-  const [imageIndices, setImageIndices] = useState([0, 1, 2]);
-  const [nextImage, setNextImage] = useState(3);
+  const {
+    images,
+    isLoading,
+    imageIndices,
+    nextImage,
+    setImageIndices,
+    setNextImage,
+  } = useHeroMedia();
   const [isSwappingImage, setIsSwappingImage] = useState<number | null>(null);
 
   const sectionRef = useRef<HTMLElement>(null);
@@ -128,11 +135,21 @@ export default function HeroSection() {
 
       <div className="w-full max-w-[700px] justify-self-center px-4 md:px-0 animate-slide-in-right [animation-delay:200ms]">
         <div className="relative h-[380px] sm:h-[450px] md:h-[520px] lg:h-[580px] w-full flex items-center justify-center">
-          <ImageStack
-            positionIndex={positionIndex}
-            imageIndices={imageIndices}
-            isSwappingImage={isSwappingImage}
-          />
+          {isLoading ? (
+            <div className="flex flex-col items-center gap-4">
+              <Spin size="large" />
+              <div className="text-primary font-medium animate-pulse">
+                Loading Images...
+              </div>
+            </div>
+          ) : (
+            <ImageStack
+              positionIndex={positionIndex}
+              imageIndices={imageIndices}
+              isSwappingImage={isSwappingImage}
+              images={images}
+            />
+          )}
         </div>
       </div>
     </section>

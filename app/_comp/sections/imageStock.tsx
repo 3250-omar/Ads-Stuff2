@@ -2,13 +2,6 @@ import { memo } from "react";
 import Image from "next/image";
 
 // All available images
-export const images = [
-  "/imgs/1.jpeg",
-  "/imgs/2.jpeg",
-  "/imgs/3.jpeg",
-  "/imgs/4.jpeg",
-  "/imgs/5.jpeg",
-];
 
 const positionStyles = {
   left: {
@@ -39,10 +32,12 @@ const ImageStack = memo(
     positionIndex,
     imageIndices,
     isSwappingImage,
+    images,
   }: {
     positionIndex: number;
     imageIndices: number[];
     isSwappingImage: number | null;
+    images: string[];
   }) => {
     return (
       <div className="relative w-[280px] sm:w-[320px] md:w-[380px] lg:w-[420px] h-[320px] sm:h-[380px] md:h-[440px] lg:h-[500px]">

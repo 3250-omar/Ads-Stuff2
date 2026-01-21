@@ -12,7 +12,7 @@ export const createClient = () => {
   }
   return createBrowserClient(supabaseUrl!, supabaseKey!);
 };
-
+export const supabaseClient = createClient();
 // Export a singleton if needed, but only if we are sure env vars exist.
 // For now, we remove the top-level execution to prevent build failures.
 // export const supabase = createClient();
