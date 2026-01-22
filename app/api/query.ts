@@ -4,7 +4,10 @@ import { useQuery } from "@tanstack/react-query";
 import { App } from "antd";
 import { useState } from "react";
 
-export const useGetSocialMedia = () => {
+export const useGetSocialMedia = (): {
+  socialMedia: any[] | null | undefined;
+  loading: boolean;
+} => {
   const { message } = App.useApp();
   const getAllSocialMedia = async () => {
     const { data } = await supabaseClient.from("socialmedia").select();
@@ -13,6 +16,7 @@ export const useGetSocialMedia = () => {
   const { data, isPending, error } = useQuery({
     queryKey: ["social-media"],
     queryFn: getAllSocialMedia,
+    staleTime: 1000 * 60 * 60 * 2, // 2 hours
   });
   if (error) message.error(error?.message);
 
@@ -107,6 +111,7 @@ export const useGetProjects = ({
   const { data, isPending, error } = useQuery({
     queryKey: ["projects", status, id, page, pageSize],
     queryFn: getAllProjects,
+    refetchOnWindowFocus: false,
   });
 
   if (error) message.error(error?.message);
@@ -133,6 +138,7 @@ export const useGetAllCustomers = () => {
   const { data, isPending, error } = useQuery({
     queryKey: ["our_customers"],
     queryFn: getAllCustomers,
+    staleTime: 1000 * 60 * 60, // 1 hour
   });
 
   if (error) message.error(error?.message);
