@@ -2,7 +2,7 @@
 import { Button, Typography, Space, Spin } from "antd";
 import { useEffect, useRef, useCallback, useState } from "react";
 import ImageStack, { positionOrders } from "./imageStock";
-import { useHeroMedia } from "@/app/hooks/useHeroMedia";
+import { useHeroMedia } from "@/app/api/query";
 
 const { Title, Paragraph } = Typography;
 

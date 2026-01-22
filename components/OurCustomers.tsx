@@ -1,10 +1,11 @@
 "use client";
 
-import { Carousel, Divider, Typography } from "antd";
+import { Carousel, Divider, Spin, Tooltip, Typography } from "antd";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGetAllCustomers } from "@/app/api/query";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -25,6 +26,7 @@ export default function OurCustomers() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
   const carouselRef = useRef<HTMLDivElement>(null);
+  const { customers, loading } = useGetAllCustomers();
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -56,6 +58,7 @@ export default function OurCustomers() {
 
     return () => ctx.revert();
   }, []);
+  if (loading) return <Spin />;
 
   return (
     <section
@@ -79,25 +82,33 @@ export default function OurCustomers() {
           slidesToShow={4}
           dots={false}
           className="customer-carousel"
+          speed={500}
+          // slidesToScroll={1}
+          arrows
+          swipeToSlide
           responsive={[
             { breakpoint: 1024, settings: { slidesToShow: 3 } },
             { breakpoint: 768, settings: { slidesToShow: 2 } },
             { breakpoint: 480, settings: { slidesToShow: 1 } },
           ]}
         >
-          {customerImages.map((src, index) => (
-            <div key={src} className="px-4">
-              <div className="relative h-[280px] w-full rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border-2 border-white group">
-                <Image
-                  src={src}
-                  alt={`Partner ${index + 1}`}
-                  fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-700"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                />
-                <div className="absolute inset-0 bg-linear-to-t from-darkModePrimary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              </div>
-            </div>
+          {customers?.map((customer) => (
+            <>
+              <Tooltip title={customer.name} key={customer.id}>
+                <div className="px-4">
+                  <div className="relative h-[280px] w-full rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border-2 border-white group">
+                    <Image
+                      src={customer.logo_url}
+                      alt={`Our Partner ${customer.name}`}
+                      fill
+                      className="object-cover group-hover:scale-110 transition-transform duration-700"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    />
+                    <div className="absolute inset-0 bg-linear-to-t from-darkModePrimary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  </div>
+                </div>
+              </Tooltip>
+            </>
           ))}
         </Carousel>
       </div>

@@ -1,13 +1,17 @@
 "use client";
+
 import { navItems } from "@/constants/routes";
 import { Button } from "antd";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useCallback, useEffect, useState } from "react";
 
 const NavBar = () => {
   const [windowHeight, setWindowHeight] = useState<number>(0);
   const [activeSection, setActiveSection] = useState("home");
-
+  const pathname = usePathname();
+  const router = useRouter();
+  console.log("🚀 ~ NavBar ~ pathname:", pathname);
   useEffect(() => {
     const handleScroll = () => {
       setWindowHeight(window.scrollY);
@@ -31,20 +35,26 @@ const NavBar = () => {
     };
   }, []);
 
-  const scrollToSection = (href: string) => {
-    const sectionId = href.replace("#", "");
-    const element = document.getElementById(sectionId);
+  const scrollToSection = useCallback(
+    (href: string) => {
+      const sectionId = href.replace("#", "");
+      const element = document.getElementById(sectionId);
 
-    if (element) {
-      const offset = 80; // Account for navbar height
-      const elementPosition = element.offsetTop - offset;
+      if (element) {
+        const offset = 80; // Account for navbar height
+        const elementPosition = element.offsetTop - offset;
 
-      window.scrollTo({
-        top: elementPosition,
-        behavior: "smooth",
-      });
-    }
-  };
+        window.scrollTo({
+          top: elementPosition,
+          behavior: "smooth",
+        });
+      }
+      if (pathname !== "/") {
+        router.push("/");
+      }
+    },
+    [pathname, router],
+  );
 
   return (
     <nav
@@ -89,7 +99,9 @@ const NavBar = () => {
       </div>
 
       {/* Mobile Nav */}
-      <div className="fixed bottom-5 left-1/2 -translate-x-1/2 w-[280px] rounded-full bg-primary/80 backdrop-blur-md text-white z-50 mx-auto p-3 hidden max-sm:block shadow-lg">
+      <div
+        className={`fixed bottom-5 left-1/2 -translate-x-1/2 w-[280px] rounded-full bg-primary/80 backdrop-blur-md text-white z-50 mx-auto p-3 hidden max-sm:block shadow-lg ${pathname !== "/" ? "max-sm:hidden" : ""}`}
+      >
         <div className="flex items-center gap-2 justify-around">
           {navItems.map((item: { key: string; href: string }) => (
             <Button

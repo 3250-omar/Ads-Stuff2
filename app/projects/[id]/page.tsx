@@ -1,40 +1,34 @@
 "use client";
 
-import { projectsData } from "@/constants/projects";
 import { useParams, useRouter } from "next/navigation";
-import {
-  Typography,
-  Button,
-  Tag,
-  Space,
-  Divider,
-  Row,
-  Col,
-  Carousel,
-} from "antd";
+import { Typography, Button, Tag, Space, Divider, Row, Col, Spin } from "antd";
 import {
   ArrowLeftOutlined,
   CheckCircleFilled,
   ThunderboltFilled,
   LineChartOutlined,
-  LeftOutlined,
-  RightOutlined,
 } from "@ant-design/icons";
 import Image from "next/image";
-import { useEffect, useRef, Suspense } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
+import { useGetProjects } from "@/app/api/query";
+import { Project } from "@/types";
+import MediaComp from "./_comp/MediaComp";
+import { getStatusColor } from "@/constants/getStatusColor";
 
 const { Title, Paragraph, Text } = Typography;
 
 const ProjectDetails = () => {
-  const params = useParams();
+  const { id } = useParams();
   const router = useRouter();
-  const project = projectsData.find((p) => p.id === params.id);
-
+  const { loading, projects: singleProject } = useGetProjects({
+    id: Number(id),
+  });
   const headerRef = useRef(null);
   const contentRef = useRef(null);
   const imageRef = useRef(null);
 
+  const project: Project = singleProject?.[0];
   useEffect(() => {
     if (!project) return;
 
@@ -66,6 +60,14 @@ const ProjectDetails = () => {
 
     return () => ctx.revert();
   }, [project]);
+
+  if (loading) {
+    return (
+      <div className="w-full h-full flex justify-center items-center">
+        <Spin size="large" />
+      </div>
+    );
+  }
 
   if (!project) {
     return (
@@ -99,18 +101,18 @@ const ProjectDetails = () => {
         <div ref={headerRef} className="mb-12 space-y-4">
           <div className="flex flex-wrap items-center gap-4">
             <Tag
-              color="#6B9071"
-              className="rounded-full px-4 py-1 text-sm font-bold uppercase tracking-widest border-none"
+              color={getStatusColor(project.status)}
+              className="rounded-full px-4 py-1 text-sm font-bold uppercase tracking-widest"
             >
               {project.status}
             </Tag>
-            <Space size="middle" className="flex-wrap">
+            {/* <Space size="middle" className="flex-wrap">
               {project.tags?.map((tag) => (
                 <Text key={tag} className="text-gray-400 font-medium">
                   #{tag}
                 </Text>
               ))}
-            </Space>
+            </Space> */}
           </div>
           <Title
             level={1}
@@ -123,64 +125,43 @@ const ProjectDetails = () => {
           </Paragraph>
         </div>
 
-        {/* Media Carousel */}
-        <div
-          ref={imageRef}
-          className="relative w-full mb-16 shadow-2xl rounded-[3rem] overflow-hidden border-4 border-white group"
-        >
-          <Carousel
-            arrows
-            variableWidth={false}
-            autoplay={false}
-            dots={{ className: "custom-dots" }}
-            prevArrow={
-              <div className="flex! items-center justify-center z-20! left-6! w-12! h-12! rounded-full! bg-white/30! hover:bg-white/50! backdrop-blur-md! text-white! hover:text-primary! transition-all!">
-                <LeftOutlined />
-              </div>
-            }
-            nextArrow={
-              <div className="flex! items-center justify-center z-20! right-6! w-12! h-12! rounded-full! bg-white/30! hover:bg-white/50! backdrop-blur-md! text-white! hover:text-primary! transition-all!">
-                <RightOutlined />
-              </div>
-            }
-          >
-            {project.media && project.media.length > 0 ? (
-              project.media.map((item, index) => (
-                <div
-                  key={index}
-                  className="relative w-full h-[400px] md:h-[600px]"
-                >
-                  {item.type === "image" ? (
-                    <Image
-                      src={item.url}
-                      alt={`${project.title} - ${index}`}
-                      fill
-                      className="object-cover"
-                      priority={index === 0}
+        {/* Media Grid */}
+        <div ref={imageRef} className="w-full mb-16">
+          {project.project_media && project.project_media.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+              {project.project_media.map((media, index) => {
+                // Create a masonry-style layout with varying heights
+                const isFirst = index === 0;
+                const isLarge = index % 5 === 0; // Every 5th item is large
+                const isWide = index % 7 === 0; // Every 7th item spans 2 columns
+
+                return (
+                  <div
+                    key={index}
+                    className={`detail-card ${
+                      isWide && index !== 0
+                        ? "md:col-span-2 h-[300px] md:h-[400px]"
+                        : isLarge && index !== 0
+                          ? "h-[350px] md:h-[500px]"
+                          : isFirst
+                            ? "md:col-span-2 lg:col-span-2 h-[400px] md:h-[500px] lg:h-[600px]"
+                            : "h-[300px] md:h-[350px]"
+                    }`}
+                  >
+                    <MediaComp
+                      media={media}
+                      alt={`${project.title} - ${index + 1}`}
+                      priority={index < 3}
                     />
-                  ) : (
-                    <video
-                      src={item.url}
-                      className="w-full h-full object-cover"
-                      controls
-                    />
-                  )}
-                </div>
-              ))
-            ) : (
-              // Fallback to single featured image if no media array
-              <div className="relative w-full h-[400px] md:h-[600px]">
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  className="object-cover"
-                  priority
-                />
-              </div>
-            )}
-          </Carousel>
-          <div className="absolute inset-0 bg-linear-to-t from-darkModePrimary/20 to-transparent pointer-events-none" />
+                  </div>
+                );
+              })}
+            </div>
+          ) : (
+            <div className="relative w-full h-[400px] md:h-[600px] flex items-center justify-center bg-gray-100 rounded-[3rem]">
+              <p className="text-gray-400 text-lg">No media available</p>
+            </div>
+          )}
         </div>
 
         {/* Content Section */}
@@ -191,7 +172,7 @@ const ProjectDetails = () => {
               Overview
             </Title>
             <Paragraph className="text-lg text-gray-600 leading-relaxed m-0">
-              {project.fullDescription}
+              {project.description}
             </Paragraph>
           </div>
 
@@ -208,7 +189,7 @@ const ProjectDetails = () => {
                     </Title>
                   </div>
                   <ul className="space-y-4 m-0 p-0 list-none">
-                    {project.challenges?.map((item, i) => (
+                    {project.project_challenges?.map((item, i) => (
                       <li key={i} className="flex gap-3 text-gray-600">
                         <span className="text-amber-400 font-bold">•</span>
                         {item}
@@ -252,7 +233,7 @@ const ProjectDetails = () => {
                     </Title>
                   </div>
                   <ul className="space-y-4 m-0 p-0 list-none">
-                    {project.results?.map((item, i) => (
+                    {project.project_results?.map((item, i) => (
                       <li
                         key={i}
                         className="flex gap-3 text-gray-600 font-medium"

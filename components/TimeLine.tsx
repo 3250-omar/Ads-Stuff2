@@ -61,7 +61,7 @@ export default function Timeline() {
   }, [items]);
 
   return (
-    <div ref={sectionRef} className="relative py-20 px-4">
+    <div ref={sectionRef} className="relative py-20 px-4 overflow-x-hidden">
       {/* Center line */}
       <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-linear-to-b from-primary/10 via-primary to-primary/10 -translate-x-1/2 hidden md:block rounded-full" />
 

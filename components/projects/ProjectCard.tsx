@@ -1,25 +1,25 @@
 "use client";
-
 import { Card, Tag, Typography } from "antd";
 import { LinkOutlined } from "@ant-design/icons";
 import { Project } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
+import { useMemo } from "react";
+import { getStatusColor } from "@/constants/getStatusColor";
 
-const { Title, Paragraph, Text } = Typography;
+const { Title, Paragraph } = Typography;
 
 const ProjectCard = ({ project }: { project: Project }) => {
-  const getStatusColor = (status: string) => {
-    switch (status.toLowerCase()) {
-      case "finished":
-        return "#6B9071";
-      case "inprogress":
-        return "#AEC3B0";
-      default:
-        return "default";
-    }
-  };
-
+  const onlyImages = useMemo(
+    () =>
+      project.project_media?.filter(
+        (media) =>
+          !media.endsWith(".mp4") ||
+          !media.endsWith(".webm") ||
+          !media.endsWith(".mov"),
+      ),
+    [project.project_media],
+  );
   return (
     <Card
       hoverable
@@ -28,7 +28,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
       cover={
         <div className="relative w-full h-[220px] rounded-2xl overflow-hidden px-4 pt-4">
           <Image
-            src={project.image}
+            src={onlyImages?.[0] || "/projectHasNoImages.webp"}
             alt={project.title}
             fill
             className="object-cover rounded-2xl group-hover:scale-110 transition-transform duration-700"
