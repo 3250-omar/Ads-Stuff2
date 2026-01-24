@@ -5,7 +5,7 @@ import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
 import AntdRegistry from "@/lib/AntdRegistry";
-import { ConfigProvider } from "antd";
+import { ConfigProvider, App } from "antd";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -96,10 +96,12 @@ export default function RootLayout({
                 },
               }}
             >
-              <NavBar />
-              <div className="head-section">{children}</div>
-              <Footer />
-              <ScrollToTop />
+              <App>
+                <NavBar />
+                <div className="head-section">{children}</div>
+                <Footer />
+                <ScrollToTop />
+              </App>
             </ConfigProvider>
           </AntdRegistry>
         </Providers>
