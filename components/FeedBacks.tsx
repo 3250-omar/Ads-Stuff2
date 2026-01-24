@@ -30,8 +30,10 @@ export default function FeedBacks() {
           slidesToShow={5}
           slidesToScroll={1}
           dots={false}
-          pauseOnHover
-          autoplaySpeed={3000}
+          autoplaySpeed={0}
+          speed={12000}
+          cssEase="linear"
+          pauseOnHover={false}
           className="feedback-carousel"
           responsive={[
             {
