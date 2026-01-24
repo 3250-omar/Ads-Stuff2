@@ -48,7 +48,7 @@ const TestimonialCard = ({ testimonial }: TestimonialCardProps) => {
 
         <div className="flex flex-col items-center gap-4 grow justify-center">
           <MessageFilled className="text-primary/30 text-3xl" />
-          <Text className="text-gray-600 italic leading-relaxed text-sm">
+          <Text className="text-gray-600 italic leading-relaxed text-sm text-wrap">
             &ldquo;
             {Array.isArray(testimonial.feedback_text)
               ? testimonial.feedback_text.join(" ")

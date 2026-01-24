@@ -24,51 +24,20 @@ export default function FeedBacks() {
       </div>
 
       <div className="max-w-full mx-auto px-4">
-        <Carousel
-          autoplay
-          infinite
-          slidesToShow={5}
-          slidesToScroll={1}
-          dots={false}
-          autoplaySpeed={0}
-          speed={12000}
-          cssEase="linear"
-          pauseOnHover={false}
-          className="feedback-carousel"
-          responsive={[
-            {
-              breakpoint: 1200,
-              settings: {
-                slidesToShow: 4,
-              },
-            },
-            {
-              breakpoint: 1024,
-              settings: {
-                slidesToShow: 3,
-              },
-            },
-            {
-              breakpoint: 768,
-              settings: {
-                slidesToShow: 1,
-              },
-            },
-            {
-              breakpoint: 425,
-              settings: {
-                slidesToShow: 1,
-              },
-            },
-          ]}
-        >
-          {feedbacks?.map((testimonial: any, index: number) => (
-            <TestimonialCard
-              key={testimonial.id || index}
-              testimonial={testimonial}
-            />
-          ))}
-        </Carousel>
+        <div className="marquee-container relative flex overflow-hidden py-4">
+          <div className="flex animate-marquee gap-8 whitespace-nowrap">
+            {[
+              ...(feedbacks || []),
+              ...(feedbacks || []),
+              ...(feedbacks || []),
+              ...(feedbacks || []),
+            ].map((testimonial, i) => (
+              <div key={i} className="w-[300px]">
+                <TestimonialCard testimonial={testimonial} />
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
