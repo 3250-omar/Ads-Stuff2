@@ -22,8 +22,10 @@ const MediaComp = ({
         <video
           src={media}
           className="w-full h-full object-cover"
+          autoPlay
           controls
-          autoPlay={false}
+          loop
+          muted
           playsInline
         />
       ) : (

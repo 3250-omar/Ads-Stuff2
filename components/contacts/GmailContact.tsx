@@ -8,10 +8,12 @@ import {
   Form,
   Typography,
   Space,
-  message,
   Divider,
+  App,
 } from "antd";
 import { MailOutlined, SendOutlined, ReloadOutlined } from "@ant-design/icons";
+
+import emailjs from "@emailjs/browser";
 
 const { Title, Text } = Typography;
 const { TextArea } = Input;
@@ -19,7 +21,7 @@ const { TextArea } = Input;
 export default function GmailForm() {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
-
+  const { message } = App.useApp();
   const handleSubmit = async (values: any) => {
     const { email, content } = values;
 
@@ -31,13 +33,31 @@ export default function GmailForm() {
     setLoading(true);
 
     try {
-      // Mock API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      message.success("Message sent successfully!");
-      form.resetFields();
+      const templateParams = {
+        from_email: email,
+        to_email: process.env.NEXT_PUBLIC_EMAILJS_TO_EMAIL,
+        message: content,
+        reply_to: email,
+      };
+
+      const result = await emailjs.send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "",
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "",
+        templateParams,
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "",
+      );
+
+      if (result.status === 200) {
+        message.success("Message sent successfully!");
+        form.resetFields();
+      } else {
+        throw new Error("Failed to send");
+      }
     } catch (error) {
-      console.error(error);
-      message.error("Failed to send message. Try again later.");
+      console.error("EmailJS Error:", error);
+      message.error(
+        "Failed to send message. Please check your connection or contact settings.",
+      );
     } finally {
       setLoading(false);
     }

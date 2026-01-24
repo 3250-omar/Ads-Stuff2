@@ -13,23 +13,31 @@ const NavBar = () => {
   const router = useRouter();
   console.log("🚀 ~ NavBar ~ pathname:", pathname);
   useEffect(() => {
+    let ticking = false;
+
     const handleScroll = () => {
-      setWindowHeight(window.scrollY);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setWindowHeight(window.scrollY);
 
-      // Determine active section based on scroll position
-      const sections = navItems.map((item) => item.key);
-      const scrollPosition = window.scrollY + 100;
+          // Determine active section based on scroll position
+          const sections = navItems.map((item) => item.key);
+          const scrollPosition = window.scrollY + 100;
 
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const section = document.getElementById(sections[i]);
-        if (section && section.offsetTop <= scrollPosition) {
-          setActiveSection(sections[i]);
-          break;
-        }
+          for (let i = sections.length - 1; i >= 0; i--) {
+            const section = document.getElementById(sections[i]);
+            if (section && section.offsetTop <= scrollPosition) {
+              setActiveSection(sections[i]);
+              break;
+            }
+          }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
@@ -37,6 +45,11 @@ const NavBar = () => {
 
   const scrollToSection = useCallback(
     (href: string) => {
+      if (pathname !== "/") {
+        router.push("/" + href);
+        return;
+      }
+
       const sectionId = href.replace("#", "");
       const element = document.getElementById(sectionId);
 
@@ -48,9 +61,12 @@ const NavBar = () => {
           top: elementPosition,
           behavior: "smooth",
         });
-      }
-      if (pathname !== "/") {
-        router.push("/");
+
+        // Update URL hash without jumping
+        window.history.pushState(null, "", href);
+
+        // Manually trigger hashchange so LazySection knows to reveal itself
+        window.dispatchEvent(new HashChangeEvent("hashchange"));
       }
     },
     [pathname, router],
@@ -67,7 +83,7 @@ const NavBar = () => {
       <Button
         onClick={() => scrollToSection("#home")}
         className="h-auto! p-0! border-none! shadow-none! hover:bg-transparent! flex items-center"
-        type="text"
+        type="link"
       >
         <Image
           src="/Logo3G.png"

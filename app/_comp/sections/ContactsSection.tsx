@@ -3,10 +3,20 @@ import { Typography, Divider } from "antd";
 import TabsComp from "@/components/TabsComp";
 import { HeartFilled } from "@ant-design/icons";
 import { SiGmail, SiWhatsapp, SiTelegram } from "react-icons/si";
-import GmailForm from "@/components/contacts/GmailContact";
-import WhatsAppContact from "@/components/contacts/WhatsAppContact";
-import TelegramContact from "@/components/contacts/TelegramContact";
-import { useEffect, useRef } from "react";
+import dynamic from "next/dynamic";
+
+const GmailForm = dynamic(() => import("@/components/contacts/GmailContact"), {
+  ssr: false,
+});
+const WhatsAppContact = dynamic(
+  () => import("@/components/contacts/WhatsAppContact"),
+  { ssr: false },
+);
+const TelegramContact = dynamic(
+  () => import("@/components/contacts/TelegramContact"),
+  { ssr: false },
+);
+import { useEffect, useMemo, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -14,30 +24,32 @@ gsap.registerPlugin(ScrollTrigger);
 
 const { Title } = Typography;
 
-const contactTabsItems = [
-  {
-    title: "Gmail",
-    icon: SiGmail,
-    value: "gmail",
-    content: <GmailForm />,
-  },
-  {
-    title: "WhatsApp",
-    icon: SiWhatsapp,
-    value: "whatsapp",
-    content: <WhatsAppContact />,
-  },
-  {
-    title: "Telegram",
-    icon: SiTelegram,
-    value: "telegram",
-    content: <TelegramContact />,
-  },
-];
 export default function ContactsSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-
+  const contactTabsItems = useMemo(
+    () => [
+      {
+        title: "Gmail",
+        icon: SiGmail,
+        value: "gmail",
+        content: <GmailForm />,
+      },
+      {
+        title: "WhatsApp",
+        icon: SiWhatsapp,
+        value: "whatsapp",
+        content: <WhatsAppContact />,
+      },
+      {
+        title: "Telegram",
+        icon: SiTelegram,
+        value: "telegram",
+        content: <TelegramContact />,
+      },
+    ],
+    [],
+  );
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.from(contentRef.current, {
@@ -59,7 +71,6 @@ export default function ContactsSection() {
   return (
     <section
       ref={sectionRef}
-      id="contacts"
       className="w-full px-4 py-20 gradient-section rounded-[3rem]"
     >
       <div ref={contentRef} className="flex flex-col items-center gap-8">

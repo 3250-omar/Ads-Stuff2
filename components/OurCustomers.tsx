@@ -29,6 +29,8 @@ export default function OurCustomers() {
   const { customers, loading } = useGetAllCustomers();
 
   useEffect(() => {
+    if (loading || !titleRef.current || !carouselRef.current) return;
+
     const ctx = gsap.context(() => {
       gsap.from(titleRef.current, {
         y: 40,
@@ -57,8 +59,12 @@ export default function OurCustomers() {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, []);
-  if (loading) return <Spin />;
+  }, [loading]);
+  if (loading) {
+    return (
+      <div className="w-full h-[500px] animate-pulse bg-gray-50/50 rounded-[3rem]" />
+    );
+  }
 
   return (
     <section
@@ -79,13 +85,14 @@ export default function OurCustomers() {
       <div ref={carouselRef} className="px-4">
         <Carousel
           autoplay
+          autoplaySpeed={2000}
           slidesToShow={4}
           dots={false}
           className="customer-carousel"
           speed={500}
-          // slidesToScroll={1}
-          arrows
-          swipeToSlide
+          slidesToScroll={1}
+          lazyLoad="progressive"
+          arrows={false}
           responsive={[
             { breakpoint: 1024, settings: { slidesToShow: 3 } },
             { breakpoint: 768, settings: { slidesToShow: 2 } },
@@ -93,8 +100,8 @@ export default function OurCustomers() {
           ]}
         >
           {customers?.map((customer) => (
-            <>
-              <Tooltip title={customer.name} key={customer.id}>
+            <div key={customer.id}>
+              <Tooltip title={customer.name}>
                 <div className="px-4">
                   <div className="relative h-[280px] w-full rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border-2 border-white group">
                     <Image
@@ -108,7 +115,7 @@ export default function OurCustomers() {
                   </div>
                 </div>
               </Tooltip>
-            </>
+            </div>
           ))}
         </Carousel>
       </div>

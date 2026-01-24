@@ -50,10 +50,7 @@ const ProjectsSection = () => {
     );
   }
   return (
-    <section
-      id="projects"
-      className="w-full px-4 py-20 gradient-section rounded-[3rem]"
-    >
+    <section className="w-full px-4 py-20 gradient-section rounded-[3rem]">
       <div className="text-center mb-16 flex flex-col items-center">
         <Title level={2} className="section-title mb-4">
           Our Creative Impact

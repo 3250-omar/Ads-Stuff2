@@ -8,14 +8,22 @@ const ScrollToTop = () => {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+    let ticking = false;
+
     const handleScroll = () => {
-      setVisible(window.scrollY >= 100);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setVisible(window.scrollY >= 100);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
 
     // Check initial scroll position on mount
     handleScroll();
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 

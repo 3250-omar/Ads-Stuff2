@@ -55,7 +55,7 @@ export const useHeroMedia = () => {
   const { data: images = staticHeroImages, isLoading } = useQuery({
     queryKey: ["hero-media"],
     queryFn: fetchHeroImages,
-    staleTime: 1000 * 60 * 60, // 1 hour
+    refetchOnWindowFocus: false,
   });
 
   const [imageIndices, setImageIndices] = useState([0, 1, 2]);
@@ -144,4 +144,28 @@ export const useGetAllCustomers = () => {
   if (error) message.error(error?.message);
 
   return { customers: data, loading: isPending };
+};
+
+export const useGetAllFeedbacks = () => {
+  const { message } = App.useApp();
+
+  const getAllFeedbacks = async () => {
+    const { data, error } = await supabaseClient
+      .from("customer_feedback")
+      .select("* , our_customers(logo_url , name)");
+    // .eq("status", "active");
+    if (error) throw error;
+    return data;
+  };
+
+  const { data, isPending, error } = useQuery({
+    queryKey: ["customer_feedback"],
+    queryFn: getAllFeedbacks,
+    refetchOnWindowFocus: false,
+    // staleTime: 1000 * 60 * 60, // 1 hour
+  });
+
+  if (error) message.error(error?.message);
+
+  return { feedbacks: data, loading: isPending };
 };

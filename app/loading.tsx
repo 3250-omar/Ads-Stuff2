@@ -12,7 +12,6 @@ const Loading = () => {
         // height={400}
         fill
         className="object-contain"
-        priority
       />
       <Spin className="size-8 text-primary" />
     </div>

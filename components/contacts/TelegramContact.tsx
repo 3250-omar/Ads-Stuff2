@@ -33,7 +33,7 @@ export default function TelegramContact() {
       const encodedMessage = encodeURIComponent(content);
       window.open(
         `https://t.me/${cleanUsername}?text=${encodedMessage}`,
-        "_blank"
+        "_blank",
       );
       message.success("Opening Telegram...");
       setLoading(false);

@@ -1,24 +1,48 @@
-"use client";
 import HeroSection from "./_comp/sections/HeroSection";
 import dynamic from "next/dynamic";
-import { Spin } from "antd";
-import StatictsSection from "@/components/StatictsSection";
-import ContactsSection from "./_comp/sections/ContactsSection";
 import LazySection from "@/components/LazySection";
 
+const StatictsSection = dynamic(() => import("@/components/StatictsSection"), {
+  ssr: true,
+  loading: () => (
+    <div className="w-full h-[200px] animate-pulse bg-gray-50/50 rounded-[3rem]" />
+  ),
+});
+
 const Timeline = dynamic(() => import("@/components/TimeLine"), {
-  ssr: false,
+  ssr: true,
+  loading: () => (
+    <div className="w-full h-[400px] animate-pulse bg-gray-50/50 rounded-[3rem]" />
+  ),
 });
 const OurCustomers = dynamic(() => import("@/components/OurCustomers"), {
-  ssr: false,
+  ssr: true,
+  loading: () => (
+    <div className="w-full h-[500px] animate-pulse bg-gray-50/50 rounded-[3rem]" />
+  ),
 });
 const FeedBacks = dynamic(() => import("@/components/FeedBacks"), {
-  ssr: false,
+  ssr: true,
+  loading: () => (
+    <div className="w-full h-[400px] animate-pulse bg-gray-50/50 rounded-[3rem]" />
+  ),
 });
 const ProjectsSection = dynamic(
   () => import("./_comp/sections/ProjectsSection"),
   {
-    ssr: false,
+    ssr: true,
+    loading: () => (
+      <div className="w-full h-[600px] animate-pulse bg-gray-50/50 rounded-[3rem]" />
+    ),
+  },
+);
+const ContactsSection = dynamic(
+  () => import("./_comp/sections/ContactsSection"),
+  {
+    ssr: true,
+    loading: () => (
+      <div className="w-full h-[400px] animate-pulse bg-gray-50/50 rounded-[3rem]" />
+    ),
   },
 );
 
@@ -33,7 +57,7 @@ export default function Home() {
         <LazySection minHeight={400}>
           <Timeline />
         </LazySection>
-        <LazySection minHeight={400}>
+        <LazySection id="projects" minHeight={400}>
           <ProjectsSection />
         </LazySection>
         <LazySection minHeight={400}>
@@ -42,7 +66,9 @@ export default function Home() {
         <LazySection minHeight={400}>
           <FeedBacks />
         </LazySection>
-        <ContactsSection />
+        <LazySection id="contacts" minHeight={400}>
+          <ContactsSection />
+        </LazySection>
       </div>
     </div>
   );

@@ -63,7 +63,8 @@ export const ImageStack = ({
               alt={`Portfolio Image ${cardIdx + 1}`}
               fill
               className="object-cover"
-              fetchPriority="high"
+              priority={cardIdx === 0}
+              loading={cardIdx === 0 ? "eager" : "lazy"}
               sizes="(max-width: 640px) 220px, (max-width: 768px) 260px, (max-width: 1024px) 300px, 340px"
             />
             <div className="absolute inset-0 bg-linear-to-t from-darkModePrimary/40 to-transparent" />

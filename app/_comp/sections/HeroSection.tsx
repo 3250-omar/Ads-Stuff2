@@ -117,14 +117,14 @@ export default function HeroSection() {
             <Button
               type="primary"
               size="large"
-              className="px-10 h-14 rounded-2xl text-lg font-semibold shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 hover:scale-105 transition-all duration-300"
+              className="px-10 h-14 rounded-2xl text-lg font-semibold shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 hover:scale-105 transition-all duration-300 max-sm:px-4 max-sm:h-12"
               onClick={handleGetStartedClick}
             >
               Get Started
             </Button>
             <Button
               size="large"
-              className="px-10 h-14 rounded-2xl text-lg font-semibold border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300"
+              className="px-10 h-14 rounded-2xl text-lg font-semibold border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300 max-sm:px-4 max-sm:h-12"
               onClick={handleSeeWorkClick}
             >
               See Our Work
@@ -135,21 +135,12 @@ export default function HeroSection() {
 
       <div className="w-full max-w-[700px] justify-self-center px-4 md:px-0 animate-slide-in-right [animation-delay:200ms]">
         <div className="relative h-[380px] sm:h-[450px] md:h-[520px] lg:h-[580px] w-full flex items-center justify-center">
-          {isLoading ? (
-            <div className="flex flex-col items-center gap-4">
-              <Spin size="large" />
-              <div className="text-primary font-medium animate-pulse">
-                Loading Images...
-              </div>
-            </div>
-          ) : (
-            <ImageStack
-              positionIndex={positionIndex}
-              imageIndices={imageIndices}
-              isSwappingImage={isSwappingImage}
-              images={images}
-            />
-          )}
+          <ImageStack
+            positionIndex={positionIndex}
+            imageIndices={imageIndices}
+            isSwappingImage={isSwappingImage}
+            images={images}
+          />
         </div>
       </div>
     </section>
