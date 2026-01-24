@@ -1,36 +1,96 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ads & Stuff
 
-## Getting Started
+A modern, high-performance portfolio website for **Ads & Stuff**, a digital advertising agency specializing in visual storytelling and creative content. Built with **Next.js 15+**, **Ant Design**, and **Supabase**.
 
-First, run the development server:
+## 🚀 Tech Stack
+
+- **Framework**: [Next.js 15](https://nextjs.org/) (App Router)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **UI Component Library**: [Ant Design (v6)](https://ant.design/)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
+- **Backend & Database**: [Supabase](https://supabase.com/)
+- **State Management & Data Fetching**: [TanStack Query](https://tanstack.com/query/latest)
+- **Animations**: [GSAP](https://gsap.com/) & CSS Animations
+- **Email Service**: [EmailJS](https://www.emailjs.com/)
+
+## 📂 Project Structure
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+├── app/
+│   ├── _comp/sections/   # Main landing page sections (Hero, Skills, Projects, etc.)
+│   ├── api/              # API hooks and queries
+│   ├── layout.tsx        # Root layout with Providers and AntD Config
+│   └── page.tsx          # Main entry point
+├── components/           # Reusable UI components (NavBar, Footer, etc.)
+├── constants/            # Static data and assets
+├── lib/                  # Library configurations (e.g., AntdRegistry)
+├── utils/                # Utility functions
+│   └── supabase/         # Supabase client configuration
+└── public/               # Static assets
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ Getting Started
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Prerequisites
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Node.js (v18 or higher)
+- Yarn, npm, or pnpm
 
-## Learn More
+### Installation
 
-To learn more about Next.js, take a look at the following resources:
+1. **Clone the repository:**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   ```bash
+   git clone https://github.com/3250-omar/Ads-Stuff2.git
+   cd web
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2. **Install dependencies:**
 
-## Deploy on Vercel
+   ```bash
+   yarn install
+   # or
+   npm install
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+3. **Configure Environment Variables:**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+   Create a `.env.local` file in the root directory and add the following keys:
+
+   ```env
+   # Supabase Configuration
+   NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+
+   # EmailJS Configuration (Contact Form)
+   NEXT_PUBLIC_EMAILJS_SERVICE_ID=your_service_id
+   NEXT_PUBLIC_EMAILJS_TEMPLATE_ID=your_template_id
+   NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=your_public_key
+   NEXT_PUBLIC_EMAILJS_TO_EMAIL=your_receiving_email
+   ```
+
+4. **Run the development server:**
+
+   ```bash
+   yarn dev
+   # or
+   npm run dev
+   ```
+
+   Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## ✨ Features
+
+- **Dynamic Content**: Projects, Feedbacks, and Customer data are fetched dynamically from Supabase.
+- **Responsive Design**: Fully responsive layout optimized for all devices using Tailwind CSS and Ant Design Grid.
+- **Contact Form**: Functional contact form powered by EmailJS.
+- **Hero Section**: Dynamic media fetching (images/videos) from Supabase Storage.
+- **Performance**: Optimized with React Query for caching and efficient data fetching.
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📄 License
+
+This project is licensed under the MIT License.
