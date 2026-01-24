@@ -2,7 +2,7 @@ import { staticHeroImages } from "@/constants/staticImages";
 import { supabaseClient } from "@/utils/supabase/client";
 import { useQuery } from "@tanstack/react-query";
 import { App } from "antd";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export const useGetSocialMedia = (): {
   socialMedia: any[] | null | undefined;
@@ -18,7 +18,11 @@ export const useGetSocialMedia = (): {
     queryFn: getAllSocialMedia,
     staleTime: 1000 * 60 * 60 * 2, // 2 hours
   });
-  if (error) message.error(error?.message);
+  useEffect(() => {
+    if (error) {
+      message.error(error.message);
+    }
+  }, [error, message]);
 
   return { socialMedia: data, loading: isPending };
 };
@@ -114,7 +118,11 @@ export const useGetProjects = ({
     refetchOnWindowFocus: false,
   });
 
-  if (error) message.error(error?.message);
+  useEffect(() => {
+    if (error) {
+      message.error(error.message);
+    }
+  }, [error, message]);
 
   return {
     projects: data?.data,
@@ -141,7 +149,11 @@ export const useGetAllCustomers = () => {
     staleTime: 1000 * 60 * 60, // 1 hour
   });
 
-  if (error) message.error(error?.message);
+  useEffect(() => {
+    if (error) {
+      message.error(error.message);
+    }
+  }, [error, message]);
 
   return { customers: data, loading: isPending };
 };
@@ -165,7 +177,11 @@ export const useGetAllFeedbacks = () => {
     // staleTime: 1000 * 60 * 60, // 1 hour
   });
 
-  if (error) message.error(error?.message);
+  useEffect(() => {
+    if (error) {
+      message.error(error.message);
+    }
+  }, [error, message]);
 
   return { feedbacks: data, loading: isPending };
 };
