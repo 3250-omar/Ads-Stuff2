@@ -86,7 +86,7 @@ export default function OurCustomers() {
         <Carousel
           autoplay
           autoplaySpeed={2000}
-          slidesToShow={6}
+          slidesToShow={5}
           dots={false}
           className="customer-carousel"
           speed={500}
