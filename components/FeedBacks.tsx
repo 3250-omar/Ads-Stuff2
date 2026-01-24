@@ -35,13 +35,25 @@ export default function FeedBacks() {
           className="feedback-carousel"
           responsive={[
             {
-              breakpoint: 1024,
+              breakpoint: 1200,
               settings: {
-                slidesToShow: 2,
+                slidesToShow: 4,
               },
             },
             {
-              breakpoint: 640,
+              breakpoint: 1024,
+              settings: {
+                slidesToShow: 3,
+              },
+            },
+            {
+              breakpoint: 768,
+              settings: {
+                slidesToShow: 1,
+              },
+            },
+            {
+              breakpoint: 425,
               settings: {
                 slidesToShow: 1,
               },

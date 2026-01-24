@@ -52,11 +52,11 @@ const StatictsSection = () => {
           }}
           className="flex flex-col items-center justify-center gap-3 group hover:bg-primary hover:-translate-y-3 hover:cursor-pointer transition-all duration-500 p-12 rounded-4xl bg-white shadow-lg hover:shadow-2xl hover:glow-primary"
         >
-          <div className="text-6xl font-black text-primary group-hover:text-white transition-colors duration-300 ">
+          <div className="text-6xl font-black text-primary group-hover:text-white transition-colors duration-300 max-sm:text-3xl ">
             <CountUp end={statistic.count} duration={3} delay={0.5} />
             <span>{statistic.suffix}</span>
           </div>
-          <Text className="text-xl font-semibold text-gray-600 group-hover:text-white/90 transition-colors duration-300 tracking-wide">
+          <Text className="text-xl font-semibold text-gray-600 group-hover:text-white/90 transition-colors duration-300 max-sm:text-lg tracking-wide">
             {statistic.title}
           </Text>
         </div>

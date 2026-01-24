@@ -86,7 +86,7 @@ export default function OurCustomers() {
         <Carousel
           autoplay
           autoplaySpeed={2000}
-          slidesToShow={4}
+          slidesToShow={6}
           dots={false}
           className="customer-carousel"
           speed={500}
@@ -94,9 +94,11 @@ export default function OurCustomers() {
           lazyLoad="progressive"
           arrows={false}
           responsive={[
-            { breakpoint: 1024, settings: { slidesToShow: 3 } },
-            { breakpoint: 768, settings: { slidesToShow: 2 } },
-            { breakpoint: 480, settings: { slidesToShow: 1 } },
+            { breakpoint: 1200, settings: { slidesToShow: 5 } },
+            { breakpoint: 1024, settings: { slidesToShow: 4 } },
+            { breakpoint: 768, settings: { slidesToShow: 3 } },
+            { breakpoint: 480, settings: { slidesToShow: 2 } },
+            { breakpoint: 360, settings: { slidesToShow: 1 } },
           ]}
         >
           {customers?.map((customer) => (
