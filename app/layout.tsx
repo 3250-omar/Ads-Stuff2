@@ -92,13 +92,13 @@ export default function RootLayout({
             <ConfigProvider
               theme={{
                 token: {
-                  colorPrimary: "#6B9071",
+                  colorPrimary: "#4A6B50",
                 },
               }}
             >
               <App>
                 <NavBar />
-                <div className="head-section">{children}</div>
+                <main className="head-section">{children}</main>
                 <Footer />
                 <ScrollToTop />
               </App>
