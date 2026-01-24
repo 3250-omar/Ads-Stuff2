@@ -2,26 +2,26 @@ import HeroSection from "./_comp/sections/HeroSection";
 import dynamic from "next/dynamic";
 import LazySection from "@/components/LazySection";
 
-const StatictsSection = dynamic(() => import("@/components/StatictsSection"), {
+const StatictsSection = dynamic(() => import("@/app/_comp/sections/StatictsSection"), {
   ssr: true,
   loading: () => (
     <div className="w-full h-[200px] animate-pulse bg-gray-50/50 rounded-[3rem]" />
   ),
 });
 
-const Timeline = dynamic(() => import("@/components/TimeLine"), {
+const Timeline = dynamic(() => import("@/app/_comp/sections/TimeLine"), {
   ssr: true,
   loading: () => (
     <div className="w-full h-[400px] animate-pulse bg-gray-50/50 rounded-[3rem]" />
   ),
 });
-const OurCustomers = dynamic(() => import("@/components/OurCustomers"), {
+const OurCustomers = dynamic(() => import("@/app/_comp/sections/OurCustomers"), {
   ssr: true,
   loading: () => (
     <div className="w-full h-[500px] animate-pulse bg-gray-50/50 rounded-[3rem]" />
   ),
 });
-const FeedBacks = dynamic(() => import("@/components/FeedBacks"), {
+const FeedBacks = dynamic(() => import("@/app/_comp/sections/FeedBacks"), {
   ssr: true,
   loading: () => (
     <div className="w-full h-[400px] animate-pulse bg-gray-50/50 rounded-[3rem]" />

@@ -36,6 +36,8 @@ const TabsComp = ({ tabs, className }: TabsCompProps) => {
         animated={{ inkBar: true, tabPane: true }}
         size="large"
         className="custom-tabs"
+        type="card"
+        
       />
     </div>
   );
