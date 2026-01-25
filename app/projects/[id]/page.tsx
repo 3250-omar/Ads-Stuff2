@@ -125,7 +125,7 @@ const ProjectDetails = () => {
             </Title>
             {project.behance_link ? (
               <Button
-                type="text"
+                type="link"
                 icon={
                   <BehanceCircleFilled
                     style={{
