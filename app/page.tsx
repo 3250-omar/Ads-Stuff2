@@ -2,12 +2,15 @@ import HeroSection from "./_comp/sections/HeroSection";
 import dynamic from "next/dynamic";
 import LazySection from "@/components/LazySection";
 
-const StatictsSection = dynamic(() => import("@/app/_comp/sections/StatictsSection"), {
-  ssr: true,
-  loading: () => (
-    <div className="w-full h-[200px] animate-pulse bg-gray-50/50 rounded-[3rem]" />
-  ),
-});
+const StatictsSection = dynamic(
+  () => import("@/app/_comp/sections/StatictsSection"),
+  {
+    ssr: true,
+    loading: () => (
+      <div className="w-full h-[200px] animate-pulse bg-gray-50/50 rounded-[3rem]" />
+    ),
+  },
+);
 
 const Timeline = dynamic(() => import("@/app/_comp/sections/TimeLine"), {
   ssr: true,
@@ -15,12 +18,15 @@ const Timeline = dynamic(() => import("@/app/_comp/sections/TimeLine"), {
     <div className="w-full h-[400px] animate-pulse bg-gray-50/50 rounded-[3rem]" />
   ),
 });
-const OurCustomers = dynamic(() => import("@/app/_comp/sections/OurCustomers"), {
-  ssr: true,
-  loading: () => (
-    <div className="w-full h-[500px] animate-pulse bg-gray-50/50 rounded-[3rem]" />
-  ),
-});
+const OurCustomers = dynamic(
+  () => import("@/app/_comp/sections/OurCustomers"),
+  {
+    ssr: true,
+    loading: () => (
+      <div className="w-full h-[500px] animate-pulse bg-gray-50/50 rounded-[3rem]" />
+    ),
+  },
+);
 const FeedBacks = dynamic(() => import("@/app/_comp/sections/FeedBacks"), {
   ssr: true,
   loading: () => (
@@ -63,9 +69,9 @@ export default function Home() {
         <LazySection minHeight={400}>
           <OurCustomers />
         </LazySection>
-        <LazySection minHeight={400}>
+        {/* <LazySection minHeight={400}>
           <FeedBacks />
-        </LazySection>
+        </LazySection> */}
         <LazySection id="contacts" minHeight={400}>
           <ContactsSection />
         </LazySection>

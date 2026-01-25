@@ -37,7 +37,6 @@ const TabsComp = ({ tabs, className }: TabsCompProps) => {
         size="large"
         className="custom-tabs"
         type="card"
-        
       />
     </div>
   );

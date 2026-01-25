@@ -7,12 +7,13 @@ import { useGetProjects } from "@/app/api/query";
 const { Title, Paragraph } = Typography;
 
 const ProjectsSection = () => {
-  const [status, setStatus] = useState<string>("finished");
+  // const [status, setStatus] = useState<string>("finished");
   const [page, setPage] = useState(1);
   const [allProjects, setAllProjects] = useState<any[]>([]);
 
   const { loading, projects, total } = useGetProjects({
-    status,
+    // status,
+    status: "finished",
     page,
   });
 
@@ -62,7 +63,7 @@ const ProjectsSection = () => {
         </Paragraph>
       </div>
       <div className="flex flex-col gap-6">
-        <Radio.Group
+        {/* <Radio.Group
           options={[
             {
               label: "Finished",
@@ -76,7 +77,7 @@ const ProjectsSection = () => {
           defaultValue={status}
           onChange={(e) => setStatus(e.target.value)}
           optionType="button"
-        />
+        /> */}
         <Spin spinning={loading}>
           {allProjects?.length && !loading ? (
             <AllProjects projects={allProjects} />

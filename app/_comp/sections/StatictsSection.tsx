@@ -9,9 +9,9 @@ gsap.registerPlugin(ScrollTrigger);
 
 const { Text } = Typography;
 const statistics = [
-  { title: "Happy Customers", count: 1000, suffix: "+" },
-  { title: "Projects Completed", count: 500, suffix: "+" },
-  { title: "Awards Won", count: 50, suffix: "" },
+  { title: "Happy Customers", count: 99, suffix: "+" },
+  { title: "Projects Completed", count: 99, suffix: "+" },
+  // { title: "Awards Won", count: 50, suffix: "" },
 ];
 
 const StatictsSection = () => {
@@ -30,7 +30,8 @@ const StatictsSection = () => {
           scrollTrigger: {
             trigger: card,
             start: "top 85%",
-            toggleActions: "play reverse none none",
+            toggleActions: "play none none none",
+            once: true,
           },
         });
       });
@@ -42,7 +43,7 @@ const StatictsSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="gradient-section rounded-[3rem] border border-secondary/30 grid grid-cols-3 gap-8 w-full max-sm:grid-cols-1 max-md:grid-cols-2 p-10"
+      className="gradient-section rounded-[3rem] border border-secondary/30 grid grid-cols-2 gap-8 w-full max-sm:grid-cols-1 max-md:grid-cols-2 p-10"
     >
       {statistics.map((statistic, index) => (
         <div
@@ -50,10 +51,10 @@ const StatictsSection = () => {
           ref={(el) => {
             if (el) cardsRef.current[index] = el;
           }}
-          className="flex flex-col items-center justify-center gap-3 group hover:bg-primary hover:-translate-y-3 hover:cursor-pointer transition-all duration-500 p-12 rounded-4xl bg-white shadow-lg hover:shadow-2xl hover:glow-primary"
+          className="flex flex-col items-center justify-center gap-3 group hover:bg-primary hover:-translate-y-3! hover:cursor-pointer transition-all duration-500  py-16 rounded-4xl bg-white shadow-lg hover:shadow-2xl hover:glow-primary"
         >
           <div className="text-6xl font-black text-primary group-hover:text-white transition-colors duration-300 max-sm:text-3xl ">
-            <CountUp end={statistic.count} duration={3} delay={0.5} />
+            <CountUp end={statistic.count} duration={3} delay={0.3} />
             <span>{statistic.suffix}</span>
           </div>
           <Text className="text-xl font-semibold text-gray-600 group-hover:text-white/90 transition-colors duration-300 max-sm:text-lg tracking-wide">

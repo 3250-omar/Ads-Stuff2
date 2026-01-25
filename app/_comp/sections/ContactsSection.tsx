@@ -29,24 +29,24 @@ export default function ContactsSection() {
   const contentRef = useRef<HTMLDivElement>(null);
   const contactTabsItems = useMemo(
     () => [
-      {
-        title: "Gmail",
-        icon: SiGmail,
-        value: "gmail",
-        content: <GmailForm />,
-      },
+      // {
+      //   title: "Gmail",
+      //   icon: SiGmail,
+      //   value: "gmail",
+      //   content: <GmailForm />,
+      // },
       {
         title: "WhatsApp",
         icon: SiWhatsapp,
         value: "whatsapp",
         content: <WhatsAppContact />,
       },
-      {
-        title: "Telegram",
-        icon: SiTelegram,
-        value: "telegram",
-        content: <TelegramContact />,
-      },
+      // {
+      //   title: "Telegram",
+      //   icon: SiTelegram,
+      //   value: "telegram",
+      //   content: <TelegramContact />,
+      // },
     ],
     [],
   );

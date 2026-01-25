@@ -76,6 +76,7 @@ export const metadata: Metadata = {
 };
 
 import Providers from "@/components/Providers";
+import ToWhatsapp from "@/components/ToWhatsapp";
 
 export default function RootLayout({
   children,
@@ -101,6 +102,7 @@ export default function RootLayout({
                 <main className="head-section">{children}</main>
                 <Footer />
                 <ScrollToTop />
+                <ToWhatsapp />
               </App>
             </ConfigProvider>
           </AntdRegistry>

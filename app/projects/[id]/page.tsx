@@ -7,6 +7,7 @@ import {
   CheckCircleFilled,
   ThunderboltFilled,
   LineChartOutlined,
+  BehanceCircleFilled,
 } from "@ant-design/icons";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
@@ -15,6 +16,7 @@ import { useGetProjects } from "@/app/api/query";
 import { Project } from "@/types";
 import MediaComp from "./_comp/MediaComp";
 import { getStatusColor } from "@/constants/getStatusColor";
+import { FaBehanceSquare } from "react-icons/fa";
 
 const { Title, Paragraph, Text } = Typography;
 
@@ -114,12 +116,30 @@ const ProjectDetails = () => {
               ))}
             </Space> */}
           </div>
-          <Title
-            level={1}
-            className="text-5xl! md:text-6xl! font-black! text-primary! mb-5!"
-          >
-            {project.title}
-          </Title>
+          <div className="flex items-center flex-wrap justify-between">
+            <Title
+              level={1}
+              className="text-5xl! md:text-6xl! font-black! text-primary! mb-5!"
+            >
+              {project.title}
+            </Title>
+            {project.behance_link ? (
+              <Button
+                type="text"
+                icon={
+                  <BehanceCircleFilled
+                    style={{
+                      fontSize: "2rem",
+                      border: "none",
+                    }}
+                    href={project.behance_link}
+                    target="_blank"
+                  />
+                }
+              />
+            ) : null}
+          </div>
+
           <Paragraph className="text-xl text-gray-500 max-w-3xl leading-relaxed">
             {project.description}
           </Paragraph>

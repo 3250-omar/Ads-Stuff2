@@ -4,6 +4,16 @@ import { Card, Badge, Typography, Space, Divider } from "antd";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import {
+  FacebookOutlined,
+  InstagramOutlined,
+  LinkedinOutlined,
+  YoutubeOutlined,
+} from "@ant-design/icons";
+import { useGetSocialMedia } from "@/app/api/query";
+import getSocialMedia from "@/constants/getSocialMedia";
+import Link from "next/link";
+import { useMemo } from "react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -11,33 +21,78 @@ const { Title, Text, Paragraph } = Typography;
 
 type TimelineItem = {
   title: string;
-  date: string;
+  date?: string;
   subtitle?: string;
-  description?: string;
+  description?: string | React.ReactNode[];
   status?: string;
 };
 
-const items: TimelineItem[] = [
-  {
-    title: "Project Started",
-    date: "Jan 2025",
-    description: "Initial planning and setup of the repository.",
-  },
-  {
-    title: "Design Phase",
-    date: "Feb 2025",
-    description: "UI/UX design and prototyping using Figma.",
-    status: "In Progress",
-  },
-  {
-    title: "Development",
-    date: "Mar 2025",
-    description: "Started implementing frontend and backend.",
-  },
-];
 export default function Timeline() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement[]>([]);
+  const { socialMedia, loading } = useGetSocialMedia();
+
+  const items: TimelineItem[] = useMemo(
+    () => [
+      {
+        title: "Who We Are 🤔",
+        // date: "Jan 2025",
+        description:
+          "At Ads and Stuff, we’re not just another digital marketing agency we’re a team that turns ideas into real results We help you build a strong online presence, from the first ad to the final goal because simply put: your success is our success . we know how powerful the right message can be Let’s team up and make your brand the one everyone’s talking about",
+      },
+      {
+        title: "Services We Provide 🧑‍💻",
+        // date: "Feb 2025",
+        description: [
+          <div className="flex flex-wrap gap-2">
+            {[
+              "Social Media Marketing",
+              "Graphic Design",
+              "Media Production",
+              "Media Buying",
+              "Video Editing & Motion Graphics",
+              "Web Development & Management",
+            ].map((item, index) => (
+              <div key={index} className="flex items-center gap-2">
+                <Text>•</Text>
+                <Text>{item}</Text>
+              </div>
+            ))}
+          </div>,
+        ],
+        // status: "In Progress",
+      },
+      {
+        title: "Our Platforms 📱",
+        // date: "Mar 2025",
+        description: [
+          loading ? (
+            <div key="loading">Loading...</div>
+          ) : (
+            <div key="socials" className="flex items-center gap-4 flex-wrap  ">
+              {socialMedia?.map((item: any) => {
+                const { icon: SocialIcon, bgHover } = getSocialMedia({
+                  name: item.name.toLowerCase(),
+                });
+                return (
+                  <Link
+                    key={item.id}
+                    href={item.social_media_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`flex items-center justify-center w-12 h-12 rounded-full border-2 text-black! border-gray-100 text-xl hover:border-transparent hover:text-white! hover:scale-110 hover:shadow-lg transition-all ${bgHover}`}
+                  >
+                    <SocialIcon />
+                  </Link>
+                );
+              })}
+            </div>
+          ),
+        ],
+      },
+    ],
+    [socialMedia, loading],
+  );
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -92,15 +147,18 @@ export default function Timeline() {
                   >
                     <Space
                       size="middle"
-                      className={isLeft ? "flex-row-reverse" : "flex-row"}
+                      className={
+                        (isLeft ? "flex-row-reverse" : "flex-row") +
+                        " flex justify-center items-center w-full!"
+                      }
                     >
                       <Title
-                        level={4}
-                        className="m-0! group-hover:text-primary transition-colors"
+                        level={3}
+                        className="m-0! group-hover:text-primary transition-colors "
                       >
                         {item.title}
                       </Title>
-                      <Badge
+                      {/* <Badge
                         count={item.date}
                         style={{
                           backgroundColor: "#AEC3B0",
@@ -109,7 +167,7 @@ export default function Timeline() {
                           borderRadius: "1rem",
                           padding: "0 12px",
                         }}
-                      />
+                      /> */}
                     </Space>
 
                     {item.subtitle && (
@@ -118,10 +176,15 @@ export default function Timeline() {
                       </Text>
                     )}
 
-                    {item.description && (
-                      <Paragraph className="text-gray-600 leading-relaxed m-0 mt-2">
+                    {item.description &&
+                    typeof item.description === "string" ? (
+                      <Paragraph className="text-gray-600 leading-relaxed m-0 mt-2 ">
                         {item.description}
                       </Paragraph>
+                    ) : (
+                      <Space className="w-full! justify-center! mt-4!">
+                        {item.description}
+                      </Space>
                     )}
 
                     {item.status && (
