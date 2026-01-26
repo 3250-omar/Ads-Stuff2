@@ -4,7 +4,11 @@ import { useEffect, useRef, useCallback, useState } from "react";
 import ImageStack, { positionOrders } from "./imageStock";
 import { useHeroMedia } from "@/app/api/query";
 
-export default function HeroSection() {
+export default function HeroSection({
+  initialImages,
+}: {
+  initialImages?: string[];
+}) {
   const [positionIndex, setPositionIndex] = useState(0);
   const {
     images,
@@ -13,7 +17,7 @@ export default function HeroSection() {
     nextImage,
     setImageIndices,
     setNextImage,
-  } = useHeroMedia();
+  } = useHeroMedia(initialImages);
   const [isSwappingImage, setIsSwappingImage] = useState<number | null>(null);
 
   const sectionRef = useRef<HTMLElement>(null);

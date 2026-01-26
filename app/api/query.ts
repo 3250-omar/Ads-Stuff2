@@ -1,8 +1,10 @@
+"use client";
 import { staticHeroImages } from "@/constants/staticImages";
 import { supabaseClient } from "@/utils/supabase/client";
 import { useQuery } from "@tanstack/react-query";
 import { App } from "antd";
 import { useState, useEffect } from "react";
+import { getHeroImagesInternal } from "./hero-fetching";
 
 export const useGetSocialMedia = (): {
   socialMedia: any[] | null | undefined;
@@ -27,40 +29,14 @@ export const useGetSocialMedia = (): {
   return { socialMedia: data, loading: isPending };
 };
 
-export const useHeroMedia = () => {
-  const fetchHeroImages = async () => {
-    const { data: files, error } = await supabaseClient.storage
-      .from("project-media")
-      .list("projects", {
-        limit: 5,
-        offset: 0,
-        sortBy: { column: "name", order: "asc" },
-      });
-    console.log("🚀 ~ fetchHeroImages ~ files:", files);
-
-    if (error) throw error;
-
-    if (!files) return staticHeroImages;
-
-    const allMedia = files
-      .filter((file) => file.name !== ".emptyFolderPlaceholder")
-      .filter((file) => !file.metadata?.mimetype?.startsWith("video"))
-      .map((file) => {
-        const { data } = supabaseClient.storage
-          .from("project-media")
-          .getPublicUrl(`projects/${file.name}`);
-        return data.publicUrl;
-      })
-      .filter((url): url is string => !!url);
-    console.log("🚀 ~ fetchHeroImages ~ allMedia:", allMedia);
-
-    return allMedia.length >= 3 ? allMedia : staticHeroImages;
-  };
-  const { data: images = staticHeroImages, isLoading } = useQuery({
-    queryKey: ["hero-media"],
-    queryFn: fetchHeroImages,
-    refetchOnWindowFocus: false,
-  });
+export const useHeroMedia = (initialImages?: string[]) => {
+  const { data: images = initialImages || staticHeroImages, isLoading } =
+    useQuery({
+      queryKey: ["hero-media"],
+      queryFn: () => getHeroImagesInternal(supabaseClient),
+      refetchOnWindowFocus: false,
+      initialData: initialImages,
+    });
 
   const [imageIndices, setImageIndices] = useState([0, 1, 2]);
   const [nextImage, setNextImage] = useState(3);
