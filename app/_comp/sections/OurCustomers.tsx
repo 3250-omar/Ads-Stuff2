@@ -72,7 +72,7 @@ export default function OurCustomers() {
       className="space-y-12 py-20 gradient-section rounded-[3rem]"
     >
       <div ref={titleRef} className="flex flex-col items-center">
-        <Title level={2} className="section-title">
+        <Title level={2} className="section-title max-sm:text-2xl!">
           Our Trusted Partners
         </Title>
         <Divider className="border-primary/30 w-1/4 min-w-[100px] my-6" />
@@ -85,20 +85,51 @@ export default function OurCustomers() {
       <div ref={carouselRef} className="px-4">
         <Carousel
           autoplay
-          autoplaySpeed={2000}
-          slidesToShow={5}
-          dots={false}
-          className="customer-carousel"
-          speed={500}
+          autoplaySpeed={2500}
+          slidesToShow={6} // Default for Ultra-wide screens (>2560px)
           slidesToScroll={1}
-          lazyLoad="progressive"
+          dots={false}
           arrows={false}
+          infinite={customers && customers.length > 1}
+          draggable
+          className="customer-carousel"
           responsive={[
-            { breakpoint: 1200, settings: { slidesToShow: 5 } },
-            { breakpoint: 1024, settings: { slidesToShow: 4 } },
-            { breakpoint: 768, settings: { slidesToShow: 3 } },
-            { breakpoint: 480, settings: { slidesToShow: 2 } },
-            { breakpoint: 360, settings: { slidesToShow: 1 } },
+            {
+              breakpoint: 2561,
+              settings: {
+                slidesToShow: Math.min(customers?.length || 6, 6),
+              },
+            },
+            {
+              breakpoint: 1440,
+              settings: {
+                slidesToShow: Math.min(customers?.length || 5, 5),
+              },
+            },
+            {
+              breakpoint: 1200,
+              settings: {
+                slidesToShow: Math.min(customers?.length || 4, 4),
+              },
+            },
+            {
+              breakpoint: 1024,
+              settings: {
+                slidesToShow: Math.min(customers?.length || 3, 3),
+              },
+            },
+            {
+              breakpoint: 768,
+              settings: {
+                slidesToShow: Math.min(customers?.length || 2, 2),
+              },
+            },
+            {
+              breakpoint: 480,
+              settings: {
+                slidesToShow: 1,
+              },
+            },
           ]}
         >
           {customers?.map((customer) => (

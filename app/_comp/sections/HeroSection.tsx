@@ -117,14 +117,14 @@ export default function HeroSection() {
             <Button
               type="primary"
               size="large"
-              className="px-10 h-14 rounded-2xl text-lg font-semibold shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 hover:scale-105 transition-all duration-300 max-sm:px-4 max-sm:h-12"
+              className="px-10 h-14 rounded-2xl text-lg font-semibold shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 hover:scale-105 transition-all duration-300 max-sm:px-4! max-sm:h-12 max-sm:text-sm!"
               onClick={handleGetStartedClick}
             >
               Get Started
             </Button>
             <Button
               size="large"
-              className="px-10 h-14 rounded-2xl text-lg font-semibold border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300 max-sm:px-4 max-sm:h-12"
+              className="px-10 h-14 rounded-2xl text-lg font-semibold border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300 max-sm:px-4 max-sm:h-12 max-sm:text-sm!"
               onClick={handleSeeWorkClick}
             >
               See Our Work

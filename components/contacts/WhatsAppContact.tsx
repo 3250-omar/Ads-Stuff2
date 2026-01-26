@@ -1,12 +1,22 @@
 "use client";
 
 import React, { useState } from "react";
-import { Card, Input, Button, Form, Typography, Space, Tooltip, message, Divider } from "antd";
-import { 
-  WhatsAppOutlined, 
-  SendOutlined, 
-  ReloadOutlined, 
-  InfoCircleOutlined 
+import {
+  Card,
+  Input,
+  Button,
+  Form,
+  Typography,
+  Space,
+  Tooltip,
+  message,
+  Divider,
+} from "antd";
+import {
+  WhatsAppOutlined,
+  SendOutlined,
+  ReloadOutlined,
+  InfoCircleOutlined,
 } from "@ant-design/icons";
 
 const { Title, Text } = Typography;
@@ -31,7 +41,7 @@ export default function WhatsAppContact() {
       const encodedMessage = encodeURIComponent(content);
       window.open(
         `https://wa.me/${cleanPhone}?text=${encodedMessage}`,
-        "_blank"
+        "_blank",
       );
       message.success("Opening WhatsApp...");
       setLoading(false);
@@ -40,16 +50,20 @@ export default function WhatsAppContact() {
 
   return (
     <section className="py-12 flex justify-center">
-      <Card 
+      <Card
         className="w-full max-w-lg rounded-3xl shadow-xl border-none overflow-hidden"
-        styles={{ body: { padding: '40px' } }}
+        styles={{ body: { padding: "40px" } }}
       >
         <div className="text-center mb-8">
           <div className="bg-[#25D366]/10 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4">
             <WhatsAppOutlined className="text-3xl text-[#25D366]" />
           </div>
-          <Title level={2} className="!m-0 !font-black text-[#128C7E]">WhatsApp Me</Title>
-          <Text type="secondary" className="text-sm">Quick chat via WhatsApp Business</Text>
+          <Title level={2} className="m-0! font-black! text-[#128C7E]">
+            WhatsApp Me
+          </Title>
+          <Text type="secondary" className="text-sm">
+            Quick chat via WhatsApp Business
+          </Text>
         </div>
 
         <Divider className="my-8" />
@@ -72,13 +86,13 @@ export default function WhatsAppContact() {
               </Space>
             }
             rules={[
-              { required: true, message: 'Please enter your phone number' },
-              { pattern: /^\d+$/, message: 'Numbers only' }
+              { required: true, message: "Please enter your phone number" },
+              { pattern: /^\d+$/, message: "Numbers only" },
             ]}
           >
-            <Input 
-              prefix={<span className="text-gray-400 mr-2">+</span>} 
-              placeholder="1234567890" 
+            <Input
+              prefix={<span className="text-gray-400 mr-2">+</span>}
+              placeholder="1234567890"
               size="large"
               className="rounded-xl border-gray-200"
             />
@@ -87,10 +101,10 @@ export default function WhatsAppContact() {
           <Form.Item
             name="content"
             label={<Text strong>Your Message</Text>}
-            rules={[{ required: true, message: 'Please enter your message' }]}
+            rules={[{ required: true, message: "Please enter your message" }]}
           >
-            <TextArea 
-              placeholder="Write your message here..." 
+            <TextArea
+              placeholder="Write your message here..."
               rows={6}
               showCount
               maxLength={1000}

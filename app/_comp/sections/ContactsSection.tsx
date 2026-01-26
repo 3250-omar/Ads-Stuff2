@@ -78,7 +78,7 @@ export default function ContactsSection() {
           <Title level={2} className="section-title">
             Let's Work Together
           </Title>
-          <HeartFilled className="animate-pulse text-5xl text-primary animate-float" />
+          <HeartFilled className="animate-pulse text-5xl text-primary animate-float " />
         </div>
         <Divider className="border-primary/30 w-1/4 min-w-[100px]" />
         <TabsComp tabs={contactTabsItems} className="w-full max-w-4xl" />

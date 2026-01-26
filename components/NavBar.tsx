@@ -114,14 +114,14 @@ const NavBar = () => {
 
       {/* Mobile Nav */}
       <div
-        className={`fixed bottom-5 left-1/2 -translate-x-1/2 w-[280px] rounded-full bg-primary/80 backdrop-blur-md text-white z-50 mx-auto p-3 hidden max-sm:block shadow-lg ${pathname !== "/" ? "max-sm:hidden" : ""}`}
+        className={`fixed bottom-5 left-1/2 -translate-x-1/2 w-[280px] rounded-full bg-primary/80 backdrop-blur-md text-white z-50 mx-auto p-2 hidden max-sm:block shadow-lg ${pathname !== "/" ? "max-sm:hidden" : ""}`}
       >
         <div className="flex items-center gap-2 justify-around">
           {navItems.map((item: { key: string; href: string }) => (
             <Button
               onClick={() => scrollToSection(item.href)}
               key={item.key}
-              className={`transition-colors! text-sm! hover:text-black! capitalize! ${
+              className={`transition-colors! text-xs! hover:text-black! capitalize! ${
                 activeSection === item.key
                   ? "text-black! font-bold! bg-white/20! px-2! py-1! rounded-md!"
                   : "text-white!"

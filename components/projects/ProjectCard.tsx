@@ -38,10 +38,10 @@ const ProjectCard = ({ project }: { project: Project }) => {
       }
     >
       <div className="flex flex-col gap-3">
-        <div className="flex justify-between items-start gap-2">
+        <div className="flex justify-between items-start gap-2 md:flex-col md:items-center">
           <Title
             level={4}
-            className="m-0! group-hover:text-primary transition-colors"
+            className="m-0! group-hover:text-primary transition-colors "
           >
             {project.title}
           </Title>
@@ -57,7 +57,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
           {project.description}
         </Paragraph>
 
-        <div className="flex justify-between items-center mt-2 group-hover:translate-x-1 transition-transform">
+        <div className="flex justify-between items-center mt-2 group-hover:translate-x-1 transition-transform md:justify-center">
           <Link
             href={`/projects/${project.id}`}
             className="flex items-center gap-1 font-bold text-primary hover:text-primary/80"

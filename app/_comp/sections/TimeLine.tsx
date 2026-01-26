@@ -154,7 +154,7 @@ export default function Timeline() {
                     >
                       <Title
                         level={3}
-                        className="m-0! group-hover:text-primary transition-colors "
+                        className="m-0! group-hover:text-primary transition-colors max-sm:text-xl!"
                       >
                         {item.title}
                       </Title>
@@ -208,7 +208,7 @@ export default function Timeline() {
               </div>
 
               {/* Timeline dot */}
-              <div className="relative flex items-center justify-center w-12 h-12 my-4 md:my-0 z-20">
+              <div className="relative flex items-center justify-center w-12 h-12 my-4 md:my-0 z-20 max-sm:hidden">
                 <div className="w-6 h-6 rounded-full bg-white border-4 border-primary shadow-lg animate-pulse-glow" />
               </div>
 

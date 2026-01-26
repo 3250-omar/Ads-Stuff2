@@ -47,14 +47,14 @@ const StatictsSection = () => {
     >
       {statistics.map((statistic, index) => (
         <div
-          key={index}
+          key={statistic.title}
           ref={(el) => {
             if (el) cardsRef.current[index] = el;
           }}
           className="flex flex-col items-center justify-center gap-3 group hover:bg-primary hover:-translate-y-3! hover:cursor-pointer transition-all duration-500  py-16 rounded-4xl bg-white shadow-lg hover:shadow-2xl hover:glow-primary"
         >
           <div className="text-6xl font-black text-primary group-hover:text-white transition-colors duration-300 max-sm:text-3xl ">
-            <CountUp end={statistic.count} duration={3} delay={0.3} />
+            <CountUp end={statistic.count} duration={3} delay={0.2} />
             <span>{statistic.suffix}</span>
           </div>
           <Text className="text-xl font-semibold text-gray-600 group-hover:text-white/90 transition-colors duration-300 max-sm:text-lg tracking-wide">

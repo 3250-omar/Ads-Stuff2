@@ -1,3 +1,4 @@
+"use client";
 import HeroSection from "./_comp/sections/HeroSection";
 import dynamic from "next/dynamic";
 import LazySection from "@/components/LazySection";
@@ -5,7 +6,7 @@ import LazySection from "@/components/LazySection";
 const StatictsSection = dynamic(
   () => import("@/app/_comp/sections/StatictsSection"),
   {
-    ssr: true,
+    ssr: false,
     loading: () => (
       <div className="w-full h-[200px] animate-pulse bg-gray-50/50 rounded-[3rem]" />
     ),
@@ -13,7 +14,7 @@ const StatictsSection = dynamic(
 );
 
 const Timeline = dynamic(() => import("@/app/_comp/sections/TimeLine"), {
-  ssr: true,
+  ssr: false,
   loading: () => (
     <div className="w-full h-[400px] animate-pulse bg-gray-50/50 rounded-[3rem]" />
   ),
@@ -21,14 +22,14 @@ const Timeline = dynamic(() => import("@/app/_comp/sections/TimeLine"), {
 const OurCustomers = dynamic(
   () => import("@/app/_comp/sections/OurCustomers"),
   {
-    ssr: true,
+    ssr: false,
     loading: () => (
       <div className="w-full h-[500px] animate-pulse bg-gray-50/50 rounded-[3rem]" />
     ),
   },
 );
 const FeedBacks = dynamic(() => import("@/app/_comp/sections/FeedBacks"), {
-  ssr: true,
+  ssr: false,
   loading: () => (
     <div className="w-full h-[400px] animate-pulse bg-gray-50/50 rounded-[3rem]" />
   ),
@@ -36,7 +37,7 @@ const FeedBacks = dynamic(() => import("@/app/_comp/sections/FeedBacks"), {
 const ProjectsSection = dynamic(
   () => import("./_comp/sections/ProjectsSection"),
   {
-    ssr: true,
+    ssr: false,
     loading: () => (
       <div className="w-full h-[600px] animate-pulse bg-gray-50/50 rounded-[3rem]" />
     ),
@@ -45,7 +46,7 @@ const ProjectsSection = dynamic(
 const ContactsSection = dynamic(
   () => import("./_comp/sections/ContactsSection"),
   {
-    ssr: true,
+    ssr: false,
     loading: () => (
       <div className="w-full h-[400px] animate-pulse bg-gray-50/50 rounded-[3rem]" />
     ),
