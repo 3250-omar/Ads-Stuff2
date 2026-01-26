@@ -59,7 +59,10 @@ export const ImageStack = ({
             }}
           >
             <Image
-              src={images[imageIndices[cardIdx]]}
+              src={
+                images?.[imageIndices[cardIdx]] ||
+                "/public/projectHasNoImages.webp"
+              }
               alt={`Portfolio Image ${cardIdx + 1}`}
               fill
               className="object-cover"
