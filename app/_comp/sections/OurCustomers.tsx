@@ -82,75 +82,34 @@ export default function OurCustomers() {
         </Paragraph>
       </div>
 
-      <div ref={carouselRef} className="px-4">
-        <Carousel
-          autoplay
-          autoplaySpeed={2500}
-          slidesToShow={6} // Default for Ultra-wide screens (>2560px)
-          slidesToScroll={1}
-          dots={false}
-          arrows={false}
-          infinite={customers && customers.length > 1}
-          draggable
-          className="customer-carousel"
-          responsive={[
-            {
-              breakpoint: 2561,
-              settings: {
-                slidesToShow: Math.min(customers?.length || 6, 6),
-              },
-            },
-            {
-              breakpoint: 1440,
-              settings: {
-                slidesToShow: Math.min(customers?.length || 5, 5),
-              },
-            },
-            {
-              breakpoint: 1200,
-              settings: {
-                slidesToShow: Math.min(customers?.length || 4, 4),
-              },
-            },
-            {
-              breakpoint: 1024,
-              settings: {
-                slidesToShow: Math.min(customers?.length || 3, 3),
-              },
-            },
-            {
-              breakpoint: 768,
-              settings: {
-                slidesToShow: Math.min(customers?.length || 2, 2),
-              },
-            },
-            {
-              breakpoint: 480,
-              settings: {
-                slidesToShow: 1,
-              },
-            },
-          ]}
-        >
-          {customers?.map((customer) => (
-            <div key={customer.id}>
-              <Tooltip title={customer.name}>
-                <div className="px-4">
-                  <div className="relative h-[280px] w-full rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border-2 border-white group">
-                    <Image
-                      src={customer.logo_url}
-                      alt={`Our Partner ${customer.name}`}
-                      fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-700"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    />
-                    <div className="absolute inset-0 bg-linear-to-t from-darkModePrimary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      <div ref={carouselRef} className="px-4 overflow-hidden">
+        <div className="marquee-container relative flex overflow-hidden py-4">
+          <div className="flex animate-marquee gap-8 whitespace-nowrap">
+            {[
+              ...(customers || []),
+              ...(customers || []),
+              ...(customers || []),
+              ...(customers || []),
+            ].map((customer, i) => (
+              <div key={`${customer.id}-${i}`} className="w-[300px] shrink-0">
+                <Tooltip title={customer.name}>
+                  <div className="px-4">
+                    <div className="relative h-[280px] w-full rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border-2 border-white group">
+                      <Image
+                        src={customer.logo_url}
+                        alt={`Our Partner ${customer.name}`}
+                        fill
+                        className="object-cover group-hover:scale-110 transition-transform duration-700"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      />
+                      <div className="absolute inset-0 bg-linear-to-t from-darkModePrimary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    </div>
                   </div>
-                </div>
-              </Tooltip>
-            </div>
-          ))}
-        </Carousel>
+                </Tooltip>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
