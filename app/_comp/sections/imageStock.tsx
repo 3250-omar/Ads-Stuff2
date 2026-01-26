@@ -60,14 +60,14 @@ export const ImageStack = ({
           >
             <Image
               src={
-                images?.[imageIndices[cardIdx]] ||
-                "/public/projectHasNoImages.webp"
+                images?.[imageIndices[cardIdx]] || "/projectHasNoImages.webp"
               }
               alt={`Portfolio Image ${cardIdx + 1}`}
               fill
               className="object-cover"
-              priority={cardIdx === 0}
-              loading={cardIdx === 0 ? "eager" : "lazy"}
+              priority
+              loading="eager"
+              {...({ fetchPriority: "high" } as any)}
               sizes="(max-width: 640px) 220px, (max-width: 768px) 260px, (max-width: 1024px) 300px, 340px"
             />
             <div className="absolute inset-0 bg-linear-to-t from-darkModePrimary/40 to-transparent" />

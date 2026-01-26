@@ -1,10 +1,8 @@
 "use client";
-import { Button, Typography, Space, Spin } from "antd";
+import { Button, Space, Spin } from "antd";
 import { useEffect, useRef, useCallback, useState } from "react";
 import ImageStack, { positionOrders } from "./imageStock";
 import { useHeroMedia } from "@/app/api/query";
-
-const { Title, Paragraph } = Typography;
 
 export default function HeroSection() {
   const [positionIndex, setPositionIndex] = useState(0);
@@ -93,24 +91,18 @@ export default function HeroSection() {
     >
       <div className="flex flex-col gap-8 text-left max-md:text-center items-center md:items-start animate-slide-in-left">
         <div className="space-y-2">
-          <Title
-            level={1}
-            className="m-0! font-black! text-6xl! max-sm:text-4xl! max-md:text-5xl! text-darkModePrimary! leading-tight!"
-          >
-            It's Not Just Ads
-          </Title>
-          <Title
-            level={1}
-            className="m-0! font-black! text-6xl! max-sm:text-4xl! max-md:text-5xl! text-primary! leading-tight!"
-          >
-            It's The Whole Stuff
-          </Title>
+          <h1 className="m-0 font-black text-6xl max-sm:text-4xl max-md:text-5xl text-darkModePrimary leading-tight">
+            {"It's"} Not Just Ads
+          </h1>
+          <h1 className="m-0 font-black text-6xl max-sm:text-4xl max-md:text-5xl text-primary leading-tight">
+            {"It's"} The Whole Stuff
+          </h1>
         </div>
 
-        <Paragraph className="text-xl text-gray-500 max-w-lg max-md:mx-auto">
+        <p className="text-xl text-gray-500 max-w-lg max-md:mx-auto">
           We craft compelling brand stories, stunning visuals, and result-driven
           advertising campaigns that make your business unforgettable.
-        </Paragraph>
+        </p>
 
         <div className="animate-fade-in-up [animation-delay:400ms]">
           <Space size="large" className="max-md:justify-center">
