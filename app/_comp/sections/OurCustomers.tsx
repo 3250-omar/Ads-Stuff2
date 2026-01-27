@@ -1,11 +1,13 @@
 "use client";
 
-import { Carousel, Divider, Spin, Tooltip, Typography } from "antd";
+import { Button, Carousel, Divider, Spin, Tooltip, Typography } from "antd";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGetAllCustomers } from "@/app/api/query";
+import { FacebookFilled, FacebookOutlined } from "@ant-design/icons";
+import getSocialMedia from "@/constants/getSocialMedia";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -27,7 +29,25 @@ export default function OurCustomers() {
   const titleRef = useRef<HTMLDivElement>(null);
   const carouselRef = useRef<HTMLDivElement>(null);
   const { customers, loading } = useGetAllCustomers();
-
+  console.log("🚀 ~ OurCustomers ~ customers:", customers);
+  const getSocialMediaName = (url: string) => {
+    if (url.includes("facebook")) {
+      return "facebook";
+    }
+    if (url.includes("instagram")) {
+      return "instagram";
+    }
+    if (url.includes("x")) {
+      return "twitter";
+    }
+    if (url.includes("linkedin")) {
+      return "linkedin";
+    }
+    if (url.includes("tiktok")) {
+      return "tiktok";
+    }
+    return "Social Media";
+  };
   useEffect(() => {
     if (loading || !titleRef.current || !carouselRef.current) return;
 
@@ -91,9 +111,9 @@ export default function OurCustomers() {
               ...(customers || []),
               ...(customers || []),
             ].map((customer, i) => (
-              <div key={`${customer.id}-${i}`} className="w-[300px] shrink-0">
+              <div key={`${customer.id}-${i}`} className="w-[300px] shrink-0 ">
                 <Tooltip title={customer.name}>
-                  <div className="px-4">
+                  <div className="px-4 space-y-2">
                     <div className="relative h-[280px] w-full rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border-2 border-white group">
                       <Image
                         src={customer.logo_url}
@@ -104,6 +124,23 @@ export default function OurCustomers() {
                       />
                       <div className="absolute inset-0 bg-linear-to-t from-darkModePrimary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     </div>
+                    {(() => {
+                      const social = getSocialMedia({
+                        name: getSocialMediaName(customer.account),
+                      });
+                      const IconComponent = social.icon;
+                      return (
+                        <Button
+                          className="w-full"
+                          type="link"
+                          href={customer.account}
+                          target="_blank"
+                          icon={
+                            <IconComponent style={{ fontSize: "1.5rem" }} />
+                          }
+                        />
+                      );
+                    })()}
                   </div>
                 </Tooltip>
               </div>
