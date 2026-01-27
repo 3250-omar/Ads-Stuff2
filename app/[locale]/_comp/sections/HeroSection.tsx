@@ -4,11 +4,14 @@ import { useEffect, useRef, useCallback, useState } from "react";
 import ImageStack, { positionOrders } from "./imageStock";
 import { useHeroMedia } from "@/app/api/query";
 
+import { useTranslations } from "next-intl";
+
 export default function HeroSection({
   initialImages,
 }: {
   initialImages?: string[];
 }) {
+  const t = useTranslations("Hero");
   const [positionIndex, setPositionIndex] = useState(0);
   const {
     images,
@@ -60,7 +63,7 @@ export default function HeroSection({
 
       return nextPosIndex;
     });
-  }, [nextImage]);
+  }, [nextImage, images.length, setImageIndices, setNextImage]);
 
   // Initial entrance and animation interval
   useEffect(() => {
@@ -96,16 +99,15 @@ export default function HeroSection({
       <div className="flex flex-col gap-8 text-left max-md:text-center items-center md:items-start animate-slide-in-left">
         <div className="space-y-2">
           <h1 className="m-0 font-black text-6xl max-sm:text-4xl max-md:text-5xl text-darkModePrimary leading-tight">
-            {"It's"} Not Just Ads
+            {t("title1")}
           </h1>
           <h1 className="m-0 font-black text-6xl max-sm:text-4xl max-md:text-5xl text-primary leading-tight">
-            {"It's"} The Whole Stuff
+            {t("title2")}
           </h1>
         </div>
 
         <p className="text-xl text-gray-500 max-w-lg max-md:mx-auto">
-          We craft compelling brand stories, stunning visuals, and result-driven
-          advertising campaigns that make your business unforgettable.
+          {t("description")}
         </p>
 
         <div className="animate-fade-in-up [animation-delay:400ms]">
@@ -116,14 +118,14 @@ export default function HeroSection({
               className="px-10 h-14 rounded-2xl text-lg font-semibold shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 hover:scale-105 transition-all duration-300 max-sm:px-4! max-sm:h-12 max-sm:text-sm!"
               onClick={handleGetStartedClick}
             >
-              Get Started
+              {t("getStarted")}
             </Button>
             <Button
               size="large"
               className="px-10 h-14 rounded-2xl text-lg font-semibold border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300 max-sm:px-4 max-sm:h-12 max-sm:text-sm!"
               onClick={handleSeeWorkClick}
             >
-              See Our Work
+              {t("seeWork")}
             </Button>
           </Space>
         </div>

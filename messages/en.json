@@ -11,29 +11,144 @@
     "contacts": "Contacts",
     "about": "About"
   },
-  "Home": {
-    "title": "Welcome to My Portfolio",
-    "description": "Explore my work and get in touch"
+  "Hero": {
+    "title1": "It's Not Just Ads",
+    "title2": "It's The Whole Stuff",
+    "description": "We craft compelling brand stories, stunning visuals, and result-driven advertising campaigns that make your business unforgettable.",
+    "getStarted": "Get Started",
+    "seeWork": "See Our Work"
+  },
+  "Statistics": {
+    "happyCustomers": "Happy Customers",
+    "projectsCompleted": "Projects Completed"
+  },
+  "Timeline": {
+    "whoWeAre": {
+      "title": "Who We Are 🤔",
+      "description": "At Ads and Stuff, we’re not just another digital marketing agency we’re a team that turns ideas into real results We help you build a strong online presence, from the first ad to the final goal because simply put: your success is our success . we know how powerful the right message can be Let’s team up and make your brand the one everyone’s talking about"
+    },
+    "services": {
+      "title": "Services We Provide 🧑‍💻",
+      "items": {
+        "socialMedia": "Social Media Marketing",
+        "graphicDesign": "Graphic Design",
+        "mediaProduction": "Media Production",
+        "mediaBuying": "Media Buying",
+        "videoEditing": "Video Editing & Motion Graphics",
+        "webDev": "Web Development & Management"
+      }
+    },
+    "platforms": {
+      "title": "Our Platforms 📱"
+    },
+    "loading": "Loading..."
   },
   "Projects": {
-    "title": "My Projects",
-    "description": "Check out my latest work",
-    "comingSoon": "Coming soon..."
+    "title": "Our Creative Impact",
+    "description": "Explore our portfolio of successful collaborations and innovative solutions that drive growth.",
+    "noProjects": "No Projects Found",
+    "noProjectsSub": "We Are Hope To Add One Sooon!",
+    "loadMore": "Load More",
+    "viewCaseStudy": "View Case Study"
   },
-  "Skills": {
-    "title": "My Skills",
-    "description": "Technologies and tools I work with",
-    "comingSoon": "Coming soon..."
+  "ProjectDetails": {
+    "challenges": "The Challenges",
+    "solutions": "The Solutions",
+    "results": "The Results",
+    "overview": "Overview",
+    "inspired": "Inspired by this project?",
+    "extraordinary": "Let's create something extraordinary together.",
+    "startProject": "Start Your Project",
+    "backToProjects": "Back to Projects",
+    "projectNotFound": "Project Not Found",
+    "goBackHome": "Go Back Home"
+  },
+  "Customers": {
+    "title": "Our Trusted Partners",
+    "description": "We are proud to collaborate with leading brands and help them achieve extraordinary results.",
+    "socialMedia": "Social Media"
   },
   "Contacts": {
-    "title": "Get In Touch",
-    "description": "Let's work together on your next project"
+    "title": "Let's Work Together",
+    "whatsapp": "WhatsApp"
   },
-  "About": {
-    "title": "About Me",
-    "description": "Learn more about my journey"
+  "Feedbacks": {
+    "title": "What Our Clients Say"
+  },
+  "GmailContact": {
+    "title": "Contact Me",
+    "subtitle": "Speak with us via Gmail",
+    "emailLabel": "Gmail Address",
+    "emailPlaceholder": "example@gmail.com",
+    "emailRequired": "Please enter your email",
+    "emailInvalid": "Please enter a valid email",
+    "emailGmailOnly": "Please enter a valid Gmail address.",
+    "messageLabel": "Your Message",
+    "messagePlaceholder": "How can we help you?",
+    "messageRequired": "Please enter your message",
+    "sendButton": "Send Message",
+    "resetButton": "Reset Form",
+    "success": "Message sent successfully!",
+    "errorSend": "Failed to send message. Please check your connection or contact settings.",
+    "errorSimple": "Failed to send"
+  },
+  "WhatsAppContact": {
+    "title": "WhatsApp Me",
+    "subtitle": "Quick chat via WhatsApp Business",
+    "phoneLabel": "Phone Number",
+    "phoneTooltip": "Include country code without + (e.g., 11234567890)",
+    "phonePlaceholder": "1234567890",
+    "phoneRequired": "Please enter your phone number",
+    "phoneNumbersOnly": "Numbers only",
+    "phoneInvalid": "Please enter a valid phone number",
+    "messageLabel": "Your Message",
+    "messagePlaceholder": "Write your message here...",
+    "messageRequired": "Please enter your message",
+    "startButton": "Start Chat",
+    "clearButton": "Clear",
+    "opening": "Opening WhatsApp..."
+  },
+  "TelegramContact": {
+    "title": "Telegram Me",
+    "subtitle": "Connect via Telegram Messenger",
+    "usernameLabel": "Telegram Username",
+    "usernamePlaceholder": "username",
+    "usernameRequired": "Please enter your username",
+    "messageLabel": "Your Message",
+    "messagePlaceholder": "Type your message...",
+    "messageRequired": "Please enter your message",
+    "sendButton": "Send via Telegram",
+    "clearButton": "Clear",
+    "opening": "Opening Telegram..."
+  },
+  "Skills": {
+    "title": "Our Skills",
+    "items": {
+      "photoshop": "Adobe Photoshop",
+      "illustrator": "Adobe Illustrator",
+      "afterEffects": "Adobe After Effects",
+      "lightroom": "Adobe Lightroom",
+      "figma": "Figma",
+      "canva": "Canva",
+      "sketch": "Sketch",
+      "blender": "Blender",
+      "premierePro": "Premiere Pro",
+      "colorTheory": "Color Theory",
+      "typography": "Typography",
+      "creativeThinking": "Creative Thinking"
+    }
   },
   "Footer": {
+    "tagline": "It's Not Just Ads — It's The Whole Stuff",
+    "description": "We craft compelling brand stories, stunning visuals, and result-driven advertising campaigns.",
+    "quickLinks": "Quick Links",
+    "home": "Home",
+    "projects": "Projects",
+    "contact": "Contact",
+    "getInTouch": "Get In Touch",
+    "close": "Close",
+    "email": "Email",
+    "whatsApp": "WhatsApp",
     "copyright": "All rights reserved",
     "madeWith": "Made with ❤️"
   }

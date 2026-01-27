@@ -6,7 +6,10 @@ import TestimonialCard from "@/components/feedbacks/TestimonialCard";
 
 const { Title } = Typography;
 
+import { useTranslations } from "next-intl";
+
 export default function FeedBacks() {
+  const t = useTranslations("Feedbacks");
   const { feedbacks, loading } = useGetAllFeedbacks();
 
   if (loading) {
@@ -19,12 +22,15 @@ export default function FeedBacks() {
     <section className="w-full py-16 overflow-hidden">
       <div className="text-center mb-12">
         <Title level={2} className="section-title">
-          What Our Clients Say
+          {t("title")}
         </Title>
       </div>
 
       <div className="max-w-full mx-auto px-4">
-        <div className="marquee-container relative flex overflow-hidden py-4">
+        <div
+          className="marquee-container relative flex overflow-hidden py-4"
+          dir="ltr"
+        >
           <div className="flex animate-marquee gap-8 whitespace-nowrap">
             {[
               ...(feedbacks || []),

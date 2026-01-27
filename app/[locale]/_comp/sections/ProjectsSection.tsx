@@ -6,7 +6,10 @@ import { useGetProjects } from "@/app/api/query";
 
 const { Title, Paragraph } = Typography;
 
+import { useTranslations } from "next-intl";
+
 const ProjectsSection = () => {
+  const t = useTranslations("Projects");
   // const [status, setStatus] = useState<string>("finished");
   const [page, setPage] = useState(1);
   const [allProjects, setAllProjects] = useState<any[]>([]);
@@ -41,11 +44,11 @@ const ProjectsSection = () => {
     return (
       <div className="flex flex-col items-center justify-center">
         <Title level={2} className="section-title mb-4 text-primary">
-          No Projects Found
+          {t("noProjects")}
         </Title>
         <Divider className="border-primary/30 w-1/4 min-w-[100px] my-6" />
         <Paragraph className="text-xl text-gray-500 max-w-2xl text-center">
-          We Are Hope To Add One Sooon!
+          {t("noProjectsSub")}
         </Paragraph>
       </div>
     );
@@ -54,30 +57,14 @@ const ProjectsSection = () => {
     <section className="w-full px-4 py-20 gradient-section rounded-[3rem]">
       <div className="text-center mb-16 flex flex-col items-center">
         <Title level={2} className="section-title mb-4">
-          Our Creative Impact
+          {t("title")}
         </Title>
         <Divider className="border-primary/30 w-1/4 min-w-[100px] my-6" />
         <Paragraph className="text-xl text-gray-500 max-w-2xl text-center">
-          Explore our portfolio of successful collaborations and innovative
-          solutions that drive growth.
+          {t("description")}
         </Paragraph>
       </div>
       <div className="flex flex-col gap-6">
-        {/* <Radio.Group
-          options={[
-            {
-              label: "Finished",
-              value: "finished",
-            },
-            {
-              label: "InProgress",
-              value: "inprogress",
-            },
-          ]}
-          defaultValue={status}
-          onChange={(e) => setStatus(e.target.value)}
-          optionType="button"
-        /> */}
         <Spin spinning={loading}>
           {allProjects?.length && !loading ? (
             <AllProjects projects={allProjects} />
@@ -91,7 +78,7 @@ const ProjectsSection = () => {
               loading={loading}
               onClick={() => setPage((prev) => prev + 1)}
             >
-              Load More
+              {t("loadMore")}
             </Button>
           </div>
         )}

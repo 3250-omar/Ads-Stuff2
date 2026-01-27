@@ -22,7 +22,10 @@ import {
 const { Title, Text } = Typography;
 const { TextArea } = Input;
 
+import { useTranslations } from "next-intl";
+
 export default function WhatsAppContact() {
+  const t = useTranslations("WhatsAppContact");
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
 
@@ -31,7 +34,7 @@ export default function WhatsAppContact() {
     const cleanPhone = phone.replace(/\D/g, "");
 
     if (!cleanPhone || cleanPhone.length < 10) {
-      message.error("Please enter a valid phone number");
+      message.error(t("phoneInvalid"));
       return;
     }
 
@@ -43,7 +46,7 @@ export default function WhatsAppContact() {
         `https://wa.me/${cleanPhone}?text=${encodedMessage}`,
         "_blank",
       );
-      message.success("Opening WhatsApp...");
+      message.success(t("opening"));
       setLoading(false);
     }, 800);
   };
@@ -59,10 +62,10 @@ export default function WhatsAppContact() {
             <WhatsAppOutlined className="text-3xl text-[#25D366]" />
           </div>
           <Title level={2} className="m-0! font-black! text-[#128C7E]">
-            WhatsApp Me
+            {t("title")}
           </Title>
           <Text type="secondary" className="text-sm">
-            Quick chat via WhatsApp Business
+            {t("subtitle")}
           </Text>
         </div>
 
@@ -79,20 +82,20 @@ export default function WhatsAppContact() {
             name="phone"
             label={
               <Space>
-                <Text strong>Phone Number</Text>
-                <Tooltip title="Include country code without + (e.g., 11234567890)">
+                <Text strong>{t("phoneLabel")}</Text>
+                <Tooltip title={t("phoneTooltip")}>
                   <InfoCircleOutlined className="text-gray-400 cursor-help" />
                 </Tooltip>
               </Space>
             }
             rules={[
-              { required: true, message: "Please enter your phone number" },
-              { pattern: /^\d+$/, message: "Numbers only" },
+              { required: true, message: t("phoneRequired") },
+              { pattern: /^\d+$/, message: t("phoneNumbersOnly") },
             ]}
           >
             <Input
               prefix={<span className="text-gray-400 mr-2">+</span>}
-              placeholder="1234567890"
+              placeholder={t("phonePlaceholder")}
               size="large"
               className="rounded-xl border-gray-200"
             />
@@ -100,11 +103,11 @@ export default function WhatsAppContact() {
 
           <Form.Item
             name="content"
-            label={<Text strong>Your Message</Text>}
-            rules={[{ required: true, message: "Please enter your message" }]}
+            label={<Text strong>{t("messageLabel")}</Text>}
+            rules={[{ required: true, message: t("messageRequired") }]}
           >
             <TextArea
-              placeholder="Write your message here..."
+              placeholder={t("messagePlaceholder")}
               rows={6}
               showCount
               maxLength={1000}
@@ -120,9 +123,9 @@ export default function WhatsAppContact() {
               icon={<SendOutlined />}
               block
               size="large"
-              className="h-14 rounded-xl font-bold text-base shadow-lg bg-[#25D366] border-[#25D366] hover:!bg-[#128C7E] hover:!border-[#128C7E]"
+              className="h-14 rounded-xl font-bold text-base shadow-lg bg-[#25D366] border-[#25D366] hover:bg-[#128C7E]! hover:border-[#128C7E]!"
             >
-              Start Chat
+              {t("startButton")}
             </Button>
 
             <Button
@@ -133,7 +136,7 @@ export default function WhatsAppContact() {
               size="large"
               className="rounded-xl font-medium text-gray-400 hover:text-red-400"
             >
-              Clear
+              {t("clearButton")}
             </Button>
           </Space>
         </Form>

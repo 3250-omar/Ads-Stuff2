@@ -1,11 +1,16 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
 import AntdRegistry from "@/lib/AntdRegistry";
 import { ConfigProvider, App } from "antd";
+import { NextIntlClientProvider } from "next-intl";
+import { locales } from "@/i18n/config";
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
+}
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -77,36 +82,49 @@ export const metadata: Metadata = {
 
 import Providers from "@/components/Providers";
 import ToWhatsapp from "@/components/ToWhatsapp";
+import { notFound } from "next/navigation";
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
+  params: Promise<{ locale: string }>;
 }>) {
+  const { locale } = await params;
+  if (!locales.includes(locale as any)) notFound();
+  const messages = (await import(`../../messages/${locale}.json`)).default;
+
   return (
-    <html lang="en" dir="ltr" suppressHydrationWarning>
+    <html
+      lang={locale}
+      dir={locale === "ar" ? "rtl" : "ltr"}
+      suppressHydrationWarning
+    >
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-linear-to-br from-schemaWhite/50 via-white to-secondary/20 min-h-screen overflow-x-hidden`}
       >
-        <Providers>
-          <AntdRegistry>
-            <ConfigProvider
-              theme={{
-                token: {
-                  colorPrimary: "#4A6B50",
-                },
-              }}
-            >
-              <App>
-                <NavBar />
-                <main className="head-section">{children}</main>
-                <Footer />
-                <ScrollToTop />
-                <ToWhatsapp />
-              </App>
-            </ConfigProvider>
-          </AntdRegistry>
-        </Providers>
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          <Providers>
+            <AntdRegistry>
+              <ConfigProvider
+                theme={{
+                  token: {
+                    colorPrimary: "#4A6B50",
+                  },
+                }}
+              >
+                <App>
+                  <NavBar />
+                  <main className="head-section">{children}</main>
+                  <Footer />
+                  <ScrollToTop />
+                  <ToWhatsapp />
+                </App>
+              </ConfigProvider>
+            </AntdRegistry>
+          </Providers>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

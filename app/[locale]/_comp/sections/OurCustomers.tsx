@@ -24,7 +24,10 @@ const customerImages = [
   "/imgs/3.jpeg",
 ];
 
+import { useTranslations } from "next-intl";
+
 export default function OurCustomers() {
+  const t = useTranslations("Customers");
   const sectionRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -46,7 +49,7 @@ export default function OurCustomers() {
     if (url.includes("tiktok")) {
       return "tiktok";
     }
-    return "Social Media";
+    return t("socialMedia");
   };
   useEffect(() => {
     if (loading || !titleRef.current || !carouselRef.current) return;
@@ -93,17 +96,19 @@ export default function OurCustomers() {
     >
       <div ref={titleRef} className="flex flex-col items-center">
         <Title level={2} className="section-title max-sm:text-2xl!">
-          Our Trusted Partners
+          {t("title")}
         </Title>
         <Divider className="border-primary/30 w-1/4 min-w-[100px] my-6" />
         <Paragraph className="text-xl text-gray-500 max-w-2xl text-center">
-          We are proud to collaborate with leading brands and help them achieve
-          extraordinary results.
+          {t("description")}
         </Paragraph>
       </div>
 
       <div ref={carouselRef} className="px-4 overflow-hidden">
-        <div className="marquee-container relative flex overflow-hidden py-4">
+        <div
+          className="marquee-container relative flex overflow-hidden py-4"
+          dir="ltr"
+        >
           <div className="flex animate-marquee gap-8 whitespace-nowrap">
             {[
               ...(customers || []),

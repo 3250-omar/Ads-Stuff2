@@ -2,14 +2,18 @@
 
 import { navItems } from "@/constants/routes";
 import { Button } from "antd";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
+import LanguageSwitcher from "./languageSwitcher";
 
 const NavBar = () => {
   const [windowHeight, setWindowHeight] = useState<number>(0);
   const [activeSection, setActiveSection] = useState("home");
   const pathname = usePathname();
+  const t = useTranslations("Navigation");
+
   const router = useRouter();
   console.log("🚀 ~ NavBar ~ pathname:", pathname);
   useEffect(() => {
@@ -106,15 +110,16 @@ const NavBar = () => {
               }`}
               type="dashed"
             >
-              {item.key}
+              {t(item.key)}
             </Button>
           ))}
         </div>
+        <LanguageSwitcher />
       </div>
 
       {/* Mobile Nav */}
       <div
-        className={`fixed bottom-5 left-1/2 -translate-x-1/2 w-[280px] rounded-full bg-primary/80 backdrop-blur-md text-white z-50 mx-auto p-2 hidden max-sm:block shadow-lg ${pathname !== "/" ? "max-sm:hidden" : ""}`}
+        className={`fixed bottom-5 left-1/2 -translate-x-1/2 w-[300px] rounded-full bg-primary/80 backdrop-blur-md text-white z-50 mx-auto p-2 hidden max-sm:block shadow-lg `}
       >
         <div className="flex items-center gap-2 justify-around">
           {navItems.map((item: { key: string; href: string }) => (
@@ -128,9 +133,10 @@ const NavBar = () => {
               }`}
               type="text"
             >
-              {item.key}
+              {t(item.key)}
             </Button>
           ))}
+          <LanguageSwitcher variant="dark" forMobile />
         </div>
       </div>
     </nav>

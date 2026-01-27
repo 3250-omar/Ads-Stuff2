@@ -10,11 +10,14 @@ import { Project } from "@/types";
 
 const { Title } = Typography;
 
+import { useTranslations } from "next-intl";
+
 interface ProjectInfoSectionProps {
   project: Project;
 }
 
 const ProjectInfoSection = ({ project }: ProjectInfoSectionProps) => {
+  const t = useTranslations("ProjectDetails");
   return (
     <Row gutter={[32, 32]}>
       {/* Challenges */}
@@ -24,7 +27,7 @@ const ProjectInfoSection = ({ project }: ProjectInfoSectionProps) => {
             <div className="flex items-center gap-3">
               <ThunderboltFilled className="text-amber-400 text-3xl" />
               <Title level={3} className="m-0!">
-                The Challenges
+                {t("challenges")}
               </Title>
             </div>
             <ul className="space-y-4 m-0 p-0 list-none">
@@ -46,7 +49,7 @@ const ProjectInfoSection = ({ project }: ProjectInfoSectionProps) => {
             <div className="flex items-center gap-3">
               <CheckCircleFilled className="text-primary text-3xl" />
               <Title level={3} className="m-0!">
-                The Solutions
+                {t("solutions")}
               </Title>
             </div>
             <ul className="space-y-4 m-0 p-0 list-none">
@@ -68,7 +71,7 @@ const ProjectInfoSection = ({ project }: ProjectInfoSectionProps) => {
             <div className="flex items-center gap-3">
               <LineChartOutlined className="text-secondary text-3xl" />
               <Title level={3} className="m-0!">
-                The Results
+                {t("results")}
               </Title>
             </div>
             <ul className="space-y-4 m-0 p-0 list-none">

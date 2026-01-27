@@ -27,7 +27,10 @@ type TimelineItem = {
   status?: string;
 };
 
+import { useTranslations } from "next-intl";
+
 export default function Timeline() {
+  const t = useTranslations("Timeline");
   const sectionRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement[]>([]);
   const { socialMedia, loading } = useGetSocialMedia();
@@ -35,23 +38,20 @@ export default function Timeline() {
   const items: TimelineItem[] = useMemo(
     () => [
       {
-        title: "Who We Are 🤔",
-        // date: "Jan 2025",
-        description:
-          "At Ads and Stuff, we’re not just another digital marketing agency we’re a team that turns ideas into real results We help you build a strong online presence, from the first ad to the final goal because simply put: your success is our success . we know how powerful the right message can be Let’s team up and make your brand the one everyone’s talking about",
+        title: t("whoWeAre.title"),
+        description: t("whoWeAre.description"),
       },
       {
-        title: "Services We Provide 🧑‍💻",
-        // date: "Feb 2025",
+        title: t("services.title"),
         description: [
-          <div className="flex flex-wrap gap-2">
+          <div key="services" className="flex flex-wrap gap-2">
             {[
-              "Social Media Marketing",
-              "Graphic Design",
-              "Media Production",
-              "Media Buying",
-              "Video Editing & Motion Graphics",
-              "Web Development & Management",
+              t("services.items.socialMedia"),
+              t("services.items.graphicDesign"),
+              t("services.items.mediaProduction"),
+              t("services.items.mediaBuying"),
+              t("services.items.videoEditing"),
+              t("services.items.webDev"),
             ].map((item, index) => (
               <div key={index} className="flex items-center gap-2">
                 <Text>•</Text>
@@ -60,14 +60,12 @@ export default function Timeline() {
             ))}
           </div>,
         ],
-        // status: "In Progress",
       },
       {
-        title: "Our Platforms 📱",
-        // date: "Mar 2025",
+        title: t("platforms.title"),
         description: [
           loading ? (
-            <div key="loading">Loading...</div>
+            <div key="loading">{t("loading")}</div>
           ) : (
             <div key="socials" className="flex items-center gap-4 flex-wrap  ">
               {socialMedia?.map((item: any) => {
@@ -91,7 +89,7 @@ export default function Timeline() {
         ],
       },
     ],
-    [socialMedia, loading],
+    [socialMedia, loading, t],
   );
 
   useEffect(() => {

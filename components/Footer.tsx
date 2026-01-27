@@ -17,16 +17,19 @@ import { useState } from "react";
 
 const { Title, Text } = Typography;
 
+import { useTranslations } from "next-intl";
+
 const Footer = () => {
+  const t = useTranslations("Footer");
   const [showMessage, setShowMessage] = useState<boolean>(false);
   const currentYear = new Date().getFullYear();
   // const { socialmedia: socialMedia, loading } = useGetSocialMedia();
   const { socialMedia, loading } = useGetSocialMedia();
 
   const quickLinks = [
-    { name: "Home", href: "#home" },
-    { name: "Projects", href: "#projects" },
-    { name: "Contact", href: "#contacts" },
+    { name: t("home"), href: "#home" },
+    { name: t("projects"), href: "#projects" },
+    { name: t("contact"), href: "#contacts" },
   ];
 
   return (
@@ -44,14 +47,9 @@ const Footer = () => {
               <Title level={2} className="text-primary! m-0! font-black!">
                 Ads & Stuff
               </Title>
-              <Text className="text-gray-500 text-lg">
-                It's Not Just Ads — It's The Whole Stuff
-              </Text>
+              <Text className="text-gray-500 text-lg">{t("tagline")}</Text>
             </div>
-            <Text className="text-gray-400 max-w-xs">
-              We craft compelling brand stories, stunning visuals, and
-              result-driven advertising campaigns.
-            </Text>
+            <Text className="text-gray-400 max-w-xs">{t("description")}</Text>
           </div>
 
           {/* Quick Links */}
@@ -60,7 +58,7 @@ const Footer = () => {
               strong
               className="text-primary! text-lg! uppercase tracking-widest"
             >
-              Quick Links
+              {t("quickLinks")}
             </Text>
             <div className="flex flex-col gap-2 items-center">
               {quickLinks.map((link) => (
@@ -85,7 +83,7 @@ const Footer = () => {
               className="flex items-center h-auto py-4 px-10 rounded-2xl hover:scale-105 transition-all shadow-xl shadow-primary/20 text-lg font-semibold"
               style={{ backgroundColor: "#6B9071" }}
             >
-              {showMessage ? "Close" : "Get In Touch"}
+              {showMessage ? t("close") : t("getInTouch")}
             </Button>
 
             {showMessage && (
@@ -100,7 +98,7 @@ const Footer = () => {
                   }}
                   className="rounded-xl border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all font-medium"
                 >
-                  Email
+                  {t("email")}
                 </Button>
                 <Button
                   icon={<WhatsAppOutlined />}
@@ -112,7 +110,7 @@ const Footer = () => {
                   }}
                   className="rounded-xl border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all font-medium"
                 >
-                  WhatsApp
+                  {t("whatsApp")}
                 </Button>
               </Space>
             )}
@@ -147,7 +145,7 @@ const Footer = () => {
 
           {/* Copyright */}
           <Text className="text-gray-400 text-sm">
-            &copy; {currentYear} Ads & Stuff. All rights reserved.
+            &copy; {currentYear} Ads & Stuff. {t("copyright")}
           </Text>
         </div>
       </div>

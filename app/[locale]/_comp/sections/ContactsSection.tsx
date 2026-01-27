@@ -24,7 +24,10 @@ gsap.registerPlugin(ScrollTrigger);
 
 const { Title } = Typography;
 
+import { useTranslations } from "next-intl";
+
 export default function ContactsSection() {
+  const t = useTranslations("Contacts");
   const sectionRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const contactTabsItems = useMemo(
@@ -36,7 +39,7 @@ export default function ContactsSection() {
       //   content: <GmailForm />,
       // },
       {
-        title: "WhatsApp",
+        title: t("whatsapp"),
         icon: SiWhatsapp,
         value: "whatsapp",
         content: <WhatsAppContact />,
@@ -48,7 +51,7 @@ export default function ContactsSection() {
       //   content: <TelegramContact />,
       // },
     ],
-    [],
+    [t],
   );
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -76,7 +79,7 @@ export default function ContactsSection() {
       <div ref={contentRef} className="flex flex-col items-center gap-8">
         <div className="flex items-center gap-4 justify-center">
           <Title level={2} className="section-title">
-            Let's Work Together
+            {t("title")}
           </Title>
           <HeartFilled className="animate-pulse text-5xl text-primary animate-float " />
         </div>

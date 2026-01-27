@@ -8,13 +8,14 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const { Text } = Typography;
-const statistics = [
-  { title: "Happy Customers", count: 99, suffix: "+" },
-  { title: "Projects Completed", count: 99, suffix: "+" },
-  // { title: "Awards Won", count: 50, suffix: "" },
-];
+import { useTranslations } from "next-intl";
 
 const StatictsSection = () => {
+  const t = useTranslations("Statistics");
+  const statistics = [
+    { title: t("happyCustomers"), count: 99, suffix: "+" },
+    { title: t("projectsCompleted"), count: 99, suffix: "+" },
+  ];
   const sectionRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement[]>([]);
 

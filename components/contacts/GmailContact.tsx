@@ -18,7 +18,10 @@ import emailjs from "@emailjs/browser";
 const { Title, Text } = Typography;
 const { TextArea } = Input;
 
+import { useTranslations } from "next-intl";
+
 export default function GmailForm() {
+  const t = useTranslations("GmailContact");
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const { message } = App.useApp();
@@ -26,7 +29,7 @@ export default function GmailForm() {
     const { email, content } = values;
 
     if (!email.endsWith("@gmail.com")) {
-      message.warning("Please enter a valid Gmail address.");
+      message.warning(t("emailGmailOnly"));
       return;
     }
 
@@ -48,16 +51,14 @@ export default function GmailForm() {
       );
 
       if (result.status === 200) {
-        message.success("Message sent successfully!");
+        message.success(t("success"));
         form.resetFields();
       } else {
-        throw new Error("Failed to send");
+        throw new Error(t("errorSimple"));
       }
     } catch (error) {
       console.error("EmailJS Error:", error);
-      message.error(
-        "Failed to send message. Please check your connection or contact settings.",
-      );
+      message.error(t("errorSend"));
     } finally {
       setLoading(false);
     }
@@ -74,10 +75,10 @@ export default function GmailForm() {
             <MailOutlined className="text-3xl text-primary" />
           </div>
           <Title level={2} className="m-0! font-black! text-primary!">
-            Contact Me
+            {t("title")}
           </Title>
           <Text type="secondary" className="text-sm">
-            Speak with us via Gmail
+            {t("subtitle")}
           </Text>
         </div>
 
@@ -92,15 +93,15 @@ export default function GmailForm() {
         >
           <Form.Item
             name="email"
-            label={<Text strong>Gmail Address</Text>}
+            label={<Text strong>{t("emailLabel")}</Text>}
             rules={[
-              { required: true, message: "Please enter your email" },
-              { type: "email", message: "Please enter a valid email" },
+              { required: true, message: t("emailRequired") },
+              { type: "email", message: t("emailInvalid") },
             ]}
           >
             <Input
               prefix={<MailOutlined className="text-gray-400 mr-2" />}
-              placeholder="example@gmail.com"
+              placeholder={t("emailPlaceholder")}
               size="large"
               className="rounded-xl border-gray-200"
             />
@@ -108,11 +109,11 @@ export default function GmailForm() {
 
           <Form.Item
             name="content"
-            label={<Text strong>Your Message</Text>}
-            rules={[{ required: true, message: "Please enter your message" }]}
+            label={<Text strong>{t("messageLabel")}</Text>}
+            rules={[{ required: true, message: t("messageRequired") }]}
           >
             <TextArea
-              placeholder="How can we help you?"
+              placeholder={t("messagePlaceholder")}
               rows={6}
               className="rounded-xl border-gray-200"
             />
@@ -128,7 +129,7 @@ export default function GmailForm() {
               size="large"
               className="h-14 rounded-xl font-bold text-base shadow-lg shadow-primary/20"
             >
-              Send Message
+              {t("sendButton")}
             </Button>
 
             <Button
@@ -139,7 +140,7 @@ export default function GmailForm() {
               size="large"
               className="rounded-xl font-medium text-gray-400 hover:text-red-400"
             >
-              Reset Form
+              {t("resetButton")}
             </Button>
           </Space>
         </Form>

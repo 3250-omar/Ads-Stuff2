@@ -16,7 +16,10 @@ import ProjectOverview from "./_comp/ProjectOverview";
 import ProjectInfoSection from "./_comp/ProjectInfoSection";
 import ProjectCTA from "./_comp/ProjectCTA";
 
+import { useTranslations } from "next-intl";
+
 const ProjectDetails = () => {
+  const t = useTranslations("ProjectDetails");
   const { id } = useParams();
   const router = useRouter();
   const { loading, projects: singleProject } = useGetProjects({
@@ -72,13 +75,13 @@ const ProjectDetails = () => {
   if (!project) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center p-8 text-center">
-        <Title level={2}>Project Not Found</Title>
+        <Title level={2}>{t("projectNotFound")}</Title>
         <Button
           type="primary"
           icon={<ArrowLeftOutlined />}
           onClick={() => router.push("/")}
         >
-          Go Back Home
+          {t("goBackHome")}
         </Button>
       </div>
     );
@@ -94,7 +97,7 @@ const ProjectDetails = () => {
           onClick={() => router.push("/#projects")}
           className="text-primary! hover:text-primary/80 mb-8 p-0 flex items-center gap-2 font-semibold"
         >
-          Back to Projects
+          {t("backToProjects")}
         </Button>
 
         {/* Header Section */}

@@ -16,43 +16,62 @@ import { Tooltip, Typography } from "antd";
 
 const { Title } = Typography;
 
-const skills = [
-  {
-    name: "Adobe Photoshop",
-    icon: <SiAdobephotoshop className="w-20 h-20 text-[#001E36]" />,
-  },
-  {
-    name: "Adobe Illustrator",
-    icon: <SiAdobeillustrator className="w-20 h-20 text-[#330000]" />,
-  },
-  {
-    name: "Adobe After Effects",
-    icon: <SiAdobeaftereffects className="w-20 h-20 text-[#00005C]" />,
-  },
-  {
-    name: "Adobe Lightroom",
-    icon: <SiAdobelightroom className="w-20 h-20 text-[#001E36]" />,
-  },
-  { name: "Figma", icon: <SiFigma className="w-20 h-20 text-[#A259FF]" /> },
-  { name: "Canva", icon: <SiCanva className="w-20 h-20 text-[#00C4CC]" /> },
-  { name: "Sketch", icon: <SiSketch className="w-20 h-20 text-[#F7B500]" /> },
-  { name: "Blender", icon: <SiBlender className="w-20 h-20 text-[#E87D0D]" /> },
-  {
-    name: "Premiere Pro",
-    icon: <SiAdobepremierepro className="w-20 h-20 text-[#00005C]" />,
-  },
-  {
-    name: "Color Theory",
-    icon: <FaPalette className="w-20 h-20 text-teal-500" />,
-  },
-  { name: "Typography", icon: <FaFont className="w-20 h-20 text-rose-500" /> },
-  {
-    name: "Creative Thinking",
-    icon: <FaBrain className="w-20 h-20 text-fuchsia-500" />,
-  },
-];
+import { useTranslations } from "next-intl";
 
 export default function SkillsSection() {
+  const t = useTranslations("Skills");
+
+  const skills = [
+    {
+      name: t("items.photoshop"),
+      icon: <SiAdobephotoshop className="w-20 h-20 text-[#001E36]" />,
+    },
+    {
+      name: t("items.illustrator"),
+      icon: <SiAdobeillustrator className="w-20 h-20 text-[#330000]" />,
+    },
+    {
+      name: t("items.afterEffects"),
+      icon: <SiAdobeaftereffects className="w-20 h-20 text-[#00005C]" />,
+    },
+    {
+      name: t("items.lightroom"),
+      icon: <SiAdobelightroom className="w-20 h-20 text-[#001E36]" />,
+    },
+    {
+      name: t("items.figma"),
+      icon: <SiFigma className="w-20 h-20 text-[#A259FF]" />,
+    },
+    {
+      name: t("items.canva"),
+      icon: <SiCanva className="w-20 h-20 text-[#00C4CC]" />,
+    },
+    {
+      name: t("items.sketch"),
+      icon: <SiSketch className="w-20 h-20 text-[#F7B500]" />,
+    },
+    {
+      name: t("items.blender"),
+      icon: <SiBlender className="w-20 h-20 text-[#E87D0D]" />,
+    },
+    {
+      name: t("items.premierePro"),
+      icon: <SiAdobepremierepro className="w-20 h-20 text-[#00005C]" />,
+    },
+    {
+      name: t("items.colorTheory"),
+      icon: <FaPalette className="w-20 h-20 text-teal-500" />,
+    },
+    {
+      name: t("items.typography"),
+      icon: <FaFont className="w-20 h-20 text-rose-500" />,
+    },
+    {
+      name: t("items.creativeThinking"),
+      icon: <FaBrain className="w-20 h-20 text-fuchsia-500" />,
+    },
+  ];
+
   return (
     <section className="w-full py-20 flex flex-col gap-12 overflow-hidden bg-gray-50/30">
       <div className="container mx-auto px-4 text-center">
@@ -60,11 +79,14 @@ export default function SkillsSection() {
           level={2}
           className="m-0! text-primary! font-black! text-5xl! max-sm:text-4xl!"
         >
-          Our Skills
+          {t("title")}
         </Title>
       </div>
 
-      <div className="relative flex overflow-hidden py-10 marquee-container">
+      <div
+        className="relative flex overflow-hidden py-10 marquee-container"
+        dir="ltr"
+      >
         <div className="flex animate-marquee gap-10 px-5">
           {skills.map((skill, i) => (
             <div key={`${skill.name}-1-${i}`} className="shrink-0">

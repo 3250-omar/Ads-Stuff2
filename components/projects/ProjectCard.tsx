@@ -7,9 +7,12 @@ import Link from "next/link";
 import { useMemo } from "react";
 import { getStatusColor } from "@/constants/getStatusColor";
 
+import { useTranslations } from "next-intl";
+
 const { Title, Paragraph } = Typography;
 
 const ProjectCard = ({ project }: { project: Project }) => {
+  const t = useTranslations("Projects");
   const onlyImages = useMemo(
     () =>
       project.project_media?.filter(
@@ -62,7 +65,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
             href={`/projects/${project.id}`}
             className="flex items-center gap-1 font-bold text-primary hover:text-primary/80"
           >
-            <span>View Case Study</span>
+            <span>{t("viewCaseStudy")}</span>
             <LinkOutlined />
           </Link>
         </div>
