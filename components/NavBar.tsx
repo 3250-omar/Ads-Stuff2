@@ -2,7 +2,7 @@
 
 import { navItems } from "@/constants/routes";
 import { Button } from "antd";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
@@ -13,8 +13,8 @@ const NavBar = () => {
   const [activeSection, setActiveSection] = useState("home");
   const pathname = usePathname();
   const t = useTranslations("Navigation");
-
   const router = useRouter();
+  const language = useLocale();
   console.log("🚀 ~ NavBar ~ pathname:", pathname);
   useEffect(() => {
     let ticking = false;
@@ -49,8 +49,8 @@ const NavBar = () => {
 
   const scrollToSection = useCallback(
     (href: string) => {
-      if (pathname !== "/") {
-        router.push("/" + href);
+      if (pathname !== `/${language}`) {
+        router.push(`/${language}/${href}`);
         return;
       }
 
