@@ -124,23 +124,25 @@ export default function OurCustomers() {
                       />
                       <div className="absolute inset-0 bg-linear-to-t from-darkModePrimary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     </div>
-                    {(() => {
-                      const social = getSocialMedia({
-                        name: getSocialMediaName(customer.account),
-                      });
-                      const IconComponent = social.icon;
-                      return (
-                        <Button
-                          className="w-full"
-                          type="link"
-                          href={customer.account}
-                          target="_blank"
-                          icon={
-                            <IconComponent style={{ fontSize: "1.5rem" }} />
-                          }
-                        />
-                      );
-                    })()}
+                    {customer.account
+                      ? (() => {
+                          const social = getSocialMedia({
+                            name: getSocialMediaName(customer.account),
+                          });
+                          const IconComponent = social.icon;
+                          return (
+                            <Button
+                              className="w-full"
+                              type="link"
+                              href={customer.account}
+                              target="_blank"
+                              icon={
+                                <IconComponent style={{ fontSize: "1.5rem" }} />
+                              }
+                            />
+                          );
+                        })()
+                      : null}
                   </div>
                 </Tooltip>
               </div>
