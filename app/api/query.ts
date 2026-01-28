@@ -161,3 +161,45 @@ export const useGetAllFeedbacks = () => {
 
   return { feedbacks: data, loading: isPending };
 };
+
+export const useGetArticles = ({
+  limit,
+  slug,
+}: {
+  limit?: number;
+  slug?: string;
+} = {}) => {
+  const { message } = App.useApp();
+
+  const getArticles = async () => {
+    let query = supabaseClient.from("articles").select("*");
+
+    if (slug) {
+      query = query.eq("slug", slug);
+    }
+
+    if (limit) {
+      query = query.limit(limit);
+    }
+
+    const { data, error } = await query.order("published_at", {
+      ascending: false,
+    });
+    if (error) throw error;
+    return data;
+  };
+
+  const { data, isPending, error } = useQuery({
+    queryKey: ["articles", limit, slug],
+    queryFn: getArticles,
+    staleTime: 1000 * 60 * 30, // 30 minutes
+  });
+
+  useEffect(() => {
+    if (error) {
+      message.error(error.message);
+    }
+  }, [error, message]);
+
+  return { articles: data, loading: isPending };
+};

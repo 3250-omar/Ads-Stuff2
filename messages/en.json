@@ -9,7 +9,8 @@
     "projects": "Projects",
     "skills": "Skills",
     "contacts": "Contacts",
-    "about": "About"
+    "about": "About",
+    "articles": "Articles"
   },
   "Hero": {
     "title1": "It's Not Just Ads",
@@ -151,5 +152,15 @@
     "whatsApp": "WhatsApp",
     "copyright": "All rights reserved",
     "madeWith": "Made with ❤️"
+  },
+  "Articles": {
+    "title": "Latest Insights & Stories",
+    "description": "Stay updated with our latest news, creative tips, and industry insights.",
+    "readMore": "Read More",
+    "viewAll": "View All Articles",
+    "publishedAt": "Published at",
+    "noArticles": "No Articles Found",
+    "backToArticles": "Back to Articles",
+    "featured": "Featured Articles"
   }
 }

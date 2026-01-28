@@ -14,8 +14,22 @@ export interface Project {
   project_challenges?: string[];
   solutions?: string[];
   project_results?: string[];
-  project_media?:string[]
-  overview?:string;
-  social_media?:string[]
-  behance_link?:string
+  project_media?: string[];
+  overview?: string;
+  behance_link?: string;
+}
+
+export interface Article {
+  id: number;
+  title: string;
+  description: string;
+  content: string; // Markdown or Rich Text
+  slug: string;
+  image_url: string;
+  published_at: string;
+  author?: string;
+  tags?: string[];
+  meta_title?: string;
+  meta_description?: string;
+  meta_keywords?: string[];
 }
