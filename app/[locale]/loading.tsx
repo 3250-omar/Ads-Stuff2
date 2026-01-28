@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const Loading = () => {
   return (
-    <div className="w-full h-full items-center justify-center flex flex-col relative">
+    <div className="w-full h-full items-center justify-center flex flex-col ">
       <Image
         src="/Logo3IconMan.svg"
         alt="Logo"

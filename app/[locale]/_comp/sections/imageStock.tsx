@@ -60,7 +60,7 @@ export const ImageStack = ({
           >
             <Image
               src={
-                images?.[imageIndices[cardIdx]] || "/projectHasNoImages.webp"
+                images?.[imageIndices?.[cardIdx]] || "/projectHasNoImages.webp"
               }
               alt={`Portfolio Image ${cardIdx + 1}`}
               fill
