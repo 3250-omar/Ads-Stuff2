@@ -63,7 +63,8 @@ export default function OurCustomers() {
         scrollTrigger: {
           trigger: titleRef.current,
           start: "top 85%",
-          toggleActions: "play reverse play reverse",
+          // toggleActions: "play none none none",
+          once: true,
         },
       });
 
@@ -129,7 +130,7 @@ export default function OurCustomers() {
                       />
                       <div className="absolute inset-0 bg-linear-to-t from-darkModePrimary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     </div>
-                    {customer.account
+                    {/* {customer.account
                       ? (() => {
                           const social = getSocialMedia({
                             name: getSocialMediaName(customer.account),
@@ -147,7 +148,7 @@ export default function OurCustomers() {
                             />
                           );
                         })()
-                      : null}
+                      : null} */}
                   </div>
                 </Tooltip>
               </div>
