@@ -23,7 +23,7 @@ export interface Article {
   id: number;
   created_at: string;
   title: string;
-  
+  title_en?: string;
   title_ar?: string;
   description: string;
   description_ar?: string;
