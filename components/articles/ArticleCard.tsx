@@ -19,7 +19,7 @@ const ArticleCard = ({ article }: { article: Article }) => {
         <div className="relative h-48 overflow-hidden">
           <img
             src={article.image_url}
-            alt={article.title}
+            alt={locale === "ar" ? article.title_ar : article.title_en}
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
           />
           <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent flex items-end p-4">
@@ -54,11 +54,11 @@ const ArticleCard = ({ article }: { article: Article }) => {
         level={4}
         className="group-hover:text-primary transition-colors line-clamp-2 min-h-14 mb-2"
       >
-        {article.title}
+        {locale === "ar" ? article.title_ar : article.title_en}
       </Title>
 
       <Paragraph className="text-gray-500 line-clamp-3 mb-6 flex-1">
-        {article.description}
+        {locale === "ar" ? article.description_ar : article.description_en}
       </Paragraph>
 
       <Link href={`/${locale}/articles/${article.slug}`}>
