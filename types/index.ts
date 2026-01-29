@@ -23,11 +23,14 @@ export interface Article {
   id: number;
   created_at: string;
   title: string;
+  
   title_ar?: string;
   description: string;
   description_ar?: string;
+  description_en?: string;
   content: string; // Markdown or Rich Text
   content_ar?: string;
+  content_en?: string;
   slug: string;
   image_url: string;
   published_at: string;

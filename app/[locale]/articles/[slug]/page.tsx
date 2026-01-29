@@ -21,21 +21,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!article) return { title: "Article Not Found" };
 
   const isAr = locale === "ar";
-  const title = isAr ? article.title_ar || article.title : article.title;
+  const title = isAr ? article.title_ar || article.title_en : article.title_en;
   const description = isAr
-    ? article.description_ar || article.description
-    : article.description;
+    ? article.description_ar || article.description_en
+    : article.description_en;
   const metaTitle = isAr
-    ? article.meta_title_ar || article.meta_title || title
-    : article.meta_title || title;
+    ? article.meta_title_ar || article.meta_title_en || title
+    : article.meta_title_en || title;
   const metaDescription = isAr
-    ? article.meta_description_ar || article.meta_description || description
-    : article.meta_description || description;
+    ? article.meta_description_ar || article.meta_description_en || description
+    : article.meta_description_en || description;
 
   return {
     title: metaTitle,
     description: metaDescription,
-    keywords: article.meta_keywords || article.tags,
+    keywords:
+      article.meta_keywords_ar || article.meta_keywords_en || article.tags,
     openGraph: {
       title: title,
       description: description,

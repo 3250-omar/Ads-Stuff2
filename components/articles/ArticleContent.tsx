@@ -17,13 +17,16 @@ interface ArticleContentProps {
 }
 
 const ArticleContent = ({ article }: ArticleContentProps) => {
+  console.log("🚀 ~ ArticleContent ~ article:", article);
   const t = useTranslations("Articles");
   const tNav = useTranslations("Navigation");
   const locale = useLocale();
   const displayTitle =
-    locale === "ar" ? article.title_ar || article.title : article.title;
+    locale === "ar" ? article.title_ar || article.title_en : article.title_en;
   const displayContent =
-    locale === "ar" ? article.content_ar || article.content : article.content;
+    locale === "ar"
+      ? article.content_ar || article.content_en
+      : article.content_en;
 
   return (
     <article
@@ -98,7 +101,7 @@ const ArticleContent = ({ article }: ArticleContentProps) => {
       <section className="prose prose-lg max-w-none prose-primary order-1">
         <div
           className="text-gray-700 leading-relaxed space-y-6"
-          dangerouslySetInnerHTML={{ __html: displayContent }}
+          dangerouslySetInnerHTML={{ __html: displayContent! }}
         />
       </section>
 
