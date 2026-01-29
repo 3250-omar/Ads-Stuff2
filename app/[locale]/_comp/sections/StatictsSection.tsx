@@ -26,7 +26,7 @@ const StatictsSection = () => {
           y: 60,
           opacity: 0,
           duration: 0.8,
-          delay: index * 0.15,
+          // delay: index * 0.15,
           ease: "power3.out",
           scrollTrigger: {
             trigger: card,

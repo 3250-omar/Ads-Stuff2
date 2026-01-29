@@ -21,15 +21,21 @@ export interface Project {
 
 export interface Article {
   id: number;
+  created_at: string;
   title: string;
+  title_ar?: string;
   description: string;
+  description_ar?: string;
   content: string; // Markdown or Rich Text
+  content_ar?: string;
   slug: string;
   image_url: string;
   published_at: string;
   author?: string;
   tags?: string[];
   meta_title?: string;
+  meta_title_ar?: string;
   meta_description?: string;
+  meta_description_ar?: string;
   meta_keywords?: string[];
 }

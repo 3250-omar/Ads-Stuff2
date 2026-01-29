@@ -20,9 +20,16 @@ const ArticleContent = ({ article }: ArticleContentProps) => {
   const t = useTranslations("Articles");
   const tNav = useTranslations("Navigation");
   const locale = useLocale();
+  const displayTitle =
+    locale === "ar" ? article.title_ar || article.title : article.title;
+  const displayContent =
+    locale === "ar" ? article.content_ar || article.content : article.content;
 
   return (
-    <article className="min-h-screen pt-28 pb-20 px-4 md:px-8 lg:px-16 max-w-4xl mx-auto">
+    <article
+      className="min-h-screen pt-28 pb-20 px-4 md:px-8 lg:px-16 max-w-4xl mx-auto"
+      dir={locale === "ar" ? "rtl" : "ltr"}
+    >
       <Breadcrumb
         className="mb-8"
         items={[
@@ -38,7 +45,7 @@ const ArticleContent = ({ article }: ArticleContentProps) => {
             title: <Link href={`/${locale}/articles`}>{tNav("articles")}</Link>,
           },
           {
-            title: article.title,
+            title: displayTitle,
           },
         ]}
       />
@@ -53,7 +60,7 @@ const ArticleContent = ({ article }: ArticleContentProps) => {
               )}
             </span>
           </div>
-          <Divider type="vertical" className="bg-gray-400" />
+          <Divider orientation="vertical" className="bg-gray-400" />
           <div className="flex items-center gap-2">
             <UserOutlined />
             <span>{article.author || "Ads & Stuff"}</span>
@@ -64,7 +71,7 @@ const ArticleContent = ({ article }: ArticleContentProps) => {
           level={1}
           className="text-4xl md:text-5xl font-black mb-8 leading-tight"
         >
-          {article.title}
+          {displayTitle}
         </Title>
 
         <div className="flex gap-2 mb-10">
@@ -82,7 +89,7 @@ const ArticleContent = ({ article }: ArticleContentProps) => {
         <div className="rounded-4xl overflow-hidden shadow-2xl mb-12">
           <img
             src={article.image_url}
-            alt={article.title}
+            alt={displayTitle}
             className="w-full h-auto object-cover max-h-[500px]"
           />
         </div>
@@ -91,7 +98,7 @@ const ArticleContent = ({ article }: ArticleContentProps) => {
       <section className="prose prose-lg max-w-none prose-primary order-1">
         <div
           className="text-gray-700 leading-relaxed space-y-6"
-          dangerouslySetInnerHTML={{ __html: article.content }}
+          dangerouslySetInnerHTML={{ __html: displayContent }}
         />
       </section>
 

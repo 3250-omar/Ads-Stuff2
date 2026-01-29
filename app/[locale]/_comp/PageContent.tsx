@@ -61,7 +61,7 @@ export default function PageContent({
         <LazySection id="projects" minHeight={400}>
           <ProjectsSection />
         </LazySection>
-        <LazySection minHeight={400}>
+        <LazySection minHeight={400} id="articles">
           <ArticlesSection />
         </LazySection>
         <LazySection minHeight={400}>

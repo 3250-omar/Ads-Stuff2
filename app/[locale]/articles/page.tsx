@@ -23,8 +23,7 @@ const ArticlesPage = () => {
           {
             title: (
               <Link href={`/${locale}`} className="flex items-center gap-2">
-                <HomeOutlined />
-                <span>{tNav("home")}</span>
+                <HomeOutlined /> <span>{tNav("home")}</span>
               </Link>
             ),
           },
