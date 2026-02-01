@@ -23,12 +23,12 @@ const OurCustomers = dynamic(() => import("./sections/OurCustomers"), {
     <div className="w-full h-[500px] animate-pulse bg-gray-50/50 rounded-[3rem]" />
   ),
 });
-const ArticlesSection = dynamic(() => import("./sections/ArticlesSection"), {
-  ssr: false,
-  loading: () => (
-    <div className="w-full h-[500px] animate-pulse bg-gray-50/50 rounded-[3rem]" />
-  ),
-});
+// const ArticlesSection = dynamic(() => import("./sections/ArticlesSection"), {
+//   ssr: false,
+//   loading: () => (
+//     <div className="w-full h-[500px] animate-pulse bg-gray-50/50 rounded-[3rem]" />
+//   ),
+// });
 
 const ProjectsSection = dynamic(() => import("./sections/ProjectsSection"), {
   ssr: false,
@@ -61,9 +61,9 @@ export default function PageContent({
         <LazySection id="projects" minHeight={400}>
           <ProjectsSection />
         </LazySection>
-        <LazySection minHeight={400} id="articles">
-          <ArticlesSection />
-        </LazySection>
+        {/* <LazySection minHeight={400} id="articles">
+  <ArticlesSection />
+</LazySection> */}
         <LazySection minHeight={400}>
           <OurCustomers />
         </LazySection>

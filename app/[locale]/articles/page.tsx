@@ -1,11 +1,14 @@
 "use client";
-import { Typography, Divider, Spin, Breadcrumb } from "antd";
+"use client";
+import { Typography, Divider, Spin, Breadcrumb, Tag, Button } from "antd";
 import { useTranslations, useLocale } from "next-intl";
 import { useGetArticles } from "@/app/api/query";
 import ArticlesGrid from "@/components/articles/ArticlesGrid";
 import ArticleCard from "@/components/articles/ArticleCard";
 import Link from "next/link";
-import { HomeOutlined } from "@ant-design/icons";
+import { HomeOutlined, ArrowRightOutlined } from "@ant-design/icons";
+import React from "react";
+import gsap from "gsap";
 
 const { Title, Paragraph } = Typography;
 

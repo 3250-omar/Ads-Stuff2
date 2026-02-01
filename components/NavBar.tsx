@@ -49,8 +49,10 @@ const NavBar = () => {
 
   const scrollToSection = useCallback(
     (href: string) => {
-      if (pathname !== `/${language}`) {
-        router.push(`/${language}/${href}`);
+      // If it's an absolute route (starts with /) or if we're not on the home page
+      if (href.startsWith("/") || pathname !== `/${language}`) {
+        const targetPath = href.startsWith("/") ? href : `/${href}`;
+        router.push(`/${language}${targetPath}`);
         return;
       }
 

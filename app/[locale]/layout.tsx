@@ -23,6 +23,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://ads-stuff2.vercel.app"),
   title: {
     default: "Ads & Stuff | Modern Digital Advertising & Content Creation",
     template: "%s | Ads & Stuff",
