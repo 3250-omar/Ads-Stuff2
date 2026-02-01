@@ -4,6 +4,8 @@ import { Card, Typography, Tag, Button } from "antd";
 import { ArrowRightOutlined, CalendarOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import { useTranslations, useLocale } from "next-intl";
+import Image from "next/image";
+import { memo } from "react";
 
 const { Title, Paragraph, Text } = Typography;
 
@@ -17,10 +19,11 @@ const ArticleCard = ({ article }: { article: Article }) => {
       className="glass-card overflow-hidden h-full flex flex-col border-none group"
       cover={
         <div className="relative h-48 overflow-hidden">
-          <img
+          <Image
             src={article.image_url}
-            alt={locale === "ar" ? article.title_ar : article.title_en}
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+            alt={"article image"}
+            fill
+            className="object-cover transition-transform duration-500 group-hover:scale-110"
           />
           <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent flex items-end p-4">
             <Tag
@@ -78,4 +81,4 @@ const ArticleCard = ({ article }: { article: Article }) => {
   );
 };
 
-export default ArticleCard;
+export default memo(ArticleCard);

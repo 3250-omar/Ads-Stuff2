@@ -8,6 +8,7 @@ import {
 } from "@ant-design/icons";
 import { Typography, Breadcrumb, Tag, Divider } from "antd";
 import { useTranslations, useLocale } from "next-intl";
+import Image from "next/image";
 import Link from "next/link";
 
 const { Title, Paragraph } = Typography;
@@ -90,10 +91,12 @@ const ArticleContent = ({ article }: ArticleContentProps) => {
         </div>
 
         <div className="rounded-4xl overflow-hidden shadow-2xl mb-12">
-          <img
+          <Image
             src={article.image_url}
-            alt={displayTitle}
-            className="w-full h-auto object-cover max-h-[500px]"
+            alt={displayTitle || "article content"}
+            width={500}
+            height={500}
+            className="w-full h-auto object-cover max-h-[500px] "
           />
         </div>
       </header>

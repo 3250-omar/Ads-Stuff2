@@ -5,17 +5,17 @@ import { Button } from "antd";
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { memo, useCallback, useEffect, useState } from "react";
 import LanguageSwitcher from "./languageSwitcher";
 
 const NavBar = () => {
   const [windowHeight, setWindowHeight] = useState<number>(0);
   const [activeSection, setActiveSection] = useState("home");
+  console.log("🚀 ~ NavBar ~ activeSection:", activeSection);
   const pathname = usePathname();
   const t = useTranslations("Navigation");
   const router = useRouter();
   const language = useLocale();
-  console.log("🚀 ~ NavBar ~ pathname:", pathname);
   useEffect(() => {
     let ticking = false;
 
@@ -106,7 +106,7 @@ const NavBar = () => {
               onClick={() => scrollToSection(item.href)}
               key={item.key}
               className={`text-base transition-colors hover:text-primary! capitalize! ${
-                activeSection === item.key
+                activeSection === item.key || pathname.includes(item.key)
                   ? "text-primary! font-bold! border-primary!"
                   : "text-gray-600"
               }`}
@@ -129,7 +129,7 @@ const NavBar = () => {
               onClick={() => scrollToSection(item.href)}
               key={item.key}
               className={`transition-colors! text-xs! hover:text-black! capitalize! ${
-                activeSection === item.key
+                activeSection === item.key || pathname.includes(item.key)
                   ? "text-black! font-bold! bg-white/20! px-2! py-1! rounded-md!"
                   : "text-white!"
               }`}
@@ -145,4 +145,4 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+export default memo (NavBar);
