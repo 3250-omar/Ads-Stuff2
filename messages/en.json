@@ -161,6 +161,19 @@
     "publishedAt": "Published at",
     "noArticles": "No Articles Found",
     "backToArticles": "Back to Articles",
-    "featured": "Featured Articles"
+    "featured": "Featured Articles",
+    "advertising": "Advertising",
+    "marketing": "Marketing",
+    "analytics": "Analytics",
+    "campaigns": "Campaigns",
+    "social media": "Social Media",
+    "seo": "SEO",
+    "ppc": "PPC",
+    "content": "Content",
+    "strategy": "Strategy",
+    "performance": "Performance",
+    "branding": "Branding",
+    "digital ads": "Digital Ads",
+    "creative": "Creative"
   }
 }

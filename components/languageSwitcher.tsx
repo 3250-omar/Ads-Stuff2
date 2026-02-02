@@ -10,9 +10,11 @@ const { Text } = Typography;
 const LanguageSwitcher = ({
   variant = "default",
   forMobile = false,
+  className = "",
 }: {
   variant?: "default" | "dark";
   forMobile?: boolean;
+  className?: string;
 }) => {
   const t = useTranslations("Language");
   const pathname = usePathname();
@@ -33,7 +35,7 @@ const LanguageSwitcher = ({
     <Button
       type="text"
       onClick={handleToggle}
-      className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-all border-none group ${
+      className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-all border-none group ${className} ${
         isDark ? "hover:bg-white/10" : "hover:bg-primary/10"
       }`}
     >

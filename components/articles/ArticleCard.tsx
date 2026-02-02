@@ -6,13 +6,16 @@ import Link from "next/link";
 import { useTranslations, useLocale } from "next-intl";
 import Image from "next/image";
 import { memo } from "react";
+import { getTagColors } from "@/constants/getTagsColors";
 
 const { Title, Paragraph, Text } = Typography;
 
 const ArticleCard = ({ article }: { article: Article }) => {
+  console.log("🚀 ~ ArticleCard ~ article:", article);
   const t = useTranslations("Articles");
   const locale = useLocale();
-
+  const { bg, text } = getTagColors(article.tags?.[0] || "Creative");
+  console.log("🚀 ~ ArticleCard ~ bg:", bg);
   return (
     <Card
       hoverable
@@ -28,9 +31,10 @@ const ArticleCard = ({ article }: { article: Article }) => {
           <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent flex items-end p-4">
             <Tag
               color="primary"
-              className="bg-primary border-none text-white font-medium uppercase text-[10px] tracking-wider"
+              className={` font-medium uppercase text-[10px] tracking-wider`}
+              style={{ backgroundColor: bg, color: text }}
             >
-              {article.tags?.[0] || "Creative"}
+              {t((article.tags?.[0] || "advertising").toLowerCase())}
             </Tag>
           </div>
         </div>

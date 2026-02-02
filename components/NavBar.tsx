@@ -52,6 +52,7 @@ const NavBar = () => {
       // If it's an absolute route (starts with /) or if we're not on the home page
       if (href.startsWith("/") || pathname !== `/${language}`) {
         const targetPath = href.startsWith("/") ? href : `/${href}`;
+        setActiveSection("");
         router.push(`/${language}${targetPath}`);
         return;
       }
@@ -80,7 +81,7 @@ const NavBar = () => {
 
   return (
     <nav
-      className={`flex justify-between max-sm:justify-center items-center px-5 sticky top-0 z-50 h-[80px] transition-all duration-300 ${
+      className={`flex justify-between max-sm:justify-center items-center gap-5 px-5 sticky top-0 z-50 h-[80px] transition-all duration-300 ${
         windowHeight >= 80 ? "bg-white shadow-md " : "bg-transparent"
       }`}
     >
@@ -99,6 +100,12 @@ const NavBar = () => {
           priority
         />
       </Button>
+      <LanguageSwitcher
+        variant="dark"
+        forMobile
+        className="hidden! max-sm:block! "
+      />
+
       <div className="flex items-center gap-5 max-sm:hidden">
         <div className="flex items-center gap-6">
           {navItems.map((item: { key: string; href: string }) => (
@@ -121,7 +128,7 @@ const NavBar = () => {
 
       {/* Mobile Nav */}
       <div
-        className={`fixed bottom-5 left-1/2 -translate-x-1/2 w-[300px] rounded-full bg-primary/80 backdrop-blur-md text-white z-50 mx-auto p-2 hidden max-sm:block shadow-lg `}
+        className={`fixed bottom-5 left-1/2 -translate-x-1/2 max-w-[300px] rounded-full bg-primary/80 backdrop-blur-md text-white z-50 mx-auto p-2 hidden max-sm:block shadow-lg `}
       >
         <div className="flex items-center gap-2 justify-around">
           {navItems.map((item: { key: string; href: string }) => (
@@ -138,11 +145,10 @@ const NavBar = () => {
               {t(item.key)}
             </Button>
           ))}
-          <LanguageSwitcher variant="dark" forMobile />
         </div>
       </div>
     </nav>
   );
 };
 
-export default memo (NavBar);
+export default memo(NavBar);

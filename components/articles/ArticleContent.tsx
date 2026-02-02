@@ -1,5 +1,6 @@
 "use client";
 
+import { getTagColors } from "@/constants/getTagsColors";
 import { Article } from "@/types";
 import {
   CalendarOutlined,
@@ -79,15 +80,19 @@ const ArticleContent = ({ article }: ArticleContentProps) => {
         </Title>
 
         <div className="flex gap-2 mb-10">
-          {article.tags?.map((tag: string) => (
-            <Tag
-              key={tag}
-              color="primary"
-              className="bg-primary text-white border-none rounded-full px-4 py-1"
-            >
-              {tag}
-            </Tag>
-          ))}
+          {article.tags?.map((tag: string) => {
+            const { bg, text } = getTagColors(tag);
+            return (
+              <Tag
+                key={tag}
+                color="primary"
+                className="border-none rounded-full px-4 py-1"
+                style={{ backgroundColor: bg, color: text }}
+              >
+                {t(tag.toLowerCase())}
+              </Tag>
+            );
+          })}
         </div>
 
         <div className="rounded-4xl overflow-hidden shadow-2xl mb-12">

@@ -161,6 +161,19 @@
     "publishedAt": "نُشر في",
     "noArticles": "لم يتم العثور على مقالات",
     "backToArticles": "العودة للمقالات",
-    "featured": "مقالات مختارة"
+    "featured": "مقالات مختارة",
+    "advertising": "إعلانات",
+    "marketing": "تسويق",
+    "analytics": "تحليلات",
+    "campaigns": "حملات",
+    "social media": "وسائل التواصل الاجتماعي",
+    "seo": "تحسين محركات البحث",
+    "ppc": "الدفع لكل نقرة",
+    "content": "محتوى",
+    "strategy": "استراتيجية",
+    "performance": "أداء",
+    "branding": "العلامة التجارية",
+    "digital ads": "إعلانات رقمية",
+    "creative": "إبداعي"
   }
 }
