@@ -6,40 +6,40 @@ import LazySection from "@/components/LazySection";
 const StatictsSection = dynamic(() => import("./sections/StatictsSection"), {
   ssr: true,
   loading: () => (
-    <div className="w-full h-[200px] animate-pulse bg-gray-50/50 rounded-[3rem]" />
+    <div className="w-full h-[200px] animate-pulse bg-bg-card/50 rounded-[3rem]" />
   ),
 });
 
 const Timeline = dynamic(() => import("./sections/TimeLine"), {
   ssr: false,
   loading: () => (
-    <div className="w-full h-[400px] animate-pulse bg-gray-50/50 rounded-[3rem]" />
+    <div className="w-full h-[400px] animate-pulse bg-bg-card/50 rounded-[3rem]" />
   ),
 });
 
 const OurCustomers = dynamic(() => import("./sections/OurCustomers"), {
   ssr: false,
   loading: () => (
-    <div className="w-full h-[500px] animate-pulse bg-gray-50/50 rounded-[3rem]" />
+    <div className="w-full h-[500px] animate-pulse bg-bg-card/50 rounded-[3rem]" />
   ),
 });
 // const ArticlesSection = dynamic(() => import("./sections/ArticlesSection"), {
 //   ssr: false,
 //   loading: () => (
-//     <div className="w-full h-[500px] animate-pulse bg-gray-50/50 rounded-[3rem]" />
+//     <div className="w-full h-[500px] animate-pulse bg-bg-card/50 rounded-[3rem]" />
 //   ),
 // });
 
 const ProjectsSection = dynamic(() => import("./sections/ProjectsSection"), {
   ssr: false,
   loading: () => (
-    <div className="w-full h-[600px] animate-pulse bg-gray-50/50 rounded-[3rem]" />
+    <div className="w-full h-[600px] animate-pulse bg-bg-card/50 rounded-[3rem]" />
   ),
 });
 const ContactsSection = dynamic(() => import("./sections/ContactsSection"), {
   ssr: false,
   loading: () => (
-    <div className="w-full h-[400px] animate-pulse bg-gray-50/50 rounded-[3rem]" />
+    <div className="w-full h-[400px] animate-pulse bg-bg-card/50 rounded-[3rem]" />
   ),
 });
 

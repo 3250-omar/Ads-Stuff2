@@ -116,7 +116,7 @@ export default function Timeline() {
   return (
     <div ref={sectionRef} className="relative py-20 px-4 overflow-x-hidden">
       {/* Center line */}
-      <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-linear-to-b from-primary/10 via-primary to-primary/10 -translate-x-1/2 hidden md:block rounded-full" />
+      <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-linear-to-b from-primary/0 via-primary/40 to-primary/0 -translate-x-1/2 hidden md:block rounded-full shadow-[0_0_20px_rgba(74,107,80,0.4)]" />
 
       <div className="relative z-10 space-y-16">
         {items.map((item, i) => {
@@ -135,11 +135,11 @@ export default function Timeline() {
               <div className="w-full md:w-[45%]">
                 <Card
                   variant="outlined"
-                  className="shadow-lg hover:shadow-2xl transition-all duration-500 rounded-3xl border border-gray-100 group hover:-translate-y-1 glass-card"
+                  className="shadow-2xl transition-all duration-700 rounded-[2.5rem] border border-white/5 group hover:border-primary/40 glass-card p-2"
                   style={{ textAlign: isLeft ? "right" : "left" }}
                 >
                   <div
-                    className={`flex flex-col gap-3 ${
+                    className={`flex flex-col gap-4 ${
                       isLeft ? "items-end" : "items-start"
                     }`}
                   >
@@ -152,42 +152,30 @@ export default function Timeline() {
                     >
                       <Title
                         level={3}
-                        className="m-0! group-hover:text-primary transition-colors max-sm:text-xl!"
+                        className="m-0! text-text-primary group-hover:text-primary transition-colors duration-500 max-sm:text-xl!"
                       >
                         {item.title}
                       </Title>
-                      {/* <Badge
-                        count={item.date}
-                        style={{
-                          backgroundColor: "#AEC3B0",
-                          color: "#0f2a1d",
-                          fontWeight: "bold",
-                          borderRadius: "1rem",
-                          padding: "0 12px",
-                        }}
-                      /> */}
                     </Space>
 
                     {item.subtitle && (
-                      <Text type="secondary" className="text-sm">
+                      <Text className="text-sm text-text-secondary">
                         {item.subtitle}
                       </Text>
                     )}
 
                     {item.description &&
                     typeof item.description === "string" ? (
-                      <Paragraph className="text-gray-600 leading-relaxed m-0 mt-2 ">
+                      <Paragraph className="text-text-secondary leading-relaxed m-0 mt-2 text-lg opacity-80 group-hover:opacity-100 transition-opacity">
                         {item.description}
                       </Paragraph>
                     ) : (
-                      <Space className="w-full! justify-center! mt-4!">
-                        {item.description}
-                      </Space>
+                      <div className="w-full mt-4">{item.description}</div>
                     )}
 
                     {item.status && (
                       <>
-                        <Divider className="my-3 border-primary/20" />
+                        <Divider className="my-3 border-white/10" />
                         <Badge
                           status="processing"
                           text={
@@ -207,7 +195,7 @@ export default function Timeline() {
 
               {/* Timeline dot */}
               <div className="relative flex items-center justify-center w-12 h-12 my-4 md:my-0 z-20 max-sm:hidden">
-                <div className="w-6 h-6 rounded-full bg-white border-4 border-primary shadow-lg animate-pulse-glow" />
+                <div className="w-6 h-6 rounded-full bg-primary border-4 border-bg-primary shadow-[0_0_20px_rgba(74,107,80,0.6)] animate-pulse-glow" />
               </div>
 
               {/* Empty space for the other side on desktop */}

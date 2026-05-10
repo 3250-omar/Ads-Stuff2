@@ -4,16 +4,16 @@ import Image from "next/image";
 
 const Loading = () => {
   return (
-    <div className="w-full h-full items-center justify-center flex flex-col ">
-      <Image
-        src="/Logo3IconMan.svg"
-        alt="Logo"
-        // width={400}
-        // height={400}
-        fill
-        className="object-contain"
-      />
-      <Spin className="size-8 text-primary" />
+    <div className="fixed inset-0 z-[100] bg-bg-primary items-center justify-center flex flex-col gap-8">
+      <div className="relative w-32 h-32 animate-pulse">
+        <Image
+          src="/Logo3IconMan.svg"
+          alt="Logo"
+          fill
+          className="object-contain"
+        />
+      </div>
+      <Spin size="large" className="text-primary" />
     </div>
   );
 };

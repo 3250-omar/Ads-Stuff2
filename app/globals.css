@@ -8,7 +8,7 @@
 
 @layer components {
   .head-section {
-    @apply w-full min-h-screen px-8 lg:px-16 xl:px-24;
+    @apply w-full min-h-screen px-8 lg:px-16 xl:px-24 bg-bg-primary text-text-primary;
   }
 
   .section-title {
@@ -16,24 +16,34 @@
   }
 
   .glass-card {
-    @apply bg-white/70 backdrop-blur-md border border-white/50 shadow-xl;
+    @apply bg-bg-card/70 backdrop-blur-md border border-border-subtle shadow-xl;
   }
 
   .gradient-section {
-    @apply bg-gradient-to-br from-schemaWhite/30 via-white to-secondary/10;
+    @apply bg-gradient-to-br from-bg-secondary/50 via-bg-primary to-bg-card/30;
   }
 
   .glow-primary {
-    box-shadow: 0 0 40px rgba(107, 144, 113, 0.3);
+    box-shadow: 0 0 40px var(--color-glow);
   }
 }
 
 @theme {
   --color-primary: #4a6b50;
   --color-secondary: #aec3b0;
-  --color-schemaWhite: #e3eed4;
-  --color-darkModePrimary: #0f2a1d;
+  --color-schemaWhite: #1e2b22;
+  --color-darkModePrimary: #e8f0e9;
   --color-darkModeSecondary: #375534;
+  
+  --color-bg-primary: #0a0f0d;
+  --color-bg-secondary: #111a15;
+  --color-bg-card: #1a2420;
+  --color-bg-elevated: #243029;
+  --color-text-primary: #e8f0e9;
+  --color-text-secondary: #9ba89e;
+  --color-border-subtle: rgba(74, 107, 80, 0.15);
+  --color-glow: rgba(74, 107, 80, 0.3);
+
   --fontSize-xs: 0.75rem;
   --fontSize-sm: 0.875rem;
   --fontSize-base: 1rem;

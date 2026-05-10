@@ -86,7 +86,7 @@ export default function OurCustomers() {
   }, [loading]);
   if (loading) {
     return (
-      <div className="w-full h-[500px] animate-pulse bg-gray-50/50 rounded-[3rem]" />
+      <div className="w-full h-[400px] animate-pulse bg-bg-card/50 rounded-[3rem]" />
     );
   }
 
@@ -100,55 +100,35 @@ export default function OurCustomers() {
           {t("title")}
         </Title>
         <Divider className="border-primary/30 w-1/4 min-w-[100px] my-6" />
-        <Paragraph className="text-xl text-gray-500 max-w-2xl text-center">
+        <Paragraph className="text-xl text-text-secondary max-w-2xl text-center">
           {t("description")}
         </Paragraph>
       </div>
 
       <div ref={carouselRef} className="px-4 overflow-hidden">
         <div
-          className="marquee-container relative flex overflow-hidden py-4"
+          className="marquee-container relative flex overflow-hidden py-10"
           dir="ltr"
         >
-          <div className="flex animate-marquee gap-8 whitespace-nowrap">
+          <div className="flex animate-marquee gap-10 whitespace-nowrap items-center">
             {[
               ...(customers || []),
               ...(customers || []),
               ...(customers || []),
               ...(customers || []),
             ].map((customer, i) => (
-              <div key={`${customer.id}-${i}`} className="w-[300px] shrink-0 ">
+              <div key={`${customer.id}-${i}`} className="w-[200px] md:w-[250px] shrink-0">
                 <Tooltip title={customer.name}>
-                  <div className="px-4 space-y-2">
-                    <div className="relative h-[280px] w-full rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border-2 border-white group">
+                  <div className="px-4">
+                    <div className="relative h-32 md:h-40 w-full rounded-2xl overflow-hidden bg-bg-card/40 backdrop-blur-md border border-white/5 transition-all duration-700 group hover:border-primary/30 hover:bg-bg-card/60">
                       <Image
                         src={customer.logo_url}
                         alt={`Our Partner ${customer.name}`}
                         fill
-                        className="object-cover group-hover:scale-110 transition-transform duration-700"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        className="object-contain p-6 md:p-8 grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700 brightness-110"
+                        sizes="(max-width: 768px) 200px, 250px"
                       />
-                      <div className="absolute inset-0 bg-linear-to-t from-darkModePrimary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     </div>
-                    {/* {customer.account
-                      ? (() => {
-                          const social = getSocialMedia({
-                            name: getSocialMediaName(customer.account),
-                          });
-                          const IconComponent = social.icon;
-                          return (
-                            <Button
-                              className="w-full"
-                              type="link"
-                              href={customer.account}
-                              target="_blank"
-                              icon={
-                                <IconComponent style={{ fontSize: "1.5rem" }} />
-                              }
-                            />
-                          );
-                        })()
-                      : null} */}
                   </div>
                 </Tooltip>
               </div>
