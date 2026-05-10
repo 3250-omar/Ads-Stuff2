@@ -54,37 +54,37 @@ export default function WhatsAppContact() {
   return (
     <section className="py-12 flex justify-center">
       <Card
-        className="w-full max-w-lg rounded-3xl shadow-xl border-none overflow-hidden"
+        className="w-full max-w-lg rounded-[2.5rem] bg-bg-card/40 backdrop-blur-xl border border-white/5 shadow-2xl overflow-hidden"
         styles={{ body: { padding: "40px" } }}
       >
         <div className="text-center mb-8">
-          <div className="bg-[#25D366]/10 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4">
-            <WhatsAppOutlined className="text-3xl text-[#25D366]" />
+          <div className="bg-[#25D366]/10 w-20 h-20 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-[0_0_20px_rgba(37,211,102,0.2)]">
+            <WhatsAppOutlined className="text-4xl text-[#25D366]" />
           </div>
-          <Title level={2} className="m-0! font-black! text-[#128C7E]">
+          <Title level={2} className="m-0! font-black! text-text-primary tracking-tight">
             {t("title")}
           </Title>
-          <Text type="secondary" className="text-sm">
+          <Text className="text-base text-text-secondary opacity-80 mt-2 block">
             {t("subtitle")}
           </Text>
         </div>
 
-        <Divider className="my-8" />
+        <Divider className="my-8 border-white/10" />
 
         <Form
           form={form}
           layout="vertical"
           onFinish={handleSubmit}
           requiredMark={false}
-          className="flex flex-col gap-2"
+          className="flex flex-col gap-4"
         >
           <Form.Item
             name="phone"
             label={
               <Space>
-                <Text strong>{t("phoneLabel")}</Text>
+                <Text className="text-text-primary font-bold">{t("phoneLabel")}</Text>
                 <Tooltip title={t("phoneTooltip")}>
-                  <InfoCircleOutlined className="text-gray-400 cursor-help" />
+                  <InfoCircleOutlined className="text-text-secondary cursor-help" />
                 </Tooltip>
               </Space>
             }
@@ -94,16 +94,16 @@ export default function WhatsAppContact() {
             ]}
           >
             <Input
-              prefix={<span className="text-gray-400 mr-2">+</span>}
+              prefix={<span className="text-text-secondary mr-2">+</span>}
               placeholder={t("phonePlaceholder")}
               size="large"
-              className="rounded-xl border-gray-200"
+              className="h-14 rounded-2xl bg-bg-primary/50 border-white/5 text-text-primary placeholder:text-text-secondary/30"
             />
           </Form.Item>
 
           <Form.Item
             name="content"
-            label={<Text strong>{t("messageLabel")}</Text>}
+            label={<Text className="text-text-primary font-bold">{t("messageLabel")}</Text>}
             rules={[{ required: true, message: t("messageRequired") }]}
           >
             <TextArea
@@ -111,11 +111,11 @@ export default function WhatsAppContact() {
               rows={6}
               showCount
               maxLength={1000}
-              className="rounded-xl border-gray-200"
+              className="rounded-2xl bg-bg-primary/50 border-white/5 text-text-primary placeholder:text-text-secondary/30"
             />
           </Form.Item>
 
-          <Space className="w-full mt-4" orientation="vertical" size="middle">
+          <Space className="w-full mt-6" orientation="vertical" size="middle">
             <Button
               type="primary"
               htmlType="submit"
@@ -123,7 +123,7 @@ export default function WhatsAppContact() {
               icon={<SendOutlined />}
               block
               size="large"
-              className="h-14 rounded-xl font-bold text-base shadow-lg bg-[#25D366] border-[#25D366] hover:bg-[#128C7E]! hover:border-[#128C7E]!"
+              className="h-16 rounded-2xl font-black text-lg shadow-2xl bg-[#25D366] border-none hover:bg-[#20bd5a]! hover:scale-[1.02] transition-all duration-300"
             >
               {t("startButton")}
             </Button>
@@ -134,7 +134,7 @@ export default function WhatsAppContact() {
               icon={<ReloadOutlined />}
               block
               size="large"
-              className="rounded-xl font-medium text-gray-400 hover:text-red-400"
+              className="rounded-2xl font-bold text-text-secondary hover:text-red-400! transition-colors"
             >
               {t("clearButton")}
             </Button>

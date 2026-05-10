@@ -23,54 +23,61 @@ const ProjectCard = ({ project }: { project: Project }) => {
       ),
     [project.project_media],
   );
+
   return (
-    <Card
-      hoverable
-      className="rounded-3xl border-none shadow-md overflow-hidden group"
-      styles={{ body: { padding: "24px" }, cover: { padding: "12px" } }}
-      cover={
-        <div className="relative w-full h-[220px] rounded-2xl overflow-hidden px-4 pt-4">
+    <div className="group relative w-full overflow-hidden rounded-[2.5rem] bg-bg-card/40 backdrop-blur-xl border border-white/5 transition-all duration-700 hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/10">
+      <div className="flex flex-col md:flex-row min-h-[400px]">
+        {/* Project Image */}
+        <div className="relative w-full md:w-1/2 h-[280px] md:h-auto overflow-hidden">
           <Image
             src={onlyImages?.[0] || "/projectHasNoImages.webp"}
             alt={project.title}
             fill
-            className="object-cover rounded-2xl group-hover:scale-110 transition-transform duration-700"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="object-cover transition-transform duration-1000 group-hover:scale-110"
+            sizes="(max-width: 768px) 100vw, 50vw"
           />
-        </div>
-      }
-    >
-      <div className="flex flex-col gap-3">
-        <div className="flex justify-between  gap-2 max-md:flex-col items-center">
-          <Title
-            level={4}
-            className="m-0! group-hover:text-primary transition-colors "
-          >
-            {project.title}
-          </Title>
-          <Tag
-            color={getStatusColor(project.status)}
-            className="rounded-full border-none px-3 font-semibold uppercase text-[10px] tracking-widest"
-          >
-            {project.status}
-          </Tag>
+          <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-bg-card/80 via-transparent to-transparent" />
         </div>
 
-        <Paragraph ellipsis={{ rows: 2 }} className="text-gray-500 m-0">
-          {project.description}
-        </Paragraph>
+        {/* Project Details */}
+        <div className="flex flex-col justify-center gap-6 p-8 md:p-12 lg:p-16 md:w-1/2 text-left">
+          <div className="space-y-4">
+            <Tag
+              color={getStatusColor(project.status)}
+              className="rounded-full border border-primary/20 bg-primary/10 px-4 py-1 font-bold uppercase text-[10px] tracking-widest text-primary"
+            >
+              {project.status}
+            </Tag>
+            <Title
+              level={2}
+              className="m-0! text-3xl md:text-4xl lg:text-5xl font-black tracking-tight text-text-primary group-hover:text-primary transition-colors duration-500"
+            >
+              {project.title}
+            </Title>
+          </div>
 
-        <div className="flex justify-between items-center mt-2 group-hover:translate-x-1 transition-transform max-md:justify-center">
-          <Link
-            href={`/projects/${project.id}`}
-            className="flex items-center gap-1 font-bold text-primary hover:text-primary/80"
-          >
-            <span>{t("viewCaseStudy")}</span>
-            <LinkOutlined />
-          </Link>
+          <Paragraph className="text-lg lg:text-xl text-text-secondary leading-relaxed m-0 opacity-80 group-hover:opacity-100 transition-opacity duration-500">
+            {project.description}
+          </Paragraph>
+
+          <div className="pt-4">
+            <Link
+              href={`/projects/${project.id}`}
+              className="inline-flex items-center gap-3 text-lg font-bold text-primary group/link"
+            >
+              <span className="relative">
+                {t("viewCaseStudy")}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-500 group-hover/link:w-full" />
+              </span>
+              <LinkOutlined className="text-xl transition-transform duration-500 group-hover/link:translate-x-2" />
+            </Link>
+          </div>
         </div>
       </div>
-    </Card>
+
+      {/* Subtle Background Glow */}
+      <div className="absolute -right-20 -bottom-20 w-64 h-64 bg-primary/5 rounded-full blur-[100px] pointer-events-none group-hover:bg-primary/10 transition-colors duration-700" />
+    </div>
   );
 };
 

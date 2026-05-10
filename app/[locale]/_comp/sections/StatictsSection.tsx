@@ -44,7 +44,7 @@ const StatictsSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="gradient-section rounded-[3rem] border border-secondary/30 grid grid-cols-2 gap-8 w-full max-sm:grid-cols-1 max-md:grid-cols-2 p-10"
+      className="gradient-section rounded-[3rem] border border-white/5 grid grid-cols-2 gap-8 w-full max-sm:grid-cols-1 max-md:grid-cols-2 p-10"
     >
       {statistics.map((statistic, index) => (
         <div
@@ -52,13 +52,13 @@ const StatictsSection = () => {
           ref={(el) => {
             if (el) cardsRef.current[index] = el;
           }}
-          className="flex flex-col items-center justify-center gap-3 group hover:bg-primary hover:-translate-y-3! hover:cursor-pointer transition-all duration-500  py-16 rounded-4xl bg-white shadow-lg hover:shadow-2xl hover:glow-primary"
+          className="flex flex-col items-center justify-center gap-4 group transition-all duration-700 py-20 rounded-[2.5rem] bg-bg-card/40 backdrop-blur-xl border border-white/5 shadow-2xl hover:border-primary/40 hover:shadow-primary/10 hover:bg-bg-card/60"
         >
-          <div className="text-6xl font-black text-primary group-hover:text-white transition-colors duration-300 max-sm:text-3xl ">
+          <div className="text-6xl md:text-8xl font-black text-primary transition-all duration-500 max-sm:text-5xl group-hover:scale-110 drop-shadow-[0_0_20px_rgba(74,107,80,0.3)]">
             <CountUp end={statistic.count} duration={3} delay={0.2} />
             <span>{statistic.suffix}</span>
           </div>
-          <Text className="text-xl font-semibold text-gray-600 group-hover:text-white/90 transition-colors duration-300 max-sm:text-lg tracking-wide">
+          <Text className="text-xl md:text-2xl font-bold text-text-secondary group-hover:text-text-primary transition-colors duration-500 max-sm:text-lg tracking-wide uppercase">
             {statistic.title}
           </Text>
         </div>

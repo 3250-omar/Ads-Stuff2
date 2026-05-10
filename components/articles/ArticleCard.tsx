@@ -48,7 +48,7 @@ const ArticleCard = ({ article }: { article: Article }) => {
         },
       }}
     >
-      <div className="flex items-center gap-2 mb-3 text-gray-500 text-sm">
+      <div className="flex items-center gap-2 mb-4 text-text-secondary text-sm opacity-70">
         <CalendarOutlined />
         <span>
           {new Date(article.published_at).toLocaleDateString(
@@ -59,12 +59,12 @@ const ArticleCard = ({ article }: { article: Article }) => {
 
       <Title
         level={4}
-        className="group-hover:text-primary transition-colors line-clamp-2 min-h-14 mb-2"
+        className="group-hover:text-primary transition-colors line-clamp-2 min-h-14 mb-3 text-text-primary font-bold"
       >
         {locale === "ar" ? article.title_ar : article.title_en}
       </Title>
 
-      <Paragraph className="text-gray-500 line-clamp-3 mb-6 flex-1">
+      <Paragraph className="text-text-secondary line-clamp-3 mb-6 flex-1 opacity-80">
         {locale === "ar" ? article.description_ar : article.description_en}
       </Paragraph>
 
@@ -73,10 +73,10 @@ const ArticleCard = ({ article }: { article: Article }) => {
           type="link"
           icon={
             <ArrowRightOutlined
-              className={locale === "ar" ? "rotate-180" : ""}
+              className={`${locale === "ar" ? "rotate-180" : ""} group-hover/btn:translate-x-2 transition-transform duration-300`}
             />
           }
-          className="p-0 text-primary font-semibold flex items-center gap-2 group/btn h-auto hover:bg-transparent"
+          className="p-0 text-primary font-bold flex items-center gap-2 group/btn h-auto hover:bg-transparent text-lg"
         >
           {t("readMore")}
         </Button>

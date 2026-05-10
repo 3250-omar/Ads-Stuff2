@@ -77,13 +77,13 @@ export default function ContactsSection() {
       className="w-full px-4 py-20 gradient-section rounded-[3rem]"
     >
       <div ref={contentRef} className="flex flex-col items-center gap-8">
-        <div className="flex items-center gap-4 justify-center">
-          <Title level={2} className="section-title">
+        <div className="flex items-center gap-6 justify-center">
+          <Title level={2} className="section-title text-text-primary">
             {t("title")}
           </Title>
-          <HeartFilled className="animate-pulse text-5xl text-primary animate-float " />
+          <HeartFilled className="text-5xl text-primary animate-float drop-shadow-[0_0_15px_rgba(74,107,80,0.4)]" />
         </div>
-        <Divider className="border-primary/30 w-1/4 min-w-[100px]" />
+        <Divider className="border-white/10 w-1/4 min-w-[100px]" />
         <TabsComp tabs={contactTabsItems} className="w-full max-w-4xl" />
       </div>
     </section>
