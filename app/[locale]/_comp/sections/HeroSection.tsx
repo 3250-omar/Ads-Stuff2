@@ -99,22 +99,27 @@ export default function HeroSection({
     >
       {/* Cinematic Background Media Grid */}
       <div className="absolute inset-0 z-0 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 p-4 opacity-20 scale-105">
-        {images.concat(images).slice(0, 20).map((img, i) => (
-          <div 
-            key={i} 
-            className={`relative rounded-2xl overflow-hidden border border-white/5 shadow-2xl transition-all duration-1000 ${
-              isSwappingImage === (i % 3) ? "opacity-40 scale-95" : "opacity-100"
-            }`}
-          >
-            <Image 
-              src={img || "/projectHasNoImages.webp"} 
-              alt="" 
-              fill 
-              className="object-cover"
-              sizes="(max-width: 768px) 50vw, 25vw"
-            />
-          </div>
-        ))}
+        {images
+          .concat(images)
+          .slice(0, 20)
+          .map((img, i) => (
+            <div
+              key={i}
+              className={`relative rounded-2xl overflow-hidden border border-white/5 shadow-2xl transition-all duration-1000 ${
+                isSwappingImage === i % 3
+                  ? "opacity-40 scale-95"
+                  : "opacity-100"
+              }`}
+            >
+              <Image
+                src={img || "/projectHasNoImages.webp"}
+                alt=""
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 50vw, 25vw"
+              />
+            </div>
+          ))}
       </div>
 
       {/* Dark Overlay Gradient */}
@@ -157,7 +162,7 @@ export default function HeroSection({
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 animate-bounce">
+      <div className="absolute bottom-30 left-1/2 -translate-x-1/2 z-20 animate-bounce">
         <div className="w-6 h-10 rounded-full border-2 border-white/20 flex justify-center p-2">
           <div className="w-1.5 h-1.5 rounded-full bg-primary" />
         </div>
