@@ -102,7 +102,7 @@ export default function HeroSection({
         {images
           .concat(images)
           .slice(0, 20)
-          .map((img, i) => (
+          .map((img: string, i: number) => (
             <div
               key={i}
               className={`relative rounded-2xl overflow-hidden border border-white/5 shadow-2xl transition-all duration-1000 ${
