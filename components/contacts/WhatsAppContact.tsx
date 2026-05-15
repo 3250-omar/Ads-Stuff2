@@ -61,7 +61,10 @@ export default function WhatsAppContact() {
           <div className="bg-[#25D366]/10 w-20 h-20 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-[0_0_20px_rgba(37,211,102,0.2)]">
             <WhatsAppOutlined className="text-4xl text-[#25D366]" />
           </div>
-          <Title level={2} className="m-0! font-black! text-text-primary tracking-tight">
+          <Title
+            level={2}
+            className="m-0! font-black! text-text-primary tracking-tight"
+          >
             {t("title")}
           </Title>
           <Text className="text-base text-text-secondary opacity-80 mt-2 block">
@@ -82,7 +85,9 @@ export default function WhatsAppContact() {
             name="phone"
             label={
               <Space>
-                <Text className="text-text-primary font-bold">{t("phoneLabel")}</Text>
+                <Text className="text-text-primary font-bold">
+                  {t("phoneLabel")}
+                </Text>
                 <Tooltip title={t("phoneTooltip")}>
                   <InfoCircleOutlined className="text-text-secondary cursor-help" />
                 </Tooltip>
@@ -103,7 +108,11 @@ export default function WhatsAppContact() {
 
           <Form.Item
             name="content"
-            label={<Text className="text-text-primary font-bold">{t("messageLabel")}</Text>}
+            label={
+              <Text className="text-text-primary font-bold">
+                {t("messageLabel")}
+              </Text>
+            }
             rules={[{ required: true, message: t("messageRequired") }]}
           >
             <TextArea
@@ -115,7 +124,7 @@ export default function WhatsAppContact() {
             />
           </Form.Item>
 
-          <Space className="w-full mt-6" orientation="vertical" size="middle">
+          <Space className="w-full mt-6" size="middle">
             <Button
               type="primary"
               htmlType="submit"
