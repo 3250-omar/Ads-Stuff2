@@ -26,28 +26,29 @@ const ProjectHeader = ({ project, headerRef }: ProjectHeaderProps) => {
       <div className="flex items-center flex-wrap justify-between">
         <Title
           level={1}
-          className="text-5xl! md:text-6xl! font-black! text-primary! mb-5! max-sm:text-3xl!"
+          className="text-5xl! md:text-6xl! font-black! text-text-primary! mb-5! max-sm:text-3xl! tracking-tight"
         >
           {project.title}
         </Title>
         {project.behance_link ? (
           <Button
             type="link"
+            className="text-primary hover:text-primary/80"
             icon={
               <BehanceCircleFilled
                 style={{
-                  fontSize: "2rem",
+                  fontSize: "3rem",
                   border: "none",
                 }}
-                href={project.behance_link}
-                target="_blank"
               />
             }
+            href={project.behance_link}
+            target="_blank"
           />
         ) : null}
       </div>
 
-      <Paragraph className="text-xl text-gray-500 max-w-3xl leading-relaxed">
+      <Paragraph className="text-xl md:text-2xl text-text-secondary max-w-4xl leading-relaxed opacity-90">
         {project.description}
       </Paragraph>
     </div>

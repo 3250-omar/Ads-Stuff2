@@ -5,7 +5,7 @@ import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
 import AntdRegistry from "@/lib/AntdRegistry";
-import { ConfigProvider, App } from "antd";
+import { ConfigProvider, App, theme } from "antd";
 import { NextIntlClientProvider } from "next-intl";
 import { locales } from "@/i18n/config";
 export function generateStaticParams() {
@@ -103,15 +103,24 @@ export default async function RootLayout({
       suppressHydrationWarning
     >
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-linear-to-br from-schemaWhite/50 via-white to-secondary/20 min-h-screen overflow-x-hidden`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-bg-primary text-text-primary min-h-screen overflow-x-hidden`}
       >
         <NextIntlClientProvider locale={locale} messages={messages}>
           <Providers>
             <AntdRegistry>
               <ConfigProvider
                 theme={{
+                  algorithm: theme.darkAlgorithm,
                   token: {
                     colorPrimary: "#4A6B50",
+                    colorBgContainer: "#1A2420",
+                    colorBgElevated: "#243029",
+                    colorBgLayout: "#0A0F0D",
+                    colorText: "#E8F0E9",
+                    colorTextSecondary: "#9BA89E",
+                    colorBorder: "rgba(74, 107, 80, 0.2)",
+                    borderRadius: 16,
+                    fontFamily: "var(--font-geist-sans)",
                   },
                 }}
               >

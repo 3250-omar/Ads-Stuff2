@@ -6,6 +6,7 @@ const withNextIntl = createNextIntlPlugin();
 const nextConfig: NextConfig = {
   /* config options here */
 
+  // transpilePackages: ["@ant-design/icons", "antd", "@ant-design/cssinjs"],
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
   },

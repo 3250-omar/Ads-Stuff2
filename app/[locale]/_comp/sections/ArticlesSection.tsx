@@ -22,11 +22,11 @@ const ArticlesSection = () => {
       className="w-full px-4 py-20 gradient-section rounded-[3rem]"
     >
       <div className="text-center mb-16 flex flex-col items-center">
-        <Title level={2} className="section-title mb-4">
+        <Title level={2} className="section-title mb-4 text-text-primary">
           {t("title")}
         </Title>
-        <Divider className="border-primary/30 w-1/4 min-w-[100px] my-6" />
-        <Paragraph className="text-xl text-gray-500 max-w-2xl text-center">
+        <Divider className="border-white/10 w-1/4 min-w-[100px] my-6" />
+        <Paragraph className="text-xl text-text-secondary max-w-2xl text-center opacity-80">
           {t("description")}
         </Paragraph>
       </div>

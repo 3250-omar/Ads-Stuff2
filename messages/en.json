@@ -70,11 +70,16 @@
     "socialMedia": "Social Media"
   },
   "Contacts": {
-    "title": "Let's Work Together",
-    "whatsapp": "WhatsApp"
+    "title": "Ready to Elevate Your Brand?",
+    "description": "Let's turn your vision into a digital reality. Reach out today and let's build something extraordinary together.",
+    "primaryAction": "Start a Project",
+    "whatsapp": "WhatsApp",
+    "gmail": "Gmail",
+    "telegram": "Telegram"
   },
   "Feedbacks": {
-    "title": "What Our Clients Say"
+    "title": "What Our Clients Say",
+    "description": "See how we've helped our clients achieve their goals through creative innovation."
   },
   "GmailContact": {
     "title": "Contact Me",

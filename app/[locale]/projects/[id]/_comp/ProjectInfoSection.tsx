@@ -26,13 +26,13 @@ const ProjectInfoSection = ({ project }: ProjectInfoSectionProps) => {
           <Space orientation="vertical" size="large" className="w-full">
             <div className="flex items-center gap-3">
               <ThunderboltFilled className="text-amber-400 text-3xl" />
-              <Title level={3} className="m-0!">
+              <Title level={3} className="m-0! text-text-primary">
                 {t("challenges")}
               </Title>
             </div>
             <ul className="space-y-4 m-0 p-0 list-none">
               {project.project_challenges?.map((item, i) => (
-                <li key={i} className="flex gap-3 text-gray-600">
+                <li key={i} className="flex gap-3 text-text-secondary text-lg">
                   <span className="text-amber-400 font-bold">•</span>
                   {item}
                 </li>
@@ -48,13 +48,13 @@ const ProjectInfoSection = ({ project }: ProjectInfoSectionProps) => {
           <Space orientation="vertical" size="large" className="w-full">
             <div className="flex items-center gap-3">
               <CheckCircleFilled className="text-primary text-3xl" />
-              <Title level={3} className="m-0!">
+              <Title level={3} className="m-0! text-text-primary">
                 {t("solutions")}
               </Title>
             </div>
             <ul className="space-y-4 m-0 p-0 list-none">
               {project.solutions?.map((item, i) => (
-                <li key={i} className="flex gap-3 text-gray-600">
+                <li key={i} className="flex gap-3 text-text-secondary text-lg">
                   <span className="text-primary font-bold">•</span>
                   {item}
                 </li>
@@ -70,13 +70,13 @@ const ProjectInfoSection = ({ project }: ProjectInfoSectionProps) => {
           <Space orientation="vertical" size="large" className="w-full">
             <div className="flex items-center gap-3">
               <LineChartOutlined className="text-secondary text-3xl" />
-              <Title level={3} className="m-0!">
+              <Title level={3} className="m-0! text-text-primary">
                 {t("results")}
               </Title>
             </div>
             <ul className="space-y-4 m-0 p-0 list-none">
               {project.project_results?.map((item, i) => (
-                <li key={i} className="flex gap-3 text-gray-600 font-medium">
+                <li key={i} className="flex gap-3 text-text-secondary font-medium text-lg">
                   <span className="text-secondary font-bold">•</span>
                   {item}
                 </li>

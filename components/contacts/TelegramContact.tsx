@@ -46,46 +46,46 @@ export default function TelegramContact() {
   return (
     <section className="py-12 flex justify-center">
       <Card
-        className="w-full max-w-lg rounded-3xl shadow-xl border-none overflow-hidden"
+        className="w-full max-w-lg rounded-[2.5rem] bg-bg-card/40 backdrop-blur-xl border border-white/5 shadow-2xl overflow-hidden"
         styles={{ body: { padding: "40px" } }}
       >
         <div className="text-center mb-8">
-          <div className="bg-[#0088CC]/10 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4">
-            <SiTelegram className="text-3xl text-[#0088CC]" />
+          <div className="bg-[#0088CC]/10 w-20 h-20 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-[0_0_20px_rgba(0,136,204,0.2)]">
+            <SiTelegram className="text-4xl text-[#0088CC]" />
           </div>
-          <Title level={2} className="m-0! font-black! text-[#0088CC]">
+          <Title level={2} className="m-0! font-black! text-text-primary tracking-tight">
             {t("title")}
           </Title>
-          <Text type="secondary" className="text-sm">
+          <Text className="text-base text-text-secondary opacity-80 mt-2 block">
             {t("subtitle")}
           </Text>
         </div>
 
-        <Divider className="my-8" />
+        <Divider className="my-8 border-white/10" />
 
         <Form
           form={form}
           layout="vertical"
           onFinish={handleSubmit}
           requiredMark={false}
-          className="flex flex-col gap-2"
+          className="flex flex-col gap-4"
         >
           <Form.Item
             name="username"
-            label={<Text strong>{t("usernameLabel")}</Text>}
+            label={<Text className="text-text-primary font-bold">{t("usernameLabel")}</Text>}
             rules={[{ required: true, message: t("usernameRequired") }]}
           >
             <Input
-              prefix={<span className="text-gray-400 mr-2">@</span>}
+              prefix={<span className="text-text-secondary mr-2">@</span>}
               placeholder={t("usernamePlaceholder")}
               size="large"
-              className="rounded-xl border-gray-200"
+              className="h-14 rounded-2xl bg-bg-primary/50 border-white/5 text-text-primary placeholder:text-white"
             />
           </Form.Item>
 
           <Form.Item
             name="content"
-            label={<Text strong>{t("messageLabel")}</Text>}
+            label={<Text className="text-text-primary font-bold">{t("messageLabel")}</Text>}
             rules={[{ required: true, message: t("messageRequired") }]}
           >
             <TextArea
@@ -93,11 +93,11 @@ export default function TelegramContact() {
               rows={6}
               showCount
               maxLength={1000}
-              className="rounded-xl border-gray-200"
+              className="rounded-2xl bg-bg-primary/50 border-white/5 text-text-primary placeholder:text-white"
             />
           </Form.Item>
 
-          <Space className="w-full mt-4" orientation="vertical" size="middle">
+          <Space className="w-full mt-6" size="middle">
             <Button
               type="primary"
               htmlType="submit"
@@ -105,7 +105,7 @@ export default function TelegramContact() {
               icon={<SendOutlined />}
               block
               size="large"
-              className="h-14 rounded-xl font-bold text-base shadow-lg bg-[#0088CC] border-[#0088CC] hover:bg-[#2AABEE]! hover:border-[#2AABEE]!"
+              className="h-16 rounded-2xl font-black text-lg shadow-2xl bg-[#0088CC] border-none hover:bg-[#2AABEE]! hover:scale-[1.02] transition-all duration-300"
             >
               {t("sendButton")}
             </Button>
@@ -116,7 +116,7 @@ export default function TelegramContact() {
               icon={<ReloadOutlined />}
               block
               size="large"
-              className="rounded-xl font-medium text-gray-400 hover:text-red-400"
+              className="rounded-2xl font-bold text-text-secondary hover:text-red-400! transition-colors"
             >
               {t("clearButton")}
             </Button>

@@ -82,7 +82,7 @@ const NavBar = () => {
   return (
     <nav
       className={`flex justify-between max-sm:justify-center items-center gap-5 px-5 sticky top-0 z-50 h-[80px] transition-all duration-300 ${
-        windowHeight >= 80 ? "bg-white shadow-md " : "bg-transparent"
+        windowHeight >= 80 ? "bg-bg-primary/80 backdrop-blur-xl border-b border-white/5 shadow-lg " : "bg-transparent"
       }`}
     >
       <Button
@@ -93,7 +93,7 @@ const NavBar = () => {
         <Image
           src="/Logo3G.png"
           alt="Logo"
-          className="object-contain"
+          className="object-contain brightness-110"
           width={110}
           height={50}
           style={{ width: "auto", height: "auto" }}
@@ -115,7 +115,7 @@ const NavBar = () => {
               className={`text-base transition-colors hover:text-primary! capitalize! ${
                 activeSection === item.key || pathname.includes(item.key)
                   ? "text-primary! font-bold! border-primary!"
-                  : "text-gray-600"
+                  : "text-text-secondary"
               }`}
               type="dashed"
             >
@@ -128,17 +128,17 @@ const NavBar = () => {
 
       {/* Mobile Nav */}
       <div
-        className={`fixed bottom-5 left-1/2 -translate-x-1/2 max-w-[300px] rounded-full bg-primary/80 backdrop-blur-md text-white z-50 mx-auto p-2 hidden max-sm:block shadow-lg `}
+        className={`fixed bottom-5 left-1/2 -translate-x-1/2 max-w-[300px] rounded-full bg-bg-card/90 backdrop-blur-md text-text-primary z-50 mx-auto p-2 hidden max-sm:block shadow-2xl border border-white/5`}
       >
         <div className="flex items-center gap-2 justify-around">
           {navItems.map((item: { key: string; href: string }) => (
             <Button
               onClick={() => scrollToSection(item.href)}
               key={item.key}
-              className={`transition-colors! text-xs! hover:text-black! capitalize! ${
+              className={`transition-colors! text-xs! hover:text-primary! capitalize! ${
                 activeSection === item.key || pathname.includes(item.key)
-                  ? "text-black! font-bold! bg-white/20! px-2! py-1! rounded-md!"
-                  : "text-white!"
+                  ? "text-primary! font-bold! bg-primary/20! px-2! py-1! rounded-md!"
+                  : "text-text-primary!"
               }`}
               type="text"
             >
