@@ -36,12 +36,12 @@ const ProjectCard = ({ project }: { project: Project }) => {
             className="object-cover transition-transform duration-1000 group-hover:scale-110"
             sizes="(max-width: 768px) 100vw, 50vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-bg-card/80 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-linear-to-t md:bg-linear-to-r from-bg-card/80 via-transparent to-transparent" />
         </div>
 
         {/* Project Details */}
         <div className="flex flex-col justify-center gap-6 p-8 md:p-12 lg:p-16 md:w-1/2 text-left">
-          <div className="space-y-4">
+          <div className="flex flex-col gap-4 items-start">
             <Tag
               color={getStatusColor(project.status)}
               className="rounded-full border border-primary/20 bg-primary/10 px-4 py-1 font-bold uppercase text-[10px] tracking-widest text-primary"

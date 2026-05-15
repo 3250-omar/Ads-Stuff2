@@ -43,6 +43,13 @@ const ContactsSection = dynamic(() => import("./sections/ContactsSection"), {
   ),
 });
 
+const FeedBacks = dynamic(() => import("./sections/FeedBacks"), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-[400px] animate-pulse bg-bg-card/50 rounded-[3rem]" />
+  ),
+});
+
 export default function PageContent({
   initialHeroImages,
 }: {
@@ -67,6 +74,9 @@ export default function PageContent({
         <LazySection minHeight={400}>
           <OurCustomers />
         </LazySection>
+        {/* <LazySection id="feedbacks" minHeight={400}>
+          <FeedBacks />
+        </LazySection> */}
         <LazySection id="contacts" minHeight={400}>
           <ContactsSection />
         </LazySection>

@@ -1,208 +1,216 @@
 "use client";
 
-import { Card, Badge, Typography, Space, Divider } from "antd";
+import { Card, Typography, Space } from "antd";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import {
-  FacebookOutlined,
-  InstagramOutlined,
-  LinkedinOutlined,
-  YoutubeOutlined,
-} from "@ant-design/icons";
 import { useGetSocialMedia } from "@/app/api/query";
 import getSocialMedia from "@/constants/getSocialMedia";
 import Link from "next/link";
-import { useMemo } from "react";
+import { useTranslations } from "next-intl";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const { Title, Text, Paragraph } = Typography;
 
-type TimelineItem = {
-  title: string;
-  date?: string;
-  subtitle?: string;
-  description?: string | React.ReactNode[];
-  status?: string;
-};
-
-import { useTranslations } from "next-intl";
-
-export default function Timeline() {
+export default function BrandStory() {
   const t = useTranslations("Timeline");
   const sectionRef = useRef<HTMLDivElement>(null);
-  const cardsRef = useRef<HTMLDivElement[]>([]);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const glowRef = useRef<HTMLDivElement>(null);
   const { socialMedia, loading } = useGetSocialMedia();
-
-  const items: TimelineItem[] = useMemo(
-    () => [
-      {
-        title: t("whoWeAre.title"),
-        description: t("whoWeAre.description"),
-      },
-      {
-        title: t("services.title"),
-        description: [
-          <div key="services" className="flex flex-wrap gap-2">
-            {[
-              t("services.items.socialMedia"),
-              t("services.items.graphicDesign"),
-              t("services.items.mediaProduction"),
-              t("services.items.mediaBuying"),
-              t("services.items.videoEditing"),
-              t("services.items.webDev"),
-            ].map((item, index) => (
-              <div key={index} className="flex items-center gap-2">
-                <Text>•</Text>
-                <Text>{item}</Text>
-              </div>
-            ))}
-          </div>,
-        ],
-      },
-      {
-        title: t("platforms.title"),
-        description: [
-          loading ? (
-            <div key="loading">{t("loading")}</div>
-          ) : (
-            <div key="socials" className="flex items-center gap-4 flex-wrap  ">
-              {socialMedia?.map((item: any) => {
-                const { icon: SocialIcon, bgHover } = getSocialMedia({
-                  name: item.name.toLowerCase(),
-                });
-                return (
-                  <Link
-                    key={item.id}
-                    href={item.social_media_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`flex items-center justify-center w-12 h-12 rounded-full border-2 text-black! border-gray-100 text-xl hover:border-transparent hover:text-white! hover:scale-110 hover:shadow-lg transition-all ${bgHover}`}
-                  >
-                    <SocialIcon />
-                  </Link>
-                );
-              })}
-            </div>
-          ),
-        ],
-      },
-    ],
-    [socialMedia, loading, t],
-  );
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      cardsRef.current.forEach((card, index) => {
-        const isLeft = index % 2 === 0;
-        gsap.from(card, {
-          x: isLeft ? -80 : 80,
+      // Entrance Animation
+      const cards = containerRef.current?.querySelectorAll(".bento-card");
+      if (cards) {
+        gsap.from(cards, {
+          y: 60,
           opacity: 0,
-          duration: 0.9,
-          ease: "power3.out",
+          duration: 1.2,
+          stagger: 0.1,
+          ease: "expo.out",
           scrollTrigger: {
-            trigger: card,
+            trigger: containerRef.current,
             start: "top 85%",
-            toggleActions: "play reverse play reverse",
+            toggleActions: "play none none none",
           },
         });
-      });
+
+        // Hover Tilt Effect
+        cards.forEach((card) => {
+          card.addEventListener("mousemove", (e: any) => {
+            const { clientX, clientY } = e;
+            const { left, top, width, height } = card.getBoundingClientRect();
+            const x = (clientX - left) / width - 0.5;
+            const y = (clientY - top) / height - 0.5;
+
+            gsap.to(card, {
+              rotateY: x * 10,
+              rotateX: -y * 10,
+              transformPerspective: 1000,
+              duration: 0.5,
+              ease: "power2.out",
+            });
+          });
+
+          card.addEventListener("mouseleave", () => {
+            gsap.to(card, {
+              rotateY: 0,
+              rotateX: 0,
+              duration: 0.8,
+              ease: "elastic.out(1, 0.5)",
+            });
+          });
+        });
+      }
+
+      // Mouse Glow Follow
+      const handleMouseMove = (e: MouseEvent) => {
+        if (!glowRef.current) return;
+        const { clientX, clientY } = e;
+        const { left, top } = sectionRef.current?.getBoundingClientRect() || {
+          left: 0,
+          top: 0,
+        };
+        gsap.to(glowRef.current, {
+          x: clientX - left,
+          y: clientY - top,
+          duration: 0.6,
+          ease: "power2.out",
+        });
+      };
+
+      window.addEventListener("mousemove", handleMouseMove);
+      return () => window.removeEventListener("mousemove", handleMouseMove);
     }, sectionRef);
 
     return () => ctx.revert();
-  }, [items]);
+  }, []);
+
+  const services = [
+    t("services.items.socialMedia"),
+    t("services.items.graphicDesign"),
+    t("services.items.mediaProduction"),
+    t("services.items.mediaBuying"),
+    t("services.items.videoEditing"),
+    t("services.items.webDev"),
+  ];
 
   return (
-    <div ref={sectionRef} className="relative py-20 px-4 overflow-x-hidden">
-      {/* Center line */}
-      <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-linear-to-b from-primary/0 via-primary/40 to-primary/0 -translate-x-1/2 hidden md:block rounded-full shadow-[0_0_20px_rgba(74,107,80,0.4)]" />
+    <div
+      ref={sectionRef}
+      className="relative py-24 px-4 sm:px-8 lg:px-16 overflow-hidden bg-bg-primary"
+    >
+      {/* Interactive Background Glow */}
+      <div
+        ref={glowRef}
+        className="absolute w-[600px] h-[600px] bg-primary/15 rounded-full blur-[140px] pointer-events-none z-0"
+        style={{ left: "-300px", top: "-300px" }}
+      />
 
-      <div className="relative z-10 space-y-16">
-        {items.map((item, i) => {
-          const isLeft = i % 2 === 0;
-          return (
-            <div
-              key={i}
-              ref={(el) => {
-                if (el) cardsRef.current[i] = el;
-              }}
-              className={`flex flex-col md:flex-row items-center justify-between w-full ${
-                isLeft ? "md:flex-row" : "md:flex-row-reverse"
-              }`}
-            >
-              {/* Timeline card */}
-              <div className="w-full md:w-[45%]">
-                <Card
-                  variant="outlined"
-                  className="shadow-2xl transition-all duration-700 rounded-[2.5rem] border border-white/5 group hover:border-primary/40 glass-card p-2"
-                  style={{ textAlign: isLeft ? "right" : "left" }}
-                >
-                  <div
-                    className={`flex flex-col gap-4 ${
-                      isLeft ? "items-end" : "items-start"
-                    }`}
-                  >
-                    <Space
-                      size="middle"
-                      className={
-                        (isLeft ? "flex-row-reverse" : "flex-row") +
-                        " flex justify-center items-center w-full!"
-                      }
-                    >
-                      <Title
-                        level={3}
-                        className="m-0! text-text-primary group-hover:text-primary transition-colors duration-500 max-sm:text-xl!"
-                      >
-                        {item.title}
-                      </Title>
-                    </Space>
-
-                    {item.subtitle && (
-                      <Text className="text-sm text-text-secondary">
-                        {item.subtitle}
-                      </Text>
-                    )}
-
-                    {item.description &&
-                    typeof item.description === "string" ? (
-                      <Paragraph className="text-text-secondary leading-relaxed m-0 mt-2 text-lg opacity-80 group-hover:opacity-100 transition-opacity">
-                        {item.description}
-                      </Paragraph>
-                    ) : (
-                      <div className="w-full mt-4">{item.description}</div>
-                    )}
-
-                    {item.status && (
-                      <>
-                        <Divider className="my-3 border-white/10" />
-                        <Badge
-                          status="processing"
-                          text={
-                            <Text
-                              strong
-                              className="text-primary uppercase tracking-wider text-xs"
-                            >
-                              {item.status}
-                            </Text>
-                          }
-                        />
-                      </>
-                    )}
-                  </div>
-                </Card>
-              </div>
-
-              {/* Timeline dot */}
-              <div className="relative flex items-center justify-center w-12 h-12 my-4 md:my-0 z-20 max-sm:hidden">
-                <div className="w-6 h-6 rounded-full bg-primary border-4 border-bg-primary shadow-[0_0_20px_rgba(74,107,80,0.6)] animate-pulse-glow" />
-              </div>
-
-              {/* Empty space for the other side on desktop */}
-              <div className="hidden md:block w-[45%]" />
+      <div
+        ref={containerRef}
+        className="relative z-10 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-6"
+      >
+        {/* Card 1: Who We Are (P1) */}
+        <div className="bento-card md:col-span-8 group">
+          <Card className="h-full glass-card border-white/10 rounded-[3rem] p-8 sm:p-12 transition-all duration-700 hover:border-primary/40 overflow-hidden relative shadow-2xl">
+            <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-30 transition-opacity">
+              <Title level={1} className="m-0! text-primary/20 select-none">
+                01
+              </Title>
             </div>
-          );
-        })}
+            <Space direction="vertical" size="large" className="w-full">
+              <Text className="text-primary uppercase tracking-[0.3em] text-xs font-bold block mb-2">
+                Brand Essence
+              </Text>
+              <Title
+                level={2}
+                className="m-0! text-primary text-4xl sm:text-5xl font-black mb-6"
+              >
+                {t("whoWeAre.title")}
+              </Title>
+              <Paragraph className="text-text-secondary text-lg sm:text-2xl leading-relaxed m-0 opacity-80 group-hover:opacity-100 transition-opacity max-w-2xl">
+                {t("whoWeAre.description")}
+              </Paragraph>
+            </Space>
+          </Card>
+        </div>
+
+        {/* Card 2: Platforms (P3) */}
+        <div className="bento-card md:col-span-4 group">
+          <Card className="h-full glass-card border-white/10 rounded-[3rem] p-8 sm:p-12 flex flex-col justify-between transition-all duration-700 hover:border-primary/40 relative overflow-hidden shadow-2xl">
+            <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-primary/10 rounded-full blur-3xl" />
+            <div>
+              <Text className="text-primary uppercase tracking-[0.3em] text-xs font-bold block mb-4">
+                Connect
+              </Text>
+              <Title level={3} className="m-0! text-text-primary mb-8 text-3xl">
+                {t("platforms.title")}
+              </Title>
+            </div>
+            <div className="flex flex-wrap gap-4 items-center mt-4 justify-center">
+              {loading ? (
+                <Text className="text-text-secondary italic">
+                  {t("loading")}
+                </Text>
+              ) : (
+                socialMedia?.map((item: any) => {
+                  const { icon: SocialIcon, bgHover } = getSocialMedia({
+                    name: item.name.toLowerCase(),
+                  });
+                  return (
+                    <Link
+                      key={item.id}
+                      href={item.social_media_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`flex items-center justify-center w-14 h-14 rounded-2xl border border-white/10 text-text-primary text-2xl bg-white/5 hover:border-transparent hover:text-white! hover:scale-125 hover:-translate-y-2 hover:shadow-[0_15px_30px_rgba(74,107,80,0.5)] transition-all! duration-500! ${bgHover}`}
+                    >
+                      <SocialIcon />
+                    </Link>
+                  );
+                })
+              )}
+            </div>
+          </Card>
+        </div>
+
+        {/* Card 3: Services (P2) */}
+        <div className="bento-card md:col-span-12 group">
+          <Card className="h-full glass-card border-white/10 rounded-[3rem] p-8 sm:p-12 transition-all duration-700 hover:border-primary/40 shadow-2xl">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-12 gap-4">
+              <div>
+                <Text className="text-primary uppercase tracking-[0.3em] text-xs font-bold block mb-2">
+                  Expertise
+                </Text>
+                <Title level={2} className="m-0! text-text-primary text-4xl">
+                  {t("services.title")}
+                </Title>
+              </div>
+              <div className="h-[2px] flex-1 bg-gradient-to-r from-primary/40 to-transparent hidden sm:block mb-4 mx-8" />
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              {services.map((service, index) => (
+                <div
+                  key={index}
+                  className="flex items-center gap-6 p-6 rounded-3xl bg-white/[0.03] border border-white/5 hover:border-primary/30 hover:bg-white/[0.08] transition-all duration-500 group/item hover:-translate-y-2 shadow-lg"
+                >
+                  <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center group-hover/item:bg-primary group-hover/item:text-white group-hover/item:shadow-[0_0_20px_rgba(74,107,80,0.6)] transition-all duration-500">
+                    <span className="text-primary group-hover/item:text-white text-xl font-bold">
+                      {(index + 1).toString().padStart(2, "0")}
+                    </span>
+                  </div>
+                  <Text className="text-text-primary text-xl font-semibold group-hover/item:translate-x-2 transition-transform duration-500">
+                    {service}
+                  </Text>
+                </div>
+              ))}
+            </div>
+          </Card>
+        </div>
       </div>
     </div>
   );
