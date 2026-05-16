@@ -1,49 +1,92 @@
+import { useCallback, useState } from "react";
 import { Project } from "@/types";
-import MediaComp from "./MediaComp";
+import { Segmented, ConfigProvider } from "antd";
+import {
+  AppstoreOutlined,
+  PicCenterOutlined,
+  UnorderedListOutlined,
+} from "@ant-design/icons";
+import MediaMasonry from "./MediaMasonry";
+import MediaCarousel from "./MediaCarousel";
+import MediaList from "./MediaList";
+import { useTranslations } from "next-intl";
 
 interface ProjectMediaGridProps {
   project: Project;
   imageRef: React.RefObject<HTMLDivElement | null>;
 }
 
-const BENTO_CLASSES = [
-  "lg:col-span-2 lg:row-span-2 md:col-span-2 md:row-span-2",
-  "lg:col-span-2 lg:row-span-1 md:col-span-2 md:row-span-1",
-  "lg:col-span-1 lg:row-span-1 md:col-span-1 md:row-span-1",
-  "lg:col-span-1 lg:row-span-1 md:col-span-1 md:row-span-1",
-  "lg:col-span-1 lg:row-span-1 md:col-span-1 md:row-span-1",
-  "lg:col-span-1 lg:row-span-2 md:col-span-1 md:row-span-2",
-  "lg:col-span-2 lg:row-span-2 md:col-span-2 md:row-span-2",
-  "lg:col-span-1 lg:row-span-1 md:col-span-1 md:row-span-1",
-];
+type ViewType = "masonry" | "carousel" | "list";
 
 const ProjectMediaGrid = ({ project, imageRef }: ProjectMediaGridProps) => {
+  const t = useTranslations("ProjectMedia");
   const mediaItems = project.project_media || [];
+  const [view, setView] = useState<ViewType>("masonry");
+
+  const renderView = useCallback(() => {
+    switch (view) {
+      case "masonry":
+        return <MediaMasonry media={mediaItems} />;
+      case "carousel":
+        return <MediaCarousel media={mediaItems} />;
+      case "list":
+        return <MediaList media={mediaItems} />;
+      default:
+        return <MediaMasonry media={mediaItems} />;
+    }
+  }, [view, mediaItems]);
 
   return (
-    <div ref={imageRef} className="w-full mb-16 px-0">
+    <div ref={imageRef} className="w-full mb-20 px-0">
       {mediaItems.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 auto-rows-[300px] md:auto-rows-[350px] lg:auto-rows-[380px] gap-6 md:gap-8">
-          {mediaItems.map((url, index) => (
-            <div
-              key={index}
-              className={`detail-card relative group overflow-hidden rounded-[2.5rem] bg-gray-50/50 shadow-sm hover:shadow-2xl transition-all duration-700 hover:-translate-y-2 ${
-                BENTO_CLASSES[index % BENTO_CLASSES.length]
-              } h-full min-h-[300px]`}
+        <div className="flex flex-col gap-10">
+          {/* View Switcher */}
+          <div className="flex justify-center md:justify-end mb-4 z-20 sticky top-20 ">
+            <ConfigProvider
+              theme={{
+                components: {
+                  Segmented: {
+                    itemSelectedBg: "var(--color-primary)",
+                    itemSelectedColor: "#fff",
+                    trackBg: "rgba(255, 255, 255, 0.05)",
+                  },
+                },
+              }}
             >
-              <MediaComp
-                media={url}
-                alt={`${project.title} - ${index + 1}`}
-                priority={index < 4}
-                className="h-full w-full"
+              <Segmented
+                value={view}
+                onChange={(value) => setView(value as ViewType)}
+                options={[
+                  {
+                    value: "masonry",
+                    icon: <AppstoreOutlined />,
+                    label: t("masonry"),
+                  },
+                  {
+                    value: "carousel",
+                    icon: <PicCenterOutlined />,
+                    label: t("carousel"),
+                  },
+                  {
+                    value: "list",
+                    icon: <UnorderedListOutlined />,
+                    label: t("list"),
+                  },
+                ]}
+                className="p-1 rounded-2xl border border-white/5 backdrop-blur-md"
+                size="large"
               />
-              <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-black/5 pointer-events-none" />
-            </div>
-          ))}
+            </ConfigProvider>
+          </div>
+
+          {/* Active View */}
+          <div className="transition-all duration-500 ease-in-out">
+            {renderView()}
+          </div>
         </div>
       ) : (
-        <div className="relative w-full h-[400px] md:h-[600px] flex items-center justify-center bg-gray-100 rounded-[3rem]">
-          <p className="text-gray-400 text-lg">No media available</p>
+        <div className="relative w-full h-[400px] md:h-[600px] flex items-center justify-center bg-bg-card/50 rounded-[3rem] border border-white/5">
+          <p className="text-text-secondary text-lg">{t("noMedia")}</p>
         </div>
       )}
     </div>

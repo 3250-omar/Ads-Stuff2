@@ -180,5 +180,11 @@
     "branding": "العلامة التجارية",
     "digital ads": "إعلانات رقمية",
     "creative": "إبداعي"
+  },
+  "ProjectMedia": {
+    "masonry": " شبكي",
+    "carousel": "عرض ",
+    "list": " القائمة",
+    "noMedia": "لا يوجد وسائط متاحة"
   }
 }

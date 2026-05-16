@@ -180,5 +180,11 @@
     "branding": "Branding",
     "digital ads": "Digital Ads",
     "creative": "Creative"
+  },
+  "ProjectMedia": {
+    "masonry": "Masonry",
+    "carousel": "Carousel",
+    "list": "List",
+    "noMedia": "No media available"
   }
 }
