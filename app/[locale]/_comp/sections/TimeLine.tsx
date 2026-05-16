@@ -122,7 +122,7 @@ export default function BrandStory() {
                 01
               </Title>
             </div>
-            <Space direction="vertical" size="large" className="w-full">
+            <Space orientation="vertical" size="large" className="w-full">
               <Text className="text-primary uppercase tracking-[0.3em] text-xs font-bold block mb-2">
                 Brand Essence
               </Text>
